@@ -164,7 +164,7 @@
     <span class="kicker"><i></i> 周期 2026-11-10 至 2026-11-17</span>
     <h1>小红书采购需求扫描</h1>
     <p class="lead">统计周期 <strong>2026-11-10 至 2026-11-17</strong>，只看这一周内新发布的笔记。</p>
-    <p class="datastrip"><span>32/32</span> 个主页已扫描 · 本周 <span>50 条</span>笔记 · <span>32 条</span>真实采购需求（14 个需求组）· <span>18 条</span>已筛掉</p>
+    <p class="datastrip"><span>32/32</span> 个主页已扫描 · 本周 <span>50 条</span>笔记 · <span>54 条</span>真实采购需求（19 个需求组）· <span>18 条</span>已筛掉</p>
 
     <div class="truths" aria-label="本次范围说明">
       <h2>先说清本次范围</h2>
@@ -177,8 +177,8 @@
     <div class="stats" aria-label="本次总览">
       <div class="ds"><div class="n">32 / 32</div><div class="l">本次已扫描主页 · 全部扫完</div></div>
       <div class="ds"><div class="n">50 条</div><div class="l">本周共看到的笔记</div></div>
-      <div class="ds"><div class="n">32 条</div><div class="l">真实采购需求笔记</div></div>
-      <div class="ds"><div class="n">14 个</div><div class="l">去重后的需求组</div></div>
+      <div class="ds"><div class="n">54 条</div><div class="l">真实采购需求笔记</div></div>
+      <div class="ds"><div class="n">19 个</div><div class="l">去重后的需求组</div></div>
       <div class="ds"><div class="n">10 个</div><div class="l">本周有新笔记的主页</div></div>
       <div class="ds"><div class="n">22 个</div><div class="l">本周 0 条的主页</div></div>
       <div class="ds"><div class="n">18 条</div><div class="l">被筛掉（1 条设备、15 条行业分享、1 条招聘、1 条供应商广告）</div></div>
@@ -227,17 +227,23 @@
     <div class="toolbar">
       <input type="search" id="q" placeholder="搜标题、作者、数据类型、Spec 关键词…" aria-label="搜索本次需求">
       <button class="fbtn on" data-f="all">全部</button>
-      <button class="fbtn" data-f="ego">Ego·具身数据</button>
-      <button class="fbtn" data-f="pcb">PCB 工程数据</button>
+      <button class="fbtn" data-f="ego">Ego</button>
+      <button class="fbtn" data-f="embodied">具身数据</button>
+      <button class="fbtn" data-f="pcb">PCB</button>
+      <button class="fbtn" data-f="kicad">KiCad</button>
+      <button class="fbtn" data-f="eda">EDA</button>
       <button class="fbtn" data-f="video">视频</button>
       <button class="fbtn" data-f="dataset">成品数据集</button>
       <button class="fbtn" data-f="audio">小语种音频</button>
       <button class="fbtn" data-f="math">数学</button>
-      <button class="fbtn" data-f="sim">仿真与评测</button>
-      <button class="fbtn" data-f="rl">专家标注·RL</button>
-      <button class="fbtn" data-f="eda">KiCad·EDA·PCB 工程</button>
-      <button class="fbtn" data-f="text">电子文本·读物</button>
-      <button class="fbtn" data-f="cnc">CNC·CAD 变更</button>
+      <button class="fbtn" data-f="sim">仿真</button>
+      <button class="fbtn" data-f="eval">评测</button>
+      <button class="fbtn" data-f="expert">专家标注</button>
+      <button class="fbtn" data-f="rl">RL</button>
+      <button class="fbtn" data-f="text">电子文本</button>
+      <button class="fbtn" data-f="reading">读物</button>
+      <button class="fbtn" data-f="cnc">CNC</button>
+      <button class="fbtn" data-f="cad">CAD 变更</button>
       <button class="fbtn" data-f="multi">多模态</button>
       <button class="fbtn" data-f="stem">STEM 习题教材</button>
     </div>
@@ -247,7 +253,7 @@
       <div class="group-head"><h3>需求组 1 · Ego / UMI 具身数据采集</h3><span class="meta">6 条笔记 · 2 位作者</span></div>
       <p class="group-note">去重说明：睡不醒的是我 4 条为同一需求换标题重发；哆啦梦仔 2 条（11-16 与 11-13）为同一需求换标题重发。</p>
       <div class="cards">
-        <article class="card" data-type="ego" data-text="睡不醒的是我 ego 第一视角 双目 视频 数据采集 供应商 招募 规模化">
+        <article class="card" data-type="ego embodied" data-text="睡不醒的是我 ego 第一视角 双目 视频 数据采集 供应商 招募 规模化">
           <div class="card-top"><h4>Ego 数据采集供应商招募 — 同一需求本周发了 4 条</h4><span class="tags"><span class="tag tag-type">Ego 数据采集</span><span class="tag tag-dup">作者重复 ×4</span></span></div>
           <dl class="fields">
             <dt>作者</dt><dd><a class="author-link" href="https://xhslink.cn/o/9swvnfCImTe" target="_blank" rel="noopener noreferrer"><b>睡不醒的是我</b></a></dd>
@@ -261,7 +267,7 @@
           </dl>
         </article>
 
-        <article class="card" data-type="ego" data-text="哆啦梦仔 ego umi 单目镜 双目镜 具身 头部 夹爪 传感器 成品存量">
+        <article class="card" data-type="ego embodied" data-text="哆啦梦仔 ego umi 单目镜 双目镜 具身 头部 夹爪 传感器 成品存量">
           <div class="card-top"><h4>项目一：Ego类单目镜和双目镜类视频</h4><span class="tags"><span class="tag tag-type">Ego / UMI 具身数据</span><span class="tag tag-dup">同一需求重发</span></span></div>
           <dl class="fields">
             <dt>作者</dt><dd><a class="author-link" href="https://xhslink.cn/o/9wG143ZuPbd" target="_blank" rel="noopener noreferrer"><b>哆啦梦仔</b></a></dd>
@@ -275,7 +281,7 @@
           </dl>
         </article>
 
-        <article class="card" data-type="ego" data-text="哆啦梦仔 ego umi 数据库存 供应商 具身 成品存量 采集">
+        <article class="card" data-type="ego embodied" data-text="哆啦梦仔 ego umi 数据库存 供应商 具身 成品存量 采集">
           <div class="card-top"><h4>寻找EGO和UMI数据库存的供应商</h4><span class="tags"><span class="tag tag-type">Ego / UMI 具身数据</span><span class="tag tag-dup">同一需求重发</span></span></div>
           <dl class="fields">
             <dt>作者</dt><dd><a class="author-link" href="https://xhslink.cn/o/9wG143ZuPbd" target="_blank" rel="noopener noreferrer"><b>哆啦梦仔</b></a></dd>
@@ -353,7 +359,7 @@
 <div class="group blk" id="group-5">
 <div class="group-head"><h3>需求组 5 · token 方向专家标注 / 垂类 RL 数据</h3><span class="meta">1 条笔记</span></div>
 <div class="cards">
-<article class="card" data-type="rl" data-text="佐维 token 专家标注 垂类 rl 数据 长期求购 agent 大模型 标注">
+<article class="card" data-type="expert rl" data-text="佐维 token 专家标注 垂类 rl 数据 长期求购 agent 大模型 标注">
 <div class="card-top"><h4>数据 data market🏔️</h4><span class="tags"><span class="tag tag-type">专家标注 / RL 数据</span><span class="tag tag-new">本周新发布</span></span></div>
 <dl class="fields">
 <dt>作者</dt><dd><a class="author-link" href="https://xhslink.cn/o/8q9uKb4fNTU" target="_blank" rel="noopener noreferrer"><b>佐维.</b></a></dd>
@@ -462,7 +468,7 @@
 <div class="group blk" id="group-9">
 <div class="group-head"><h3>需求组 9 · Unity / Blender 仿真与评测数据</h3><span class="meta">2 条笔记</span></div>
 <div class="cards">
-<article class="card" data-type="sim" data-text="aaa数商李不总 unity blender blenderbench 仿真 具身 强化学习 评测 demo">
+<article class="card" data-type="sim eval" data-text="aaa数商李不总 unity blender blenderbench 仿真 具身 强化学习 评测 demo">
 <div class="card-top"><h4>寻unity和blender数据供应商！</h4><span class="tags"><span class="tag tag-type">Unity / Blender 评测数据</span></span></div>
 <dl class="fields">
 <dt>作者</dt><dd><a class="author-link" href="https://xhslink.cn/o/eUpjjxyypL" target="_blank" rel="noopener noreferrer"><b>AAA数商李不总</b></a></dd>
@@ -476,7 +482,7 @@
 </dl>
 </article>
 
-<article class="card" data-type="sim" data-text="aaa数商李不总 blender rl 强化学习 数据 大厂">
+<article class="card" data-type="sim eval" data-text="aaa数商李不总 blender rl 强化学习 数据 大厂">
 <div class="card-top"><h4>大量收blender rl的数据</h4><span class="tags"><span class="tag tag-type">Blender RL 数据</span><span class="tag tag-new">本周新发布</span></span></div>
 <dl class="fields">
 <dt>作者</dt><dd><a class="author-link" href="https://xhslink.cn/o/eUpjjxyypL" target="_blank" rel="noopener noreferrer"><b>AAA数商李不总</b></a></dd>
@@ -496,7 +502,7 @@
 <div class="group blk" id="group-10">
 <div class="group-head"><h3>需求组 10 · KiCad / EDA / PCB 工程数据</h3><span class="meta">4 条笔记 · 作者均为 数据-Mr Li</span></div>
 <div class="cards">
-<article class="card" data-type="eda" data-text="数据-mr li kicad 原理图 pcb 元件库 多层板 工程 研发 合规授权 脱敏">
+<article class="card" data-type="kicad" data-text="数据-mr li kicad 原理图 pcb 元件库 多层板 工程 研发 合规授权 脱敏">
 <div class="card-top"><h4>寻kicad一手供应商</h4><span class="tags"><span class="tag tag-type">KiCad 工程数据</span><span class="tag tag-new">本周新发布</span></span></div>
 <dl class="fields">
 <dt>作者</dt><dd><a class="author-link" href="https://xhslink.cn/o/6lpL1K4pv22" target="_blank" rel="noopener noreferrer"><b>数据-Mr Li</b></a></dd>
@@ -510,7 +516,7 @@
 </dl>
 </article>
 
-<article class="card" data-type="eda" data-text="数据-mr li pcb 工程文件 电路板 研发 硬件仿真 电路方案验证 工艺参数">
+<article class="card" data-type="pcb" data-text="数据-mr li pcb 工程文件 电路板 研发 硬件仿真 电路方案验证 工艺参数">
 <div class="card-top"><h4>我需要采购，急！！</h4><span class="tags"><span class="tag tag-type">PCB 工程数据</span><span class="tag tag-new">本周新发布</span></span></div>
 <dl class="fields">
 <dt>作者</dt><dd><a class="author-link" href="https://xhslink.cn/o/6lpL1K4pv22" target="_blank" rel="noopener noreferrer"><b>数据-Mr Li</b></a></dd>
@@ -538,7 +544,7 @@
 </dl>
 </article>
 
-<article class="card" data-type="eda" data-text="数据-mr li kicad 工程源文件 电路 硬件 研发调试 器件参数 一手">
+<article class="card" data-type="kicad" data-text="数据-mr li kicad 工程源文件 电路 硬件 研发调试 器件参数 一手">
 <div class="card-top"><h4>找一手供应商</h4><span class="tags"><span class="tag tag-type">KiCad 工程数据</span><span class="tag tag-new">本周新发布</span></span></div>
 <dl class="fields">
 <dt>作者</dt><dd><a class="author-link" href="https://xhslink.cn/o/6lpL1K4pv22" target="_blank" rel="noopener noreferrer"><b>数据-Mr Li</b></a></dd>
@@ -558,7 +564,7 @@
 <div class="group blk" id="group-11">
 <div class="group-head"><h3>需求组 11 · 电子文本 / 读物素材</h3><span class="meta">6 条笔记 · 作者均为 数据-Mr Li</span></div>
 <div class="cards">
-<article class="card" data-type="text" data-text="数据-mr li 读物文本 科普 人文 社科 通识 文本理解 知识类大模型 一手">
+<article class="card" data-type="text reading" data-text="数据-mr li 读物文本 科普 人文 社科 通识 文本理解 知识类大模型 一手">
 <div class="card-top"><h4>我需要源头供应商！</h4><span class="tags"><span class="tag tag-type">电子文本 / 读物</span><span class="tag tag-new">本周新发布</span></span></div>
 <dl class="fields">
 <dt>作者</dt><dd><a class="author-link" href="https://xhslink.cn/o/6lpL1K4pv22" target="_blank" rel="noopener noreferrer"><b>数据-Mr Li</b></a></dd>
@@ -600,7 +606,7 @@
 </dl>
 </article>
 
-<article class="card" data-type="text" data-text="数据-mr li 电子书 中英文 电子读物 学术 理工 通识 科研学习 知识库">
+<article class="card" data-type="text reading" data-text="数据-mr li 电子书 中英文 电子读物 学术 理工 通识 科研学习 知识库">
 <div class="card-top"><h4>急需电子书数据采购！！！</h4><span class="tags"><span class="tag tag-type">电子文本 / 读物</span><span class="tag tag-new">本周新发布</span></span></div>
 <dl class="fields">
 <dt>作者</dt><dd><a class="author-link" href="https://xhslink.cn/o/6lpL1K4pv22" target="_blank" rel="noopener noreferrer"><b>数据-Mr Li</b></a></dd>
@@ -614,7 +620,7 @@
 </dl>
 </article>
 
-<article class="card" data-type="text" data-text="数据-mr li 电子书 文本数据集 原文 后训练 知识库构建 脱敏 定向筛选">
+<article class="card" data-type="text reading" data-text="数据-mr li 电子书 文本数据集 原文 后训练 知识库构建 脱敏 定向筛选">
 <div class="card-top"><h4>长期求购电子书文本数据集｜寻稳定供应商</h4><span class="tags"><span class="tag tag-type">电子文本 / 读物</span><span class="tag tag-new">本周新发布</span></span></div>
 <dl class="fields">
 <dt>作者</dt><dd><a class="author-link" href="https://xhslink.cn/o/6lpL1K4pv22" target="_blank" rel="noopener noreferrer"><b>数据-Mr Li</b></a></dd>
@@ -662,7 +668,7 @@
 </dl>
 </article>
 
-<article class="card" data-type="cnc" data-text="数据-mr li cad 设计变更 数据集 失效指标 仿真文件 变更说明 受力零件 保密协议">
+<article class="card" data-type="cad" data-text="数据-mr li cad 设计变更 数据集 失效指标 仿真文件 变更说明 受力零件 保密协议">
 <div class="card-top"><h4>求CAD真实设计变更数据｜找源头工程团队</h4><span class="tags"><span class="tag tag-type">CAD 设计变更数据</span><span class="tag tag-new">本周新发布</span></span></div>
 <dl class="fields">
 <dt>作者</dt><dd><a class="author-link" href="https://xhslink.cn/o/6lpL1K4pv22" target="_blank" rel="noopener noreferrer"><b>数据-Mr Li</b></a></dd>
@@ -717,6 +723,330 @@
 </article>
 </div>
 </div>
+
+    <!-- 其他账号的新需求 -->
+    <section id="others">
+      <div class="sec-head">
+        <h2>其他账号的新需求</h2>
+        <p>本周 22 条，来自 32 个监控账号之外的 21 个作者；每条都已点进笔记核对过。</p>
+      </div>
+
+<!-- 需求组 15 -->
+<div class="group blk" id="group-15">
+<div class="group-head"><h3>需求组 15 · 工业数据（CAD / CNC）</h3><span class="meta">3 条笔记 · 3 位作者</span></div>
+<div class="cards">
+<article class="card" data-type="cnc cad" data-text="祝鹤槐 cnc cad 工业数据 step cam g代码 设计变更 聚身之家 aiman 大模型训练">
+<div class="card-top"><h4>大量收购 CNC 和 CAD 工业数据！</h4><span class="tags"><span class="tag tag-type">CNC / CAD 工业数据</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><a class="author-link" href="https://www.xiaohongshu.com/user/profile/5d9f9e2c000000000d03d2a8" target="_blank" rel="noopener noreferrer"><b>祝鹤槐</b></a></dd>
+<dt>发布时间</dt><dd>2026-11-16</dd>
+<dt>需求方</dt><dd><b>聚身之家 / AIMAN.World</b>（图片抬头所示）</dd>
+<dt>数据类型</dt><dd>CNC 加工数据、CAD 设计变更数据</dd>
+<dt>Spec</dt><dd><div class="spec">长期征集真实工业数据，用于大模型训练；需正版软件与非保密性质数据。CNC 每套：单体 STEP 模型（.step）、带公差 PDF 图纸、原生 CAM 编程文件（Fusion.f3d / Mastercam.mcam）、实际后处理文件（.cps/.pp 等）、机床实际 G 代码（.nc）、基本信息（材料、机床/系统、夹具、刀具、加工工艺）；支持 3 轴 / 3+2 轴 / 4 轴 / 5 轴。CAD 每套：变更前后原生 CAD 文件（.sldprt/.prt/.catpart/.f3d 等）、变更前后对应 STEP 模型、仿真/试验数据并说明失败原因与改进思路、完整变更说明（问题背景、失败现象、改进方案、验证结果）、版本间仿真条件一致；T2 及以上，优先 T3/T4。仅征集原创或合法授权资料，需脱敏和样本验收；练习件、盗版软件、客户保密件、军工及出口管制内容不收。</div></dd>
+<dt>采购量级</dt><dd><b>CNC 30,000 套；CAD 3,000 套</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af98a80000000002b03d759" target="_blank" rel="noopener noreferrer">大量收购 CNC 和 CAD 工业数据！ ↗</a></div></dd>
+</dl>
+</article>
+
+<article class="card" data-type="cad" data-text="噢噢噢哦 cad 设计变更 零部件 失效 仿真 edd 工程变更 step ap242">
+<div class="card-top"><h4>CAD厂商 数采供应商 零部件加工</h4><span class="tags"><span class="tag tag-type">CAD 设计变更数据</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><a class="author-link" href="https://www.xiaohongshu.com/user/profile/5de13c4b000000000100947e" target="_blank" rel="noopener noreferrer"><b>噢噢噢哦</b></a></dd>
+<dt>发布时间</dt><dd>2026-11-14</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>CAD 设计变更数据集（零部件）</dd>
+<dt>Spec</dt><dd><div class="spec">急寻能提供真实工厂生产原始数据的供应商/工厂合作，拒绝仿真、合成、实验室数据。需求：真实发生过的零件失效设计变更——变更前真实失效设计，带明确数值化未满足指标；尝试过程多版修改尝试（未通过校核）；变更后优化完成、成功通过校核版本；每个版本交付原生带特征树 CAD 文件 + STEP AP242/AP214、原生仿真算例；配套完整 EDD 工程变更文档：失败原因、备选方案、取舍权衡、前后数值对比；此轮只收零部件相关文件。</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af7b8d2000000002a02d3ab" target="_blank" rel="noopener noreferrer">CAD厂商 数采供应商 零部件加工 ↗</a></div></dd>
+</dl>
+</article>
+
+<article class="card" data-type="cad sim" data-text="一只小鱼游啊游 cad blender 私有代码库 数据资源">
+<div class="card-top"><h4>在线寻数据资源</h4><span class="tags"><span class="tag tag-type">CAD / Blender / 代码库</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><a class="author-link" href="https://www.xiaohongshu.com/user/profile/6afba5f5000000000c02f001" target="_blank" rel="noopener noreferrer"><b>一只小鱼游啊游</b></a></dd>
+<dt>发布时间</dt><dd>2026-11-17</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>CAD、Blender、私有代码库</dd>
+<dt>Spec</dt><dd><div class="spec">团队最近急需 CAD、Blender 和私有代码库资源，欢迎有现成数据的团队和个人联系。</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6afbc6af000000002b03046c" target="_blank" rel="noopener noreferrer">在线寻数据资源 ↗</a></div></dd>
+</dl>
+</article>
+</div>
+</div>
+
+<!-- 需求组 16 -->
+<div class="group blk" id="group-16">
+<div class="group-head"><h3>需求组 16 · Agent 与 RL 数据</h3><span class="meta">5 条笔记 · 4 位作者</span></div>
+<div class="cards">
+<article class="card" data-type="rl" data-text="extrotech 基模团队 数据供应商 agent 轨迹 网络安全 cyber 玩具 cad opus gpt">
+<div class="card-top"><h4>基模团队寻找长期数据供应商！</h4><span class="tags"><span class="tag tag-type">Agent 轨迹 / 数据供应商</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><a class="author-link" href="https://www.xiaohongshu.com/user/profile/67e24add000000000500e070" target="_blank" rel="noopener noreferrer"><b>ExtroTech</b></a></dd>
+<dt>发布时间</dt><dd>2026-11-13</dd>
+<dt>需求方</dt><dd><b>未披露</b>（自称基模团队）</dd>
+<dt>数据类型</dt><dd>Agent 轨迹 / 网络安全 / 玩具 CAD</dd>
+<dt>Spec</dt><dd><div class="spec">找靠谱的长期数据供应商，定制化生产；先提供脱敏样本测试；有大模型团队合作经验加分；重质量，拒绝“走量不走心”。三个方向：①轨迹类，重点 Opus 5.5、GPT-6 Astra、GoT 6.1 Sol 相关；②网络安全，ExploitBench、ExploitGym、SecBench-Pro 等；③玩具 CAD，含 3D 打印和 CAD 建模。</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af678010000000018029535" target="_blank" rel="noopener noreferrer">基模团队寻找长期数据供应商！ ↗</a></div></dd>
+</dl>
+</article>
+
+<article class="card" data-type="rl" data-text="extrotech cyber 网络安全 数据供应商 exploitbench exploitgym secbench">
+<div class="card-top"><h4>寻找 Cyber 数据供应商</h4><span class="tags"><span class="tag tag-type">Cyber 数据集</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><a class="author-link" href="https://www.xiaohongshu.com/user/profile/67e24add000000000500e070" target="_blank" rel="noopener noreferrer"><b>ExtroTech</b></a></dd>
+<dt>发布时间</dt><dd>2026-11-16</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>Cyber（网络安全）数据集</dd>
+<dt>Spec</dt><dd><div class="spec">寻找可用于 AI 训练的 Cyber 数据集，例如 ExploitBench / ExploitGym / secbench-pro。私信请介绍：经营主体、可合作的数据集、内容规模、是否可提供样例、过往合作情况。</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6afa8684000000002b01b85e" target="_blank" rel="noopener noreferrer">寻找 Cyber 数据供应商 ↗</a></div></dd>
+</dl>
+</article>
+
+<article class="card" data-type="rl" data-text="rsi agent 自我改进 recursive self-improvement 强化学习 rl 环境 轨迹 benchmark apex gdpval terminal bench">
+<div class="card-top"><h4>寻找 RSI / Agent 自我改进数据</h4><span class="tags"><span class="tag tag-type">RSI / Agent 数据</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><a class="author-link" href="https://www.xiaohongshu.com/user/profile/5f0dd64f000000000101fb84" target="_blank" rel="noopener noreferrer"><b>🌟🌟🌟</b></a></dd>
+<dt>发布时间</dt><dd>2026-11-16</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>RSI（Recursive Self-Improvement）/ Agent 自我改进数据</dd>
+<dt>Spec</dt><dd><div class="spec">采购用于大模型后训练、强化学习和 Agent 能力优化的 RSI 数据。数据需体现 Agent 完成任务后根据评测结果修改自身 Prompt、工具、代码、记忆或执行策略，再通过环境测试保留更优版本，形成持续迭代过程。重点要求：可运行、可复现的 RL 环境；Agent 多轮任务交互轨迹；完整的观察、动作、工具调用和环境反馈；修改前后的 Agent 版本；奖励、评分、成功率和自动评测结果；多次尝试、失败轨迹和错误修复过程；CoWork、Terminal、Coding、Computer Use、Science 等场景。重点关注：APEX-Agents、GDPVal、Terminal Bench Science、Terminal Bench 4、其他具备完整环境和交互闭环的 Agent Benchmark 或自研数据；暂无完整 RSI 过程、但具备可运行环境、完整交互轨迹和自动评测机制的也欢迎。</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6afa9c5a0000000018028410" target="_blank" rel="noopener noreferrer">寻找 RSI / Agent 自我改进数据 ↗</a></div></dd>
+</dl>
+</article>
+
+<article class="card" data-type="rl" data-text="小镇做题家社会化指南 long-horizon cua 计算机使用 agent 长程 harbor 操作系统">
+<div class="card-top"><h4>求购 Long-Horizon CUA 数据</h4><span class="tags"><span class="tag tag-type">Long-Horizon CUA</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><a class="author-link" href="https://www.xiaohongshu.com/user/profile/64251c040000000012013599" target="_blank" rel="noopener noreferrer"><b>小镇做题家社会化指南</b></a></dd>
+<dt>发布时间</dt><dd>2026-11-16</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>Long-Horizon CUA（计算机使用 Agent）数据</dd>
+<dt>Spec</dt><dd><div class="spec">总体原则：长程、业务衔接自然、素材真实、verify 准确无误。长程要求：gpt6.1sol / gpt6 astra 平均完成需要 200 轮以上。格式：交付 harbor 格式题目。覆盖均衡：四个操作系统覆盖均衡，每个操作系统的软件、场景尽量也覆盖均衡。产物输出多样：文档、PPT、3D 产物、代码、HTML 等。</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6afab72c000000002a00f91e" target="_blank" rel="noopener noreferrer">求购 Long-Horizon CUA 数据 ↗</a></div></dd>
+</dl>
+</article>
+
+<article class="card" data-type="rl" data-text="癸亥 rl env 强化学习环境 数商 长期合作 专家知识 语音 评测 科研 编程 agent">
+<div class="card-top"><h4>RL env 公司（头部模厂采购合作）寻数商长期</h4><span class="tags"><span class="tag tag-type">RL 环境 / 多类数据</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><a class="author-link" href="https://www.xiaohongshu.com/user/profile/6af899b800000000130224c4" target="_blank" rel="noopener noreferrer"><b>癸亥</b></a></dd>
+<dt>发布时间</dt><dd>2026-11-15</dd>
+<dt>需求方</dt><dd><b>未披露</b>（自称 RL env 公司，与国内头部 2 家模厂有长期合作）</dd>
+<dt>数据类型</dt><dd>RL 环境 / 多类训练数据</dd>
+<dt>Spec</dt><dd><div class="spec">长期合作，不是一次性收，需长期稳定产出的数据商。优先方向：专家知识（理科难题，金融、法律、医学等）；语音与对话（多人会议、电话客服、方言和小语种录音）；评测与判分（行业考题、验收标准、专家打分和批改记录）；科研实验（实验记录、原始测量数据、失败的实验）；编程与 Agent（代码、终端、电脑操作、工具调用任务）。其他包括：设计与创作过程、真实工作流、可交互环境、三维与空间、业务系统记录、工业与设备、多模态与具身、试错与纠错、工程与行业文件（CAD、BIM 等专业格式）、第一视角操作。私信请说明数据相关细节如类型、sample 等。</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af8d2f5000000000d009b1b" target="_blank" rel="noopener noreferrer">RL env 公司（头部模厂采购合作）寻数商长期 ↗</a></div></dd>
+</dl>
+</article>
+</div>
+</div>
+
+<!-- 需求组 17 -->
+<div class="group blk" id="group-17">
+<div class="group-head"><h3>需求组 17 · 具身数据采集</h3><span class="meta">3 条笔记 · 3 位作者</span></div>
+<div class="cards">
+<article class="card" data-type="ego embodied" data-text="蚂蚁科技 具身 数据采集 数采 供应商 ego 触觉 头戴式 真实场景 长期招募">
+<div class="card-top"><h4>长期招募数采合作供应商</h4><span class="tags"><span class="tag tag-type">具身数据采集</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><a class="author-link" href="https://www.xiaohongshu.com/user/profile/6491aade0000000025036425" target="_blank" rel="noopener noreferrer"><b>蚂蚁科技</b></a></dd>
+<dt>发布时间</dt><dd>2026-11-14</dd>
+<dt>需求方</dt><dd><b>蚂蚁科技</b>（账号名；称有大公司背书，未披露具体公司全称）</dd>
+<dt>数据类型</dt><dd>具身智能数据采集（ego、触觉、头戴式，真实场景）</dd>
+<dt>Spec</dt><dd><div class="spec">长期招募数采合作供应商。结算：次月结，不押尾款，按有效时长结，有效数据是多少结多少，到日子就打款；三倍佣金保底合同，单场景不限时长，大公司背书。买方出：稳定订单，数据回收，签采购合同。供应商出：真实场景（家里、工厂、商超、医院都算）；干过活的人，按时交得出手；场景多样丰富，能开发新场景。方向：ego、触觉、头戴式，地区不限。两类可谈：做城市服务商的、能独立接项目的数据团队。</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b>（单场景不限时长）</dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af70146000000002a01a950" target="_blank" rel="noopener noreferrer">长期招募数采合作供应商 ↗</a></div></dd>
+</dl>
+</article>
+
+<article class="card" data-type="embodied" data-text="你等着寿司吧 具身 ai 视觉 数据采集 双目 四目 gopro 海外 东南亚 日韩">
+<div class="card-top"><h4>（无标题）</h4><span class="tags"><span class="tag tag-type">具身视觉数据采集</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><a class="author-link" href="https://www.xiaohongshu.com/user/profile/6763775c00000000150072c2" target="_blank" rel="noopener noreferrer"><b>你等着寿司吧</b></a></dd>
+<dt>发布时间</dt><dd>2026-11-17</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>具身 AI 视觉数据采集（双目/四目、GoPro）</dd>
+<dt>Spec</dt><dd><div class="spec">寻找海外数据采集合作。具身 AI 双目/四目、GoPro 视觉数据采集；区域：东南亚、日韩；场景：居家｜工厂｜物流｜商超｜康养｜酒店｜餐饮｜教育｜户外｜办公室；客户提供/指定设备，长期稳定项目，诚邀本地服务商对接。</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6afbcd250000000026012607" target="_blank" rel="noopener noreferrer">（无标题） ↗</a></div></dd>
+</dl>
+</article>
+
+<article class="card" data-type="embodied" data-text="kaiyu 具身智能 数据采集 团队 供应商 问卷 pico umi 头戴 腕部相机">
+<div class="card-top"><h4>具身智能数据采集团队来聊聊</h4><span class="tags"><span class="tag tag-type">具身数据采集</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><a class="author-link" href="https://www.xiaohongshu.com/user/profile/5d01248200000000110038cf" target="_blank" rel="noopener noreferrer"><b>kaiyu</b></a></dd>
+<dt>发布时间</dt><dd>2026-11-13</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>具身智能数据采集</dd>
+<dt>Spec</dt><dd><div class="spec">正在梳理具身数据采集合作资源，整理了一份采集供应商问卷。想了解：做过哪些采集项目、有何经验、用什么设备、能组织多少人员、做过多大规模、目前可以承接哪些采集类型，包括单目/双目裸手、Pico、UMI、头戴+腕部相机等；有成熟采集经验的团队优先，暂没做过具身采集但有可用场地资源的也可聊；也欢迎数据需求方交流需要的场景、采集方式和交付标准。私信先介绍所在城市、团队能力或场地情况，再发问卷。</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af6c308000000002b025bbb" target="_blank" rel="noopener noreferrer">具身智能数据采集团队来聊聊 ↗</a></div></dd>
+</dl>
+</article>
+</div>
+</div>
+
+<!-- 需求组 18 -->
+<div class="group blk" id="group-18">
+<div class="group-head"><h3>需求组 18 · 多模态与视频数据</h3><span class="meta">5 条笔记 · 5 位作者</span></div>
+<div class="cards">
+<article class="card" data-type="multi" data-text="炸鸡炸鸡 多模态 训练数据集 配对 白模 多机位 鸟瞰 商品图 动效 室内效果图 pilot">
+<div class="card-top"><h4>🔥AI 多模态训练数据集</h4><span class="tags"><span class="tag tag-type">多模态配对数据</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><a class="author-link" href="https://www.xiaohongshu.com/user/profile/58e783d55e87e770f9e2425c" target="_blank" rel="noopener noreferrer"><b>炸鸡炸鸡～</b></a></dd>
+<dt>发布时间</dt><dd>2026-11-17</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>AI 多模态训练数据集（多类配对数据）</dd>
+<dt>Spec</dt><dd><div class="spec">对外征集配对数据集（标题称 7 类，正文实际列出 6 项），全部支持先提供 Demo 小样—pilot 试点验证，试点达标再走批量采购；所有素材必须完整商用 / 肖像 / 场地授权。征集品类：①白模-影视原片配对：白模素模视频 + 对应原片，镜头透视、人物姿态逐帧对齐，带工程、切镜标注；②多机位同步拍摄配对：≥3 台相机同步录制，时间偏差 ≤1 帧，附带标定内外参、逐帧相机位姿；③鸟瞰全景-地面视频配对：同一场景航拍鸟瞰 / 全景图 + 地面漫游视频，带完整相机轨迹标注，空域手续齐全；④商品图-真人带货视频配对：必须是同一个实物，不接受同款替代，商品图集 + 真人试用/试穿视频，商品包围框轨迹标注；⑤图文动效多图层配对：成片 + 原始底片，各图层带 Alpha 透明通道，保留关键帧，禁止图层烘焙合并；花字、图表、贴纸、特效类都要，字体可商用；⑥室内效果图-实拍漫游配对：同一落地方案，带比例尺户型 / 鸟瞰效果图 + 室内实拍漫游，家具硬装匹配达标，相机轨迹标注完整，做好隐私脱敏。</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b>（先 Demo 小样—pilot 试点验证，再批量采购）</dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6afae00f0000000024033ab1" target="_blank" rel="noopener noreferrer">🔥AI 多模态训练数据集 ↗</a></div></dd>
+</dl>
+</article>
+
+<article class="card" data-type="video" data-text="妙子dadada 真人对话 数据集 音视频 单流 双流 asr 转写 长期采购">
+<div class="card-top"><h4>长期采购｜真人对话数据集</h4><span class="tags"><span class="tag tag-type">真人对话数据集</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><a class="author-link" href="https://www.xiaohongshu.com/user/profile/663e0a280000000003030fcc" target="_blank" rel="noopener noreferrer"><b>妙子dadada</b></a></dd>
+<dt>发布时间</dt><dd>2026-11-15</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>真人对话（音视频）数据集</dd>
+<dt>Spec</dt><dd><div class="spec">长期采购真人音视频数据集，用于模型训练，找能全流程承接的公司。三类素材：单流单人讲话｜同步双流双人同时间轴对话｜异步双流按发言轮次。硬性要求：真人原声实拍，禁 AI 生成；双人需真实语义问答；一条片段内不切镜不拼接；无水印弹幕 UI；口型与画面对得上；规格：半身/全身构图，横屏 ≥1280×720，竖屏 ≥720×1280。交付：成片 + ASR 转写/时间戳 + 说话人/轮次标签 + 裁切与校正记录 + 质量报告 + 授权材料。合作：先做 3 类×3 条小样试产，验收通过再放量，不合格返工；一个合同、一个对接人、一个验收口，转包不减免责任；有同类项目经验的团队私信，请带上脱敏样片或质量报告样例。</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b>（先 3 类×3 条小样试产，验收通过再放量）</dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af851ff000000001c03091f" target="_blank" rel="noopener noreferrer">长期采购｜真人对话数据集 ↗</a></div></dd>
+</dl>
+</article>
+
+<article class="card" data-type="video" data-text="翘嘴小李 真人音视频 数据集 单流 同步双流 异步双流 口型 采购">
+<div class="card-top"><h4>采购真人音视频数据集</h4><span class="tags"><span class="tag tag-type">真人音视频数据集</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><a class="author-link" href="https://www.xiaohongshu.com/user/profile/634502300000000018029f9d" target="_blank" rel="noopener noreferrer"><b>翘嘴小李</b></a></dd>
+<dt>发布时间</dt><dd>2026-11-13</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>真人音视频数据集</dd>
+<dt>Spec</dt><dd><div class="spec">要求在图片表格中（图片顶部有少量内容未完全显示，按可见部分记录）。单流——一个人对着镜头说话，画面里只有这个人，声音和口型要与本人对应，不涉及问答；典型场景：演讲、口播、单人播客、访谈中的单人发言。同步双流——两个人的画面同时保留在一条公共时间线上，一方说话时另一方聆听反应画面也要保留，不能删掉或冻结；典型场景：双人播客、远程连线访谈、双人对话节目。异步双流——按说话轮次出画面，甲说话只出甲的画面，乙回答只出乙的画面，每段片段内部都要求口型与声音对齐，不允许音画错位；典型场景：一问一答式对话访谈、轮播式双人节目。三类数据都必须满足第三部分的基础质量要求，差别只在画面组织方式。价格私聊。</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b>（价格私聊）</dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af6a41d000000002b004a77" target="_blank" rel="noopener noreferrer">采购真人音视频数据集 ↗</a></div></dd>
+</dl>
+</article>
+
+<article class="card" data-type="video" data-text="77今天吃什么 原始视频 数据 供应商 短剧 电影 电视剧 动画 纪录片 宠物 fpv">
+<div class="card-top"><h4>寻找原始视频数据供应商</h4><span class="tags"><span class="tag tag-type">原始视频数据</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><a class="author-link" href="https://www.xiaohongshu.com/user/profile/63096edb000000001200f531" target="_blank" rel="noopener noreferrer"><b>77今天吃什么</b></a></dd>
+<dt>发布时间</dt><dd>2026-11-11</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>原始视频数据（9 类）</dd>
+<dt>Spec</dt><dd><div class="spec">要求在图片表格中，共 9 类：①中文真人短剧/微短剧：中文表演、人物关系、紧凑叙事、兼容手机竖屏；②中文真人电影：院线级表演、镜头语言、美术、光线与声音；③中文真人电视剧/网络剧：连续角色、群像关系、多场景叙事与完整季集；④高品质动画与风格化叙事影像：典型画风、角色表演、动作与非写实叙事；⑤中文人文、美食与非遗纪录：真实中国、中文现场、工艺与生活细节；⑥动作、舞蹈、戏曲与体育表演：完整动作、节奏、多人配合与舞台调度；⑦现代生活、职业与工艺制作：当代职业、城乡生活、真实操作与状态变化；⑧宠物、野生动物与自然生态：宠物互动、连续动物行为、动物声音与自然摄影；⑨专业影像与特殊摄影素材：复杂运镜、夜景光线、微距、水下、高速与 FPV。</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af3c33f000000002b02779f" target="_blank" rel="noopener noreferrer">寻找原始视频数据供应商 ↗</a></div></dd>
+</dl>
+</article>
+
+<article class="card" data-type="multi" data-text="叮叮当 宠物 数据采集 供应商 多模态 图片 视频 行为 声音 项目合作">
+<div class="card-top"><h4>寻找宠物数据采集供应商｜项目合作</h4><span class="tags"><span class="tag tag-type">宠物多模态数据</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><a class="author-link" href="https://www.xiaohongshu.com/user/profile/67a59663000000000a03c03d" target="_blank" rel="noopener noreferrer"><b>叮叮当</b></a></dd>
+<dt>发布时间</dt><dd>2026-11-16</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>宠物多模态数据采集</dd>
+<dt>Spec</dt><dd><div class="spec">合作方向：宠物图片、视频数据；宠物行为及声音数据；宠物多模态数据采集。希望供应商具备真实采集资源及项目交付经验，支持定制化采集，非单纯库存数据销售。</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6afaaac6000000002b006780" target="_blank" rel="noopener noreferrer">寻找宠物数据采集供应商｜项目合作 ↗</a></div></dd>
+</dl>
+</article>
+</div>
+</div>
+
+<!-- 需求组 19 -->
+<div class="group blk" id="group-19">
+<div class="group-head"><h3>需求组 19 · 医疗、游戏与其他</h3><span class="meta">6 条笔记 · 6 位作者</span></div>
+<div class="cards">
+<article class="card" data-type="dataset" data-text="janne 医疗 数据集 采购 病历 影像标注 医学考题 华东江苏大数据交易中心 bdex dicom jsonl">
+<div class="card-top"><h4>医疗类高质量数据集采购！</h4><span class="tags"><span class="tag tag-type">医疗数据集</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><a class="author-link" href="https://www.xiaohongshu.com/user/profile/6a8e8f8f000000001e0115c7" target="_blank" rel="noopener noreferrer"><b>Janne</b></a></dd>
+<dt>发布时间</dt><dd>2026-11-10</dd>
+<dt>需求方</dt><dd><b>华东江苏大数据交易中心（BDEX）</b>（图片所示；项目编号 HD-GZL-2026SX022）</dd>
+<dt>数据类型</dt><dd>医疗数据（临床病历、影像标注、医学考题、对话/协作数据）</dd>
+<dt>Spec</dt><dd><div class="spec">调研医疗领域友商和其他数据供应商已有的、可直接采购的数据产品，快速补齐已有成熟供给的部分，避免重复定制。要的产出：①数据产品清单（临床病历、影像标注、医学考题、对话/协作数据，按四个需求方向归类）；②规格说明（字段结构、标注格式、难度分布、覆盖科室/病种、数据量）；③样例数据，每类至少约 100 条。重点关注高难度数据（MDT 记录、多次修改诊断的病历、疑难病例影像标注、主治医水平考题，稀缺者优先）、Agentic/协作类数据、题库类（医学 VL 考试题、科研建模题）。样例先行验证，验收以样例质量为准；优先支持按规格定制，定制周期和单价需明确；交付标准化（结构化数据 JSON/JSONL，影像 DICOM/NIfTI）。</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b>（每类样例约 100 条）</dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af2812f000000002b0248a6" target="_blank" rel="noopener noreferrer">医疗类高质量数据集采购！ ↗</a></div></dd>
+</dl>
+</article>
+
+<article class="card" data-type="dataset" data-text="又见山野 游戏 项目数据 有偿 源代码 策划 美术 音频 unity ue godot cocos">
+<div class="card-top"><h4>在线有偿收游戏项目数据！</h4><span class="tags"><span class="tag tag-type">游戏研发数据</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><a class="author-link" href="https://www.xiaohongshu.com/user/profile/5a8146694eacab436f2bc12f" target="_blank" rel="noopener noreferrer"><b>又见山野</b></a></dd>
+<dt>发布时间</dt><dd>2026-11-11</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>游戏研发数据（代码、策划、美术音频资产）</dd>
+<dt>Spec</dt><dd><div class="spec">有偿征集游戏研发数据，付费授权合作，用于 AI 模型训练。征集内容：代码与开发记录（游戏源代码、项目工程、版本迭代历史、测试资料）；策划与游戏内容（玩法设计、关卡任务、剧情对话、角色设定、世界观）；美术与音频资产（模型、贴图、动画、特效、场景、音乐、音效等）。参与范围：PC 游戏、手游均可；不限 Unity、UE、Godot、Cocos 等开发引擎；已发行、未发行、开发中或暂停开发的项目均可提交评估；不要求所有资料齐全。</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af4213e000000001f015aca" target="_blank" rel="noopener noreferrer">在线有偿收游戏项目数据！ ↗</a></div></dd>
+</dl>
+</article>
+
+<article class="card" data-type="sim eval" data-text="癞葛保 blender 场景 作业数据 ai 创建 建模 供应商 500一条 gpt6astra">
+<div class="card-top"><h4>500一条招募供应商</h4><span class="tags"><span class="tag tag-type">Blender 作业数据</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><a class="author-link" href="https://www.xiaohongshu.com/user/profile/67aba8ac00000000080172cd" target="_blank" rel="noopener noreferrer"><b>癞葛保</b></a></dd>
+<dt>发布时间</dt><dd>2026-11-11</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>Blender 场景真实作业数据（AI 创建，室内/室外设计、场景建模）</dd>
+<dt>Spec</dt><dd><div class="spec">收集 AI 创建 Blender 场景的真实作业数据，用于评估和训练模型理解需求（利用 AI 和 Blender 去模仿参照图做生成图）。硬性要求：使用 Blender 5.0.0，制作模型使用 GPT6ASTRA。暂时只对接供应商或者工作室，个人暂时不方便对接。单价 500 元/条。</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b>（单价 500 元/条）</dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af2ca1e000000002b01bdb0" target="_blank" rel="noopener noreferrer">500一条招募供应商 ↗</a></div></dd>
+</dl>
+</article>
+
+<article class="card" data-type="multi" data-text="阳关快乐的行者 数据需求 cv 类数据 企业 样例">
+<div class="card-top"><h4>数据需求，有数据资源的的砸过来</h4><span class="tags"><span class="tag tag-type">CV 类数据</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><a class="author-link" href="https://www.xiaohongshu.com/user/profile/673b4eb4000000001c01ad4f" target="_blank" rel="noopener noreferrer"><b>阳关快乐的行者</b></a></dd>
+<dt>发布时间</dt><dd>2026-11-12</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>CV 类数据（作者在评论区回复确认“企业的，CV 类数据”）</dd>
+<dt>Spec</dt><dd><div class="spec">有数据资源的先发小批量样例和格式说明。正文与图片均未说明更具体的类型、格式或场景。</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b>（仅称小批量样例）</dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af51689000000002a024265" target="_blank" rel="noopener noreferrer">数据需求，有数据资源的的砸过来 ↗</a></div></dd>
+</dl>
+</article>
+
+<article class="card" data-type="dataset" data-text="拾 数据采集 供应商 真实场景 商业 工业 养老院 学校 交付经验">
+<div class="card-top"><h4>急需寻找有交付经验的数据采集供应商！</h4><span class="tags"><span class="tag tag-type">真实场景数据采集</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><a class="author-link" href="https://www.xiaohongshu.com/user/profile/592d5b3650c4b439ba5a71fc" target="_blank" rel="noopener noreferrer"><b>拾</b></a></dd>
+<dt>发布时间</dt><dd>2026-11-13</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>真实场景数据采集（商业、工业、养老院、学校等场景）</dd>
+<dt>Spec</dt><dd><div class="spec">寻找有交付经验的数据采集供应商。商业场景：超市、餐饮店、咖啡馆、酒店等；工业场景：电子厂等；其他：养老院、学校等场景。要求真实场景、有交付经验的供应商。</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6ae8304c000000000e00e0f8" target="_blank" rel="noopener noreferrer">急需寻找有交付经验的数据采集供应商！ ↗</a></div></dd>
+</dl>
+</article>
+
+<article class="card" data-type="dataset" data-text="知许 数据采集 供应商 长期合作 私信">
+<div class="card-top"><h4>数据采集供应商私信我</h4><span class="tags"><span class="tag tag-type">数据采集</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><a class="author-link" href="https://www.xiaohongshu.com/user/profile/5f3c6bd600000000010090e2" target="_blank" rel="noopener noreferrer"><b>知许</b></a></dd>
+<dt>发布时间</dt><dd>2026-11-10</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>数据采集（未说明具体类型）</dd>
+<dt>Spec</dt><dd><div class="spec">仅图片一句“有没有靠谱的数据采集供应商？长期合作！”正文除标题外无其他内容，未说明数据类型、格式、场景或数量。</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af27342000000001603c45b" target="_blank" rel="noopener noreferrer">数据采集供应商私信我 ↗</a></div></dd>
+</dl>
+</article>
+</div>
+</div>
+    </section>
 
     <!-- 本周无新发布 -->
     <div class="group blk">
@@ -876,7 +1206,7 @@
     var shown = 0;
     cards.forEach(function(c){
       var t = c.getAttribute('data-type');
-      var okF = filter === 'all' || t === filter;
+      var okF = filter === 'all' || (t || '').split(/\s+/).indexOf(filter) !== -1;
       var hay = (c.textContent + ' ' + (c.getAttribute('data-text')||'')).toLowerCase();
       var okQ = !kw || hay.indexOf(kw) !== -1;
       var show = okF && okQ;
