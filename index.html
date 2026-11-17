@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="data:," />
+<title>小红书采购需求扫描 — 5 个主页实测结果</title>
+<style>
+  :root{
+    --bg:#ffffff; --bg2:#f6f6f4; --surface:#ffffff; --surface2:#fafaf8;
+    --ink:#191817; --ink2:#4a4743; --muted:#7a756e; --line:#e7e3de;
+    --red:#e60023; --red-soft:#fff0f2; --red-ink:#b8001c;
+    --green:#14743c; --green-soft:#eaf6ee;
+    --amber:#8a5a00; --amber-soft:#fff6dd;
+    --blue:#1d4f91; --blue-soft:#eaf1fb;
+    --chip:#f1efec;
+    --shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px rgba(0,0,0,.05);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#131211; --bg2:#1a1918; --surface:#1c1b1a; --surface2:#222120;
+      --ink:#f2efec; --ink2:#c9c3bc; --muted:#9a948c; --line:#33302d;
+      --red:#ff4d6a; --red-soft:#3a151c; --red-ink:#ff8aa0;
+      --green:#5ec98a; --green-soft:#173324;
+      --amber:#f0b84a; --amber-soft:#3a2e10;
+      --blue:#7fb0f5; --blue-soft:#1a2c4a;
+      --chip:#2a2826;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.3);
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Source Han Sans SC","Noto Sans CJK SC",sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
+  button,input:not([type="checkbox"],[type="radio"]){min-height:2.25rem}
+  a{color:var(--red-ink)}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 20px 64px}
+  .hero{padding:32px 0 8px}
+  .kicker{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--red-ink);background:var(--red-soft);padding:6px 12px;border-radius:999px}
+  .kicker i{width:7px;height:7px;border-radius:50%;background:var(--red);display:inline-block}
+  h1{font-family:"Songti SC","STSong","Noto Serif CJK SC","Source Han Serif SC",serif;font-size:clamp(28px,6vw,42px);line-height:1.15;margin:16px 0 12px;font-weight:900;letter-spacing:-.01em}
+  .lead{font-size:16.5px;color:var(--ink2);max-width:780px;margin:0}
+  .lead strong{color:var(--ink)}
+  .truths{margin-top:20px;border:2px solid var(--amber);border-radius:12px;background:var(--amber-soft);padding:18px 20px}
+  .truths h2{margin:0 0 8px;font-size:16px}
+  .truths p{margin:0;font-size:15px;color:var(--ink2)}
+  .truths b{color:var(--ink)}
+  .truths ul{margin:10px 0 0;padding-left:20px;font-size:14.5px;color:var(--ink2)}
+  .truths li{margin:5px 0}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}
+  @media(max-width:860px){.stats{grid-template-columns:repeat(2,1fr)}}
+  .ds{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .ds .n{font-size:26px;font-weight:900;line-height:1.1}
+  .ds .l{font-size:12.5px;color:var(--muted)}
+  .jump{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 4px}
+  .jump a{font-size:13.5px;font-weight:600;color:var(--ink2);text-decoration:none;background:var(--chip);padding:8px 14px;border-radius:999px;min-height:36px;display:inline-flex;align-items:center}
+  section{margin-top:40px}
+  .sec-head{margin-bottom:16px}
+  .sec-head h2{font-family:"Songti SC","STSong","Noto Serif CJK SC","Source Han Serif SC",serif;font-size:24px;margin:0 0 6px}
+  .sec-head p{margin:0;color:var(--ink2);font-size:15px;max-width:800px}
+  .account-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin:28px 0 12px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+  .account-head:first-of-type{margin-top:8px}
+  .account-head h3{margin:0;font-size:18px}
+  .account-head h3 span{font-weight:500;color:var(--muted);font-size:14px;margin-left:6px}
+  .badge{font-size:12.5px;font-weight:700;padding:5px 10px;border-radius:999px;white-space:nowrap}
+  .badge-green{background:var(--green-soft);color:var(--green)}
+  .badge-gray{background:var(--chip);color:var(--ink2)}
+  .badge-red{background:var(--red-soft);color:var(--red-ink)}
+  .badge-amber{background:var(--amber-soft);color:var(--amber)}
+  .cards{display:grid;gap:12px}
+  .card{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:18px 20px;box-shadow:var(--shadow)}
+  .card.zero{box-shadow:none;background:var(--surface2);border-style:dashed}
+  .card-top{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start;justify-content:space-between}
+  .card h4{margin:0;font-size:16.5px;line-height:1.4;max-width:640px}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}
+  .tag{font-size:12px;font-weight:800;padding:4px 9px;border-radius:999px;white-space:nowrap}
+  .tag-type{background:var(--blue-soft);color:var(--blue)}
+  .tag-dup{background:var(--amber-soft);color:var(--amber)}
+  .tag-new{background:var(--green-soft);color:var(--green)}
+  .tag-filter{background:var(--chip);color:var(--ink2)}
+  .fields{margin:14px 0 0;display:grid;grid-template-columns:96px 1fr;row-gap:7px;font-size:14px}
+  .fields dt{color:var(--muted);font-weight:700}
+  .fields dd{margin:0;color:var(--ink2)}
+  .fields dd b{color:var(--ink)}
+  .spec{background:var(--surface2);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:13.5px;line-height:1.7}
+  .card.zero .spec{background:var(--surface)}
+  @media(max-width:560px){.fields{grid-template-columns:1fr}.fields dt{margin-top:6px}}
+  .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 8px}
+  .toolbar input[type="search"]{flex:1;min-width:200px;padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:14px;font-family:inherit}
+  .fbtn{border:1px solid var(--line);background:var(--surface);color:var(--ink2);padding:8px 14px;border-radius:999px;font-size:13.5px;font-weight:700;cursor:pointer;font-family:inherit;min-height:36px}
+  .fbtn.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  .empty{display:none;border:1px dashed var(--line);border-radius:10px;padding:24px;text-align:center;color:var(--muted);font-size:14px;margin-top:12px}
+  .note{font-size:13.5px;color:var(--muted);margin-top:12px}
+  /* Watchlist */
+  .wl-tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+  .wl-tools input[type="search"]{flex:1;min-width:220px;padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:14px;font-family:inherit}
+  .wl-count{font-size:13.5px;color:var(--muted);font-weight:700;white-space:nowrap}
+  .tablewrap{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}
+  .wrow{display:grid;grid-template-columns:40px 200px 92px 1fr;gap:0;border-bottom:1px solid var(--line);align-items:start}
+  .wrow:last-child{border-bottom:0}
+  .wrow>div{padding:11px 12px;font-size:14px}
+  .wrow .no{color:var(--muted);font-weight:700;text-align:right}
+  .wrow .nick{font-weight:800;overflow-wrap:anywhere}
+  .wrow .st{font-size:12px;font-weight:800;white-space:nowrap}
+  .st-yes{color:var(--green)} .st-no{color:var(--muted)}
+  .wrow .dir{color:var(--ink2);overflow-wrap:anywhere}
+  .wrow.head{background:var(--surface2);font-weight:800;font-size:13px;color:var(--muted)}
+  .wrow.scanned{background:color-mix(in srgb, var(--green-soft) 35%, transparent)}
+  @media(max-width:700px){.wrow{grid-template-columns:32px 1fr 84px}.wrow .dir{grid-column:2 / -1;padding-top:0}.wrow.head .dir{display:none}}
+  .wl-empty{display:none;border:1px dashed var(--line);border-radius:10px;padding:24px;text-align:center;color:var(--muted);font-size:14px;margin-top:12px}
+  .summary-box{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:18px 20px}
+  .summary-box ul{margin:8px 0 0;padding-left:20px;color:var(--ink2);font-size:14.5px}
+  .summary-box li{margin:6px 0}
+  .summary-box b{color:var(--ink)}
+  .head-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .home-link{display:inline-flex;align-items:center;min-height:32px;font-size:13px;font-weight:700;color:var(--red-ink);background:var(--red-soft);border:1px solid color-mix(in srgb, var(--red) 25%, transparent);padding:5px 12px;border-radius:999px;text-decoration:none;white-space:nowrap}
+  .home-link:hover{text-decoration:underline}
+  .orig-links{display:grid;gap:6px}
+  .orig-links a{font-weight:600;text-decoration:none;overflow-wrap:anywhere}
+  .orig-links a:hover{text-decoration:underline}
+  .orig-links a span{color:var(--muted);font-weight:500;font-size:13px}
+  .wrow .nick a{color:inherit;text-decoration:none}
+  .wrow .nick a:hover{color:var(--red-ink);text-decoration:underline}
+  .link-note{font-size:13.5px;color:var(--muted);margin:10px 0 0}
+  footer{margin-top:52px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+  footer p{margin:4px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <span class="kicker"><i></i> 手动实测 · 浏览器只读扫描 · 2026-11-17</span>
+    <h1>小红书采购需求扫描<br>5 个主页最终结果</h1>
+    <p class="lead">这是今天用浏览器<strong>只读方式逐个打开主页核实</strong>的结果，不是自动周报。统计周期 <strong>2026-11-10 至 2026-11-17</strong>，只看这一周内新发布的笔记。</p>
+
+    <div class="truths" aria-label="本次范围说明">
+      <h2>先说清本次范围</h2>
+      <p><b>这是手动实测，不是本周周报。</b> 本次只扫了 32 个监控账号中的 <b>5 个</b>，其余 <b>27 个本次未扫描</b>，不能用这 5 个的结果代表全量。</p>
+      <ul>
+        <li><b>已扫描 5 个：</b>Echo、Amber咪的Mom、睡不醒的是我、Kevin｜AI Lab、数据采集（主页显示名「数据服务」）</li>
+        <li><b>统计周期：</b>2026-11-10 至 2026-11-17（含首尾两天），周期外的旧笔记不计入本周，只在说明里提一句日期</li>
+        <li><b>核实方式：</b>2026-11-17 浏览器只读打开主页核实，不点赞、不评论、不私信；需求方未在原帖写明公司名的，一律记「未披露」，不把作者当需求方</li>
+      </ul>
+    </div>
+
+    <div class="stats" aria-label="本次总览">
+      <div class="ds"><div class="n">5 / 32</div><div class="l">本次已扫描主页 · 其余 27 个未扫描</div></div>
+      <div class="ds"><div class="n">9 条</div><div class="l">5 个主页在周期内共看到的笔记</div></div>
+      <div class="ds"><div class="n">8 条</div><div class="l">真实采购需求笔记</div></div>
+      <div class="ds"><div class="n">4 类</div><div class="l">去重后的需求主题（Ego / PCB / Seedance / 成品数据集）</div></div>
+      <div class="ds"><div class="n">3 个</div><div class="l">本周有新笔记的主页</div></div>
+      <div class="ds"><div class="n">3 个</div><div class="l">本周 0 条的主页：Echo、Amber咪的Mom、Kevin｜AI Lab</div></div>
+      <div class="ds"><div class="n">1 条</div><div class="l">被筛掉：急需 UWB 麦克风（找设备厂家，非数据需求）</div></div>
+      <div class="ds"><div class="n">0 条</div><div class="l">写明需求方公司名的笔记 — 本周 8 条均未披露</div></div>
+    </div>
+
+    <nav class="jump" aria-label="快速跳转">
+      <a href="#results">5 个主页明细</a><a href="#watchlist">32 个账号清单</a><a href="#conclusion">怎么看这批结果</a>
+    </nav>
+  </header>
+
+  <section id="results">
+    <div class="sec-head">
+      <h2>5 个主页明细（2026-11-10 至 2026-11-17）</h2>
+      <p>按主页分组。同一作者、同一需求换说法重复发布的，已合并成一组并标出重复关系，不按多条独立需求计数。每张卡片下方有原文链接，每个主页标题旁有主页链接，点开即可跳转小红书。</p>
+      <p class="link-note">提示：小红书笔记链接偶尔会因临时令牌失效显示 404，遇到时点该作者的主页链接进去，再按日期找那条笔记即可。</p>
+    </div>
+
+    <div class="toolbar">
+      <input type="search" id="q" placeholder="搜标题、作者、数据类型、Spec 关键词…" aria-label="搜索本次需求">
+      <button class="fbtn on" data-f="all">全部</button>
+      <button class="fbtn" data-f="ego">Ego 数据</button>
+      <button class="fbtn" data-f="pcb">PCB 工程数据</button>
+      <button class="fbtn" data-f="video">视频 / 成品数据集</button>
+    </div>
+
+    <!-- 睡不醒的是我 -->
+    <div class="account-head" data-account>
+      <h3>睡不醒的是我 <span>本周 7 条 · 6 条真需求 · 1 条筛掉</span></h3>
+      <span class="head-actions"><a class="home-link" href="https://www.xiaohongshu.com/user/profile/650fa3ab0000000012005c67" target="_blank" rel="noopener noreferrer">查看主页 ↗</a><span class="badge badge-green">已扫描 · 本周最活跃</span></span>
+    </div>
+    <div class="cards">
+      <article class="card" data-type="ego" data-text="睡不醒的是我 ego 第一视角 双目 视频 数据采集 供应商 招募 规模化">
+        <div class="card-top"><h4>Ego 数据采集供应商招募 — 同一需求本周发了 4 条</h4><span class="tags"><span class="tag tag-type">Ego 数据采集</span><span class="tag tag-dup">作者重复 ×4</span></span></div>
+        <dl class="fields">
+          <dt>作者</dt><dd><b>睡不醒的是我</b></dd>
+          <dt>发布时间</dt><dd>2026-11-11、11-13、11-14、11-17，共 4 条</dd>
+          <dt>需求方</dt><dd><b>未披露</b> — 原帖未写公司名</dd>
+          <dt>数据类型</dt><dd>第一视角 Ego 数据采集（供应商招募）</dd>
+          <dt>Spec</dt><dd><div class="spec">招募 Ego 数据采集供应商：要第一视角双目 Ego 视频；能规模化采集、持续稳定供货；有成熟团队、或做过类似项目者优先。4 条为同一需求的不同表述，内容口径一致。</div></dd>
+          <dt>采购量级</dt><dd><b>量比较大，未给具体数字</b></dd>
+          <dt>查重状态</dt><dd><b>作者重复 / 疑似同源</b> — 4 条合并为 1 类需求，不按 4 条独立需求计</dd>
+          <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af2ba12000000001802818e" target="_blank" rel="noopener noreferrer">2026-11-11 · 寻找Ego数据采集供应商，求合作！ ↗</a><a href="https://www.xiaohongshu.com/explore/6af5680e000000002501fb55" target="_blank" rel="noopener noreferrer">2026-11-13 · 积极寻找Ego数据采集供应商中 ↗</a><a href="https://www.xiaohongshu.com/explore/6af6c0c9000000002a02bc42" target="_blank" rel="noopener noreferrer">2026-11-14 · 招募Ego数据采集供应商｜第一视角双目 ↗</a><a href="https://www.xiaohongshu.com/explore/6afad440000000002b013756" target="_blank" rel="noopener noreferrer">2026-11-17 · 寻找靠谱的Ego数据采集供应商|设备商 ↗</a></div></dd>
+        </dl>
+      </article>
+
+      <article class="card" data-type="pcb" data-text="睡不醒的是我 pcb 工程数据 altium 立创eda kicad 原理图 gerber 100份">
+        <div class="card-top"><h4>PCB 工程数据采购 — 同一规格本周发了 2 条</h4><span class="tags"><span class="tag tag-type">PCB 工程数据</span><span class="tag tag-dup">作者重复 ×2</span></span></div>
+        <dl class="fields">
+          <dt>作者</dt><dd><b>睡不醒的是我</b></dd>
+          <dt>发布时间</dt><dd>2026-11-10、11-11，共 2 条</dd>
+          <dt>需求方</dt><dd><b>未披露</b> — 原帖未写公司名</dd>
+          <dt>数据类型</dt><dd>PCB 原始工程数据</dd>
+          <dt>Spec</dt><dd><div class="spec">100 份起收，上万份也能收，1 个完整项目算 1 份；原始工程文件必须能在原软件里打开编辑，Gerber、PDF、图片不算；库文件给全，设计规则和层叠保留，原理图和 PCB 对应；只收 Altium、立创 EDA、KiCad；重复的、开源的不要；来源合规、有权授权；验收后结算。另招高校代理人收毕业设计和科研项目。</div></dd>
+          <dt>采购量级</dt><dd><b>100 份起，上万份可收</b></dd>
+          <dt>查重状态</dt><dd><b>作者重复 / 疑似同源</b> — 2 条合并为 1 类需求</dd>
+          <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af17c7b000000003402a37e" target="_blank" rel="noopener noreferrer">2026-11-10 · 招高校代理人｜高价采购真实PCB工程数据 ↗</a><a href="https://www.xiaohongshu.com/explore/6af2b919000000002a02e5e9" target="_blank" rel="noopener noreferrer">2026-11-11 · 上万份也收：长期采购真实PCB工程数据 ↗</a></div></dd>
+        </dl>
+      </article>
+
+      <article class="card" data-type="other" data-text="睡不醒的是我 uwb 麦克风 设备 厂家">
+        <div class="card-top"><h4>急需 UWB 麦克风</h4><span class="tags"><span class="tag tag-filter">已筛掉 · 非数据需求</span></span></div>
+        <dl class="fields">
+          <dt>作者</dt><dd><b>睡不醒的是我</b></dd>
+          <dt>发布时间</dt><dd>2026-11-16</dd>
+          <dt>判定</dt><dd>找设备厂家，不是数据采购需求，本次不计入 8 条有效需求。</dd>
+          <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6afa8bc5000000002a025001" target="_blank" rel="noopener noreferrer">急需 UWB 麦克风 ↗</a></div></dd>
+        </dl>
+      </article>
+    </div>
+
+    <!-- 数据采集 / 数据服务 -->
+    <div class="account-head" data-account>
+      <h3>数据采集 <span>主页显示名「数据服务」 · 本周 2 条 · 均为真需求</span></h3>
+      <span class="head-actions"><a class="home-link" href="https://www.xiaohongshu.com/user/profile/5571c88bb7ba224fe7ca2ba8" target="_blank" rel="noopener noreferrer">查看主页 ↗</a><span class="badge badge-green">已扫描</span></span>
+    </div>
+    <div class="cards">
+      <article class="card" data-type="video" data-text="数据服务 数据采集 seedance 2.5 视频 数据 思维链 一手">
+        <div class="card-top"><h4>求购 seedance 2.5 数据</h4><span class="tags"><span class="tag tag-type">视频生成数据</span><span class="tag tag-new">本周新发布</span></span></div>
+        <dl class="fields">
+          <dt>作者</dt><dd><b>数据服务</b>（监控清单中记为「数据采集」）</dd>
+          <dt>发布时间</dt><dd>2026-11-16</dd>
+          <dt>需求方</dt><dd><b>未披露</b></dd>
+          <dt>Spec</dt><dd><div class="spec">求购一手 Seedance 2.5 视频数据，不限量。配图还写了要 Seedance 思维链的数据。</div></dd>
+          <dt>采购量级</dt><dd><b>不限量</b></dd>
+          <dt>查重状态</dt><dd><b>新笔记</b></dd>
+          <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6afa7e87000000002a01eedb" target="_blank" rel="noopener noreferrer">求购 seedance 2.5 数据 ↗</a></div></dd>
+        </dl>
+      </article>
+
+      <article class="card" data-type="video" data-text="数据服务 数据采集 长期求购 成品数据集 医疗 大模型轨迹 视频生成 题库">
+        <div class="card-top"><h4>长期求购各类成品数据集</h4><span class="tags"><span class="tag tag-type">成品数据集</span><span class="tag tag-new">本周新发布</span></span></div>
+        <dl class="fields">
+          <dt>作者</dt><dd><b>数据服务</b>（监控清单中记为「数据采集」）</dd>
+          <dt>发布时间</dt><dd>2026-11-13</dd>
+          <dt>需求方</dt><dd><b>未披露</b></dd>
+          <dt>Spec</dt><dd><div class="spec">长期求购各类成品数据集：医疗数据、大模型轨迹、视频生成数据、题库数据。具体要求私信聊，原帖未展开细则。</div></dd>
+          <dt>采购量级</dt><dd><b>长期求购，未给数字</b></dd>
+          <dt>查重状态</dt><dd><b>新笔记</b></dd>
+          <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af57a86000000002b038d5f" target="_blank" rel="noopener noreferrer">长期求购各类成品数据集 ↗</a></div></dd>
+        </dl>
+      </article>
+    </div>
+
+    <!-- Echo -->
+    <div class="account-head" data-account>
+      <h3>Echo <span>本周 0 条</span></h3>
+      <span class="head-actions"><a class="home-link" href="https://www.xiaohongshu.com/user/profile/64926a27000000002a036fa5" target="_blank" rel="noopener noreferrer">查看主页 ↗</a><span class="badge badge-gray">已扫描 · 本周无新帖</span></span>
+    </div>
+    <div class="cards">
+      <article class="card zero" data-type="none" data-text="echo 本周无 cad pcb">
+        <div class="card-top"><h4>本周无新发布</h4><span class="tags"><span class="tag tag-filter">0 条</span></span></div>
+        <dl class="fields">
+          <dt>说明</dt><dd>该主页最新笔记为 <b>2026-10-28</b>，不在本周周期内。此前被关注的「有偿收 CAD 和 PCB 工程数据」为 <b>2026-10-02</b>，同样在周期外，本次不计入。</dd>
+        </dl>
+      </article>
+    </div>
+
+    <!-- Amber -->
+    <div class="account-head" data-account>
+      <h3>Amber咪的Mom <span>本周 0 条</span></h3>
+      <span class="head-actions"><a class="home-link" href="https://www.xiaohongshu.com/user/profile/62260f3f0000000021023f97" target="_blank" rel="noopener noreferrer">查看主页 ↗</a><span class="badge badge-gray">已扫描 · 本周无新帖</span></span>
+    </div>
+    <div class="cards">
+      <article class="card zero" data-type="none" data-text="amber kicad 本周无">
+        <div class="card-top"><h4>本周无新发布</h4><span class="tags"><span class="tag tag-filter">0 条</span></span></div>
+        <dl class="fields">
+          <dt>说明</dt><dd>最新笔记为 <b>2026-10-28</b> 的 KiCad 求助帖，内容是真实需求，但日期在周期外，本次不计入本周。</dd>
+        </dl>
+      </article>
+    </div>
+
+    <!-- Kevin -->
+    <div class="account-head" data-account>
+      <h3>Kevin｜AI Lab <span>本周 0 条</span></h3>
+      <span class="head-actions"><a class="home-link" href="https://www.xiaohongshu.com/user/profile/62ad1a44000000001b029aa0" target="_blank" rel="noopener noreferrer">查看主页 ↗</a><span class="badge badge-gray">已扫描 · 本周无新帖</span></span>
+    </div>
+    <div class="cards">
+      <article class="card zero" data-type="none" data-text="kevin ai lab 医疗 本周无">
+        <div class="card-top"><h4>本周无新发布</h4><span class="tags"><span class="tag tag-filter">0 条</span></span></div>
+        <dl class="fields">
+          <dt>说明</dt><dd>最新笔记为 <b>2026-11-03</b> 的医疗数据采购帖，在 2026-11-10 之前，不在本次周期内。</dd>
+        </dl>
+      </article>
+    </div>
+
+    <div class="empty" id="empty">没有符合当前筛选的内容，换个关键词试试。</div>
+  </section>
+
+  <section id="conclusion">
+    <div class="sec-head"><h2>怎么看这批结果</h2></div>
+    <div class="summary-box">
+      <ul>
+        <li><b>量集中在一个号：</b>本周 9 条笔记里 7 条来自「睡不醒的是我」，另外 2 条来自「数据服务」。其余 3 个已扫主页本周都没发帖。</li>
+        <li><b>别按 8 条独立需求理解：</b>8 条有效笔记去重后是 <b>4 类需求</b> — Ego 采集（4 条同源）、PCB 工程数据（2 条同源）、Seedance 2.5 数据（1 条）、成品数据集长期求购（1 条）。</li>
+        <li><b>需求方全部未披露：</b>本周 8 条没有一条写明采购公司名，跟进时只能先按作者联系，不能臆测背后公司。</li>
+        <li><b>这不是全量结论：</b>还有 <b>27 个账号本次未扫描</b>，它们本周有没有发采购帖，这页不做判断。</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="watchlist">
+    <div class="sec-head"><h2>32 个监控账号清单 — 本次只扫了 5 个</h2><p>清单完整保留。下面用「本次状态」标清：<b>已扫描 5 个</b>，其余 <b>27 个本次未扫描</b>。未扫描不等于本周没发帖，只是这次没看。点任意昵称即可打开该账号的小红书主页。</p></div>
+    <div class="wl-tools">
+      <input type="search" id="wlq" placeholder="按昵称或需求方向搜索，如 PCB、Agent、Echo…" aria-label="搜索监控账号">
+      <span class="wl-count" id="wlcount">显示 32 / 32</span>
+    </div>
+    <div class="tablewrap" role="table" aria-label="监控账号清单">
+      <div class="wrow head"><div class="no">#</div><div class="nick">昵称</div><div class="st">本次状态</div><div class="dir">需求方向</div></div>
+      <div class="wrow scanned" data-wl="echo cad pcb 已扫描"><div class="no">1</div><div class="nick"><a href="https://xhslink.cn/o/zC7hVlzicB" target="_blank" rel="noopener noreferrer">Echo ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">CAD 机械设计工程数据 / PCB 电子电路设计工程数据 — 本周 0 条</div></div>
+      <div class="wrow scanned" data-wl="amber咪的mom pcb kicad 已扫描"><div class="no">2</div><div class="nick"><a href="https://xhslink.cn/o/4cqm1nJhk3n" target="_blank" rel="noopener noreferrer">Amber咪的Mom（Gap中） ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">PCB 原始设计工程数据（KiCad / EasyEDA） — 本周 0 条</div></div>
+      <div class="wrow scanned" data-wl="睡不醒的是我 pcb ego 已扫描"><div class="no">3</div><div class="nick"><a href="https://xhslink.cn/o/9swvnfCImTe" target="_blank" rel="noopener noreferrer">睡不醒的是我 ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">PCB 原始工程设计数据 / Ego 数据采集 — 本周 7 条，6 条真需求</div></div>
+      <div class="wrow scanned" data-wl="kevin ai lab 已扫描"><div class="no">4</div><div class="nick"><a href="https://xhslink.cn/o/1bVRqiZzW1c" target="_blank" rel="noopener noreferrer">Kevin｜AI ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">TBS 科研任务、OSWorld / GUI Agent 轨迹、AutoResearch、3D 工程 — 本周 0 条（清单名 Kevin｜AI，主页显示 Kevin｜AI Lab）</div></div>
+      <div class="wrow scanned" data-wl="数据采集 数据服务 医疗 已扫描"><div class="no">5</div><div class="nick"><a href="https://xhslink.cn/o/9XC9nTOyzbO" target="_blank" rel="noopener noreferrer">数据采集 ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">医疗多模态、科研建模与评测、临床工作流 — 主页显示名「数据服务」，本周 2 条真需求</div></div>
+      <div class="wrow" data-wl="买定离手计划 金融 agent 未扫描"><div class="no">6</div><div class="nick"><a href="https://xhslink.cn/o/AWrqItU0YNw" target="_blank" rel="noopener noreferrer">买定离手计划 ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">金融场景 AI Agent 轨迹 / Tool-Calling / 多轮对话</div></div>
+      <div class="wrow" data-wl="不寻 金融 法律 未扫描"><div class="no">7</div><div class="nick"><a href="https://xhslink.cn/o/49BJkzq6Qhm" target="_blank" rel="noopener noreferrer">不寻 ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">企业级金融、法律高质量原始数据集</div></div>
+      <div class="wrow" data-wl="毛毛狗 金融 未扫描"><div class="no">8</div><div class="nick"><a href="https://xhslink.cn/o/AliIBP5swJl" target="_blank" rel="noopener noreferrer">毛毛狗 ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">金融财经资讯、研报摘要、公众号及雪球金融资讯</div></div>
+      <div class="wrow" data-wl="佐维 多轮对话 sft 未扫描"><div class="no">9</div><div class="nick"><a href="https://xhslink.cn/o/8q9uKb4fNTU" target="_blank" rel="noopener noreferrer">佐维. ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">多轮对话 SFT、RL/RLHF、Agent 训练轨迹、金融工作流</div></div>
+      <div class="wrow" data-wl="小木偶 视频 未扫描"><div class="no">10</div><div class="nick"><a href="https://xhslink.cn/o/5bz6VSMOuFh" target="_blank" rel="noopener noreferrer">小木偶 ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">真实场景视频（人物对话/动作、日常生活）</div></div>
+      <div class="wrow" data-wl="scenesai 世界模型 视频 未扫描"><div class="no">11</div><div class="nick"><a href="https://xhslink.cn/o/9EOOZFZDfw7" target="_blank" rel="noopener noreferrer">ScenesAi ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">世界模型 / 视频编辑 / CG、VFX 特效视频</div></div>
+      <div class="wrow" data-wl="孤云枕月 题库 语料 未扫描"><div class="no">12</div><div class="nick"><a href="https://xhslink.cn/o/2LmCR9M1txw" target="_blank" rel="noopener noreferrer">孤云枕月 ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">题库、图书期刊语料、训练语料、Agent 轨迹、多模态</div></div>
+      <div class="wrow" data-wl="云川 视频 pair 未扫描"><div class="no">13</div><div class="nick"><a href="https://xhslink.cn/o/2vI7kCrC9PP" target="_blank" rel="noopener noreferrer">云川 ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">AI 视频生成与编辑（Video Pair、参考生成、视频编辑）</div></div>
+      <div class="wrow" data-wl="小红薯69a79bf0 sd2.5 视频 未扫描"><div class="no">14</div><div class="nick"><a href="https://xhslink.cn/o/7CH8ZFrr4AV" target="_blank" rel="noopener noreferrer">小红薯69A79BF0 ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">SD2.5 视频生成与编辑（图生视频、视频复刻、Pair）</div></div>
+      <div class="wrow" data-wl="norman 专业软件 3d 未扫描"><div class="no">15</div><div class="nick"><a href="https://xhslink.cn/o/1Vcyorh6jQ3" target="_blank" rel="noopener noreferrer">Norman ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">专业软件真实商业任务（3D/工程、平面/UI、视频、办公、开发）</div></div>
+      <div class="wrow" data-wl="boliboli rlhf agent 未扫描"><div class="no">16</div><div class="nick"><a href="https://xhslink.cn/o/6P5fgLPuS0n" target="_blank" rel="noopener noreferrer">boliboli ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">RLHF 偏好 / Agent 轨迹 / CoT 推理 / 具身与离线 RL</div></div>
+      <div class="wrow" data-wl="yd 具身 ego umi 未扫描"><div class="no">17</div><div class="nick"><a href="https://xhslink.cn/o/859FxphHMne" target="_blank" rel="noopener noreferrer">💭yd ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">具身机器人（Ego、UMI、Teleop 遥操作）</div></div>
+      <div class="wrow" data-wl="simreal agent 未扫描"><div class="no">18</div><div class="nick"><a href="https://xhslink.cn/o/6XHhq6O2nLL" target="_blank" rel="noopener noreferrer">SimReal ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">编程与 Agent、专家知识、行业工作流、多模态与具身、RL 环境</div></div>
+      <div class="wrow" data-wl="楼肉肉 具身 ego 未扫描"><div class="no">19</div><div class="nick"><a href="https://xhslink.cn/o/37wFoLsaCbw" target="_blank" rel="noopener noreferrer">楼肉肉. ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">具身训练（Egocentric、UMI 机器人操作）</div></div>
+      <div class="wrow" data-wl="米粥 3d rl 未扫描"><div class="no">20</div><div class="nick"><a href="https://xhslink.cn/o/7tYXvyg3jkI" target="_blank" rel="noopener noreferrer">米粥 ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">3D 智能体轨迹 / RL 训练</div></div>
+      <div class="wrow" data-wl="哆啦梦仔 ue5 blender figma 未扫描"><div class="no">21</div><div class="nick"><a href="https://xhslink.cn/o/9wG143ZuPbd" target="_blank" rel="noopener noreferrer">哆啦梦仔 ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">UE5 游戏工程、Blender 3D、Photoshop 源文件、Figma UI/UX</div></div>
+      <div class="wrow" data-wl="月界数据 小鱼 源码 3d 未扫描"><div class="no">22</div><div class="nick"><a href="https://xhslink.cn/o/8Agn3Xrst8s" target="_blank" rel="noopener noreferrer">月界数据-小鱼 ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">软件项目源码、3D/动画/特效代码、3D 模型及游戏原画</div></div>
+      <div class="wrow" data-wl="lili agent benchmark 未扫描"><div class="no">23</div><div class="nick"><a href="https://xhslink.cn/o/53WTZrKcyWA" target="_blank" rel="noopener noreferrer">lili ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">Agent 合成后训练 / 长轨迹 / Benchmark 配套</div></div>
+      <div class="wrow" data-wl="y 后训练 rubric 未扫描"><div class="no">24</div><div class="nick"><a href="https://xhslink.cn/o/53MmonmXl0N" target="_blank" rel="noopener noreferrer">Y. ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">后训练（Rubric、SFT/RL/Reward、Agent 长任务）</div></div>
+      <div class="wrow" data-wl="01 sft dpo agent 未扫描"><div class="no">25</div><div class="nick"><a href="https://xhslink.cn/o/7NdvjrbUYTI" target="_blank" rel="noopener noreferrer">01 ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">中文 SFT / DPO、Tool-Calling / ReAct 轨迹、Coding Agent</div></div>
+      <div class="wrow" data-wl="andrew 郑瀚 agent 未扫描"><div class="no">26</div><div class="nick"><a href="https://xhslink.cn/o/4ntKIyaau2L" target="_blank" rel="noopener noreferrer">Andrew~郑瀚 ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">Agent 任务与轨迹、AI 训练评测、学术及专业知识语料</div></div>
+      <div class="wrow" data-wl="myriad cua agent 未扫描"><div class="no">27</div><div class="nick"><a href="https://xhslink.cn/o/1H0poKrKmbe" target="_blank" rel="noopener noreferrer">Myriad ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">CUA / Agent 浏览器操作轨迹（Web Agent Trajectory）</div></div>
+      <div class="wrow" data-wl="eva 后训练 rubric 未扫描"><div class="no">28</div><div class="nick"><a href="https://xhslink.cn/o/A3tzCnYlIxt" target="_blank" rel="noopener noreferrer">Eva ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">后训练（Rubric、SFT/RL/Reward、Agent 长任务及工具调用）</div></div>
+      <div class="wrow" data-wl="aaa数商李不总 cyber coding 未扫描"><div class="no">29</div><div class="nick"><a href="https://xhslink.cn/o/eUpjjxyypL" target="_blank" rel="noopener noreferrer">AAA数商李不总 ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">Cyber Agent、Coding Agent、AI Cowork、CLI Agent、WorkspaceBench、GDPval V2</div></div>
+      <div class="wrow" data-wl="miammcz 文本 ocr coding 未扫描"><div class="no">30</div><div class="nick"><a href="https://xhslink.cn/o/4LEDN3WD0Pg" target="_blank" rel="noopener noreferrer">MIAMMCZ ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">文本、OCR 图像、语音、Coding、专家垂直、多模态、合成数据</div></div>
+      <div class="wrow" data-wl="数据-mr 电子文本 未扫描"><div class="no">31</div><div class="nick"><a href="https://xhslink.cn/o/6lpL1K4pv22" target="_blank" rel="noopener noreferrer">数据-Mr ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">电子文本素材 / 中英文电子书文本资源</div></div>
+      <div class="wrow" data-wl="小花鱼 raw workspace 未扫描"><div class="no">32</div><div class="nick"><a href="https://xhslink.cn/o/dGRR8FpIis" target="_blank" rel="noopener noreferrer">小花鱼 ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">Raw Workspace 原始项目工作空间（科研、代码、软件工程、数据分析、建模仿真、STEM）</div></div>
+    </div>
+    <div class="wl-empty" id="wlempty">没有匹配的账号，换个关键词试试。</div>
+    <p class="note">本次未扫描的 27 个账号，本页不对其本周动态做任何判断。</p>
+  </section>
+
+  <footer>
+    <p><b>小红书采购需求扫描 — 5 个主页实测结果</b></p>
+    <p>核实日期 2026-11-17 · 统计周期 2026-11-10 至 2026-11-17 · 方式：浏览器只读扫描 · 范围：32 个监控账号中的 5 个，其余 27 个本次未扫描 · 本页不是本周周报，页面为发布时快照，不会自行更新。</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var cards = Array.prototype.slice.call(document.querySelectorAll('#results .card'));
+  var empty = document.getElementById('empty');
+  var q = document.getElementById('q');
+  var btns = Array.prototype.slice.call(document.querySelectorAll('.fbtn'));
+  var filter = 'all';
+  function apply(){
+    var kw = (q.value || '').trim().toLowerCase();
+    var shown = 0;
+    cards.forEach(function(c){
+      var t = c.getAttribute('data-type');
+      var okF = filter === 'all' || t === filter || (filter==='video' && t==='video');
+      var hay = (c.textContent + ' ' + (c.getAttribute('data-text')||'')).toLowerCase();
+      var okQ = !kw || hay.indexOf(kw) !== -1;
+      var show = okF && okQ;
+      c.style.display = show ? '' : 'none';
+      if(show) shown++;
+    });
+    // hide account heads with no visible cards in following sibling .cards
+    document.querySelectorAll('[data-account]').forEach(function(h){
+      var cont = h.nextElementSibling;
+      if(!cont) return;
+      var any = Array.prototype.some.call(cont.querySelectorAll('.card'), function(c){ return c.style.display !== 'none'; });
+      h.style.display = any ? '' : 'none';
+      cont.style.display = any ? '' : 'none';
+    });
+    empty.style.display = shown ? 'none' : 'block';
+  }
+  btns.forEach(function(b){
+    b.addEventListener('click', function(){
+      btns.forEach(function(x){ x.classList.remove('on'); });
+      b.classList.add('on');
+      filter = b.getAttribute('data-f');
+      apply();
+    });
+  });
+  q.addEventListener('input', apply);
+
+  var wlq = document.getElementById('wlq');
+  var rows = Array.prototype.slice.call(document.querySelectorAll('.wrow[data-wl]'));
+  var wlcount = document.getElementById('wlcount');
+  var wlempty = document.getElementById('wlempty');
+  wlq.addEventListener('input', function(){
+    var kw = (wlq.value || '').trim().toLowerCase();
+    var shown = 0;
+    rows.forEach(function(r){
+      var hay = (r.textContent + ' ' + (r.getAttribute('data-wl')||'')).toLowerCase();
+      var show = !kw || hay.indexOf(kw) !== -1;
+      r.style.display = show ? '' : 'none';
+      if(show) shown++;
+    });
+    wlcount.textContent = '显示 ' + shown + ' / 32';
+    wlempty.style.display = shown ? 'none' : 'block';
+  });
+})();
+</script>
+</body>
+</html>
