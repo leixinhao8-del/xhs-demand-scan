@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="color-scheme" content="light dark" />
 <link rel="icon" href="data:," />
-<title>小红书采购需求扫描 — 5 个主页实测结果</title>
+<title>小红书采购需求扫描 — 32 个主页实测结果</title>
 <style>
   :root{
     --bg:#ffffff; --bg2:#f6f6f4; --surface:#ffffff; --surface2:#fafaf8;
@@ -41,6 +41,8 @@
   h1{font-family:"Songti SC","STSong","Noto Serif CJK SC","Source Han Serif SC",serif;font-size:clamp(28px,6vw,42px);line-height:1.15;margin:16px 0 12px;font-weight:900;letter-spacing:-.01em}
   .lead{font-size:16.5px;color:var(--ink2);max-width:780px;margin:0}
   .lead strong{color:var(--ink)}
+  .datastrip{margin:16px 0 0;font-size:15px;font-weight:800;color:var(--ink);background:var(--surface2);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+  .datastrip span{color:var(--red-ink)}
   .truths{margin-top:20px;border:2px solid var(--amber);border-radius:12px;background:var(--amber-soft);padding:18px 20px}
   .truths h2{margin:0 0 8px;font-size:16px}
   .truths p{margin:0;font-size:15px;color:var(--ink2)}
@@ -58,8 +60,20 @@
   .sec-head{margin-bottom:16px}
   .sec-head h2{font-family:"Songti SC","STSong","Noto Serif CJK SC","Source Han Serif SC",serif;font-size:24px;margin:0 0 6px}
   .sec-head p{margin:0;color:var(--ink2);font-size:15px;max-width:800px}
+  /* Highlights */
+  .hl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:860px){.hl-grid{grid-template-columns:1fr}}
+  .hl{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:18px 20px;box-shadow:var(--shadow)}
+  .hl .num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--red);color:#fff;font-size:14px;font-weight:900;margin-bottom:10px}
+  .hl h3{margin:0 0 6px;font-size:16.5px;line-height:1.4}
+  .hl p{margin:0;font-size:14px;color:var(--ink2)}
+  /* Groups */
+  .group-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px;margin:30px 0 6px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+  .group-head:first-of-type{margin-top:8px}
+  .group-head h3{margin:0;font-size:18px}
+  .group-head .meta{font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap}
+  .group-note{margin:0 0 12px;font-size:13.5px;color:var(--muted)}
   .account-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin:28px 0 12px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
-  .account-head:first-of-type{margin-top:8px}
   .account-head h3{margin:0;font-size:18px}
   .account-head h3 span{font-weight:500;color:var(--muted);font-size:14px;margin-left:6px}
   .badge{font-size:12.5px;font-weight:700;padding:5px 10px;border-radius:999px;white-space:nowrap}
@@ -70,6 +84,8 @@
   .cards{display:grid;gap:12px}
   .card{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:18px 20px;box-shadow:var(--shadow)}
   .card.zero{box-shadow:none;background:var(--surface2);border-style:dashed}
+  .card.pending{border:2px solid var(--amber)}
+  .pending-banner{display:flex;align-items:center;gap:8px;background:var(--amber-soft);color:var(--amber);font-weight:800;font-size:13.5px;border-radius:8px;padding:8px 12px;margin-bottom:12px}
   .card-top{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start;justify-content:space-between}
   .card h4{margin:0;font-size:16.5px;line-height:1.4;max-width:640px}
   .tags{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}
@@ -78,6 +94,7 @@
   .tag-dup{background:var(--amber-soft);color:var(--amber)}
   .tag-new{background:var(--green-soft);color:var(--green)}
   .tag-filter{background:var(--chip);color:var(--ink2)}
+  .tag-pending{background:var(--amber);color:#fff}
   .fields{margin:14px 0 0;display:grid;grid-template-columns:96px 1fr;row-gap:7px;font-size:14px}
   .fields dt{color:var(--muted);font-weight:700}
   .fields dd{margin:0;color:var(--ink2)}
@@ -85,12 +102,18 @@
   .spec{background:var(--surface2);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:13.5px;line-height:1.7}
   .card.zero .spec{background:var(--surface)}
   @media(max-width:560px){.fields{grid-template-columns:1fr}.fields dt{margin-top:6px}}
-  .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 8px}
-  .toolbar input[type="search"]{flex:1;min-width:200px;padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:14px;font-family:inherit}
+  .toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 8px}
+  .toolbar input[type="search"]{flex:1 1 220px;min-width:200px;padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:14px;font-family:inherit}
   .fbtn{border:1px solid var(--line);background:var(--surface);color:var(--ink2);padding:8px 14px;border-radius:999px;font-size:13.5px;font-weight:700;cursor:pointer;font-family:inherit;min-height:36px}
   .fbtn.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
   .empty{display:none;border:1px dashed var(--line);border-radius:10px;padding:24px;text-align:center;color:var(--muted);font-size:14px;margin-top:12px}
   .note{font-size:13.5px;color:var(--muted);margin-top:12px}
+  /* Filtered summary */
+  .filtered-box{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:18px 20px;margin-top:12px}
+  .filtered-box h4{margin:0 0 8px;font-size:15.5px}
+  .filtered-box ul{margin:6px 0 0;padding-left:20px;color:var(--ink2);font-size:14.5px}
+  .filtered-box li{margin:8px 0}
+  .filtered-box b{color:var(--ink)}
   /* Watchlist */
   .wl-tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
   .wl-tools input[type="search"]{flex:1;min-width:220px;padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:14px;font-family:inherit}
@@ -102,10 +125,11 @@
   .wrow .no{color:var(--muted);font-weight:700;text-align:right}
   .wrow .nick{font-weight:800;overflow-wrap:anywhere}
   .wrow .st{font-size:12px;font-weight:800;white-space:nowrap}
-  .st-yes{color:var(--green)} .st-no{color:var(--muted)}
+  .st-yes{color:var(--green)} .st-no{color:var(--muted)} .st-mid{color:var(--amber)}
   .wrow .dir{color:var(--ink2);overflow-wrap:anywhere}
   .wrow.head{background:var(--surface2);font-weight:800;font-size:13px;color:var(--muted)}
   .wrow.scanned{background:color-mix(in srgb, var(--green-soft) 35%, transparent)}
+  .wrow.partial{background:color-mix(in srgb, var(--amber-soft) 45%, transparent)}
   @media(max-width:700px){.wrow{grid-template-columns:32px 1fr 84px}.wrow .dir{grid-column:2 / -1;padding-top:0}.wrow.head .dir{display:none}}
   .wl-empty{display:none;border:1px dashed var(--line);border-radius:10px;padding:24px;text-align:center;color:var(--muted);font-size:14px;margin-top:12px}
   .summary-box{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:18px 20px}
@@ -130,169 +154,639 @@
 <div class="wrap">
 
   <header class="hero">
-    <span class="kicker"><i></i> 手动实测 · 浏览器只读扫描 · 2026-11-17</span>
-    <h1>小红书采购需求扫描<br>5 个主页最终结果</h1>
+    <span class="kicker"><i></i> 手动实测 · 周期 2026-11-10 至 2026-11-17</span>
+    <h1>小红书采购需求扫描</h1>
     <p class="lead">这是今天用浏览器<strong>只读方式逐个打开主页核实</strong>的结果，不是自动周报。统计周期 <strong>2026-11-10 至 2026-11-17</strong>，只看这一周内新发布的笔记。</p>
+    <p class="datastrip"><span>32/32</span> 个主页已扫描 · 本周 <span>50 条</span>笔记 · <span>32 条</span>真实采购需求（14 个需求组）· <span>18 条</span>已筛掉</p>
 
     <div class="truths" aria-label="本次范围说明">
       <h2>先说清本次范围</h2>
-      <p><b>这是手动实测，不是本周周报。</b> 本次只扫了 32 个监控账号中的 <b>5 个</b>，其余 <b>27 个本次未扫描</b>，不能用这 5 个的结果代表全量。</p>
+      <p><b>这是手动实测，不是本周周报。</b> 本次 32 个监控账号<b>全部扫完</b>；29 号主页（AAA数商李不总）已补查完整。</p>
       <ul>
-        <li><b>已扫描 5 个：</b>Echo、Amber咪的Mom、睡不醒的是我、Kevin｜AI Lab、数据采集（主页显示名「数据服务」）</li>
-        <li><b>统计周期：</b>2026-11-10 至 2026-11-17（含首尾两天），周期外的旧笔记不计入本周，只在说明里提一句日期</li>
+        <li><b>统计周期：</b>2026-11-10 至 2026-11-17（含首尾两天），周期外的旧笔记不计入本周</li>
+        <li><b>说明：</b>32 个主页全部扫完；29 号主页已补查完整（此前列表不一致是加载问题，本次 10 条笔记完整核对无缺失）</li>
         <li><b>核实方式：</b>2026-11-17 浏览器只读打开主页核实，不点赞、不评论、不私信；需求方未在原帖写明公司名的，一律记「未披露」，不把作者当需求方</li>
       </ul>
     </div>
 
     <div class="stats" aria-label="本次总览">
-      <div class="ds"><div class="n">5 / 32</div><div class="l">本次已扫描主页 · 其余 27 个未扫描</div></div>
-      <div class="ds"><div class="n">9 条</div><div class="l">5 个主页在周期内共看到的笔记</div></div>
-      <div class="ds"><div class="n">8 条</div><div class="l">真实采购需求笔记</div></div>
-      <div class="ds"><div class="n">4 类</div><div class="l">去重后的需求主题（Ego / PCB / Seedance / 成品数据集）</div></div>
-      <div class="ds"><div class="n">3 个</div><div class="l">本周有新笔记的主页</div></div>
-      <div class="ds"><div class="n">3 个</div><div class="l">本周 0 条的主页：Echo、Amber咪的Mom、Kevin｜AI Lab</div></div>
-      <div class="ds"><div class="n">1 条</div><div class="l">被筛掉：急需 UWB 麦克风（找设备厂家，非数据需求）</div></div>
-      <div class="ds"><div class="n">0 条</div><div class="l">写明需求方公司名的笔记 — 本周 8 条均未披露</div></div>
+      <div class="ds"><div class="n">32 / 32</div><div class="l">本次已扫描主页 · 全部扫完</div></div>
+      <div class="ds"><div class="n">50 条</div><div class="l">本周共看到的笔记</div></div>
+      <div class="ds"><div class="n">32 条</div><div class="l">真实采购需求笔记</div></div>
+      <div class="ds"><div class="n">14 个</div><div class="l">去重后的需求组</div></div>
+      <div class="ds"><div class="n">10 个</div><div class="l">本周有新笔记的主页</div></div>
+      <div class="ds"><div class="n">22 个</div><div class="l">本周 0 条的主页</div></div>
+      <div class="ds"><div class="n">18 条</div><div class="l">被筛掉（1 条设备、15 条行业分享、1 条招聘、1 条供应商广告）</div></div>
+      <div class="ds"><div class="n">0 条</div><div class="l">写明需求方公司名的笔记 — 本周 32 条均未披露</div></div>
     </div>
 
     <nav class="jump" aria-label="快速跳转">
-      <a href="#results">5 个主页明细</a><a href="#watchlist">32 个账号清单</a><a href="#conclusion">怎么看这批结果</a>
+      <a href="#highlights">本周值得关注</a><a href="#results">需求清单（14 组）</a><a href="#conclusion">怎么看这批结果</a><a href="#watchlist">32 个账号清单</a>
     </nav>
   </header>
 
+  <section id="highlights">
+    <div class="sec-head">
+      <h2>本周值得关注</h2>
+      <p>统计周期 2026-11-10 至 2026-11-17，从本周 32 条真实采购需求里挑出的 3 个看点。</p>
+    </div>
+    <div class="hl-grid">
+      <div class="hl">
+        <span class="num">1</span>
+        <h3>数据-Mr Li 一周连发 14 条，全是采购需求</h3>
+        <p>本周最大新发现，一个人覆盖电子文本、KiCad、PCB、EDA、CNC、CAD 变更、多模态，32 条需求里他一家就占了 14 条。</p>
+      </div>
+      <div class="hl">
+        <span class="num">2</span>
+        <h3>Ego / 具身数据最热</h3>
+        <p>睡不醒的是我连发 4 条找 Ego 供应商，哆啦梦仔又补 2 条 Ego/UMI，本周 32 条需求里 6 条与 Ego/UMI 相关。</p>
+      </div>
+      <div class="hl">
+        <span class="num">3</span>
+        <h3>仿真和 3D 评测数据成型</h3>
+        <p>Unity/Blender、Blender RL、CNC 加工数据、CAD 设计变更，都是之前几轮没见过的新方向。</p>
+      </div>
+    </div>
+  </section>
+
   <section id="results">
     <div class="sec-head">
-      <h2>5 个主页明细（2026-11-10 至 2026-11-17）</h2>
-      <p>按主页分组。同一作者、同一需求换说法重复发布的，已合并成一组并标出重复关系，不按多条独立需求计数。每张卡片下方有原文链接，每个主页标题旁有主页链接，点开即可跳转小红书。</p>
+      <h2>需求清单 · 14 个需求组（2026-11-10 至 2026-11-17）</h2>
+      <p>按需求组分组呈现：本周 32 条真实采购需求笔记，去重后是 14 个需求组。同一作者、同一需求换说法重复发布的，已合并在同一组里并标出重复关系，不按多条独立需求计数。每张卡片下方有原文链接。</p>
       <p class="link-note">提示：小红书笔记链接偶尔会因临时令牌失效显示 404，遇到时点该作者的主页链接进去，再按日期找那条笔记即可。</p>
     </div>
 
     <div class="toolbar">
       <input type="search" id="q" placeholder="搜标题、作者、数据类型、Spec 关键词…" aria-label="搜索本次需求">
       <button class="fbtn on" data-f="all">全部</button>
-      <button class="fbtn" data-f="ego">Ego 数据</button>
+      <button class="fbtn" data-f="ego">Ego·具身数据</button>
       <button class="fbtn" data-f="pcb">PCB 工程数据</button>
-      <button class="fbtn" data-f="video">视频 / 成品数据集</button>
+      <button class="fbtn" data-f="video">视频</button>
+      <button class="fbtn" data-f="dataset">成品数据集</button>
+      <button class="fbtn" data-f="audio">小语种音频</button>
+      <button class="fbtn" data-f="math">数学</button>
+      <button class="fbtn" data-f="sim">仿真与评测</button>
+      <button class="fbtn" data-f="rl">专家标注·RL</button>
+      <button class="fbtn" data-f="eda">KiCad·EDA·PCB 工程</button>
+      <button class="fbtn" data-f="text">电子文本·读物</button>
+      <button class="fbtn" data-f="cnc">CNC·CAD 变更</button>
+      <button class="fbtn" data-f="multi">多模态</button>
+      <button class="fbtn" data-f="stem">STEM 习题教材</button>
     </div>
 
-    <!-- 睡不醒的是我 -->
-    <div class="account-head" data-account>
-      <h3>睡不醒的是我 <span>本周 7 条 · 6 条真需求 · 1 条筛掉</span></h3>
-      <span class="head-actions"><a class="home-link" href="https://www.xiaohongshu.com/user/profile/650fa3ab0000000012005c67" target="_blank" rel="noopener noreferrer">查看主页 ↗</a><span class="badge badge-green">已扫描 · 本周最活跃</span></span>
-    </div>
-    <div class="cards">
-      <article class="card" data-type="ego" data-text="睡不醒的是我 ego 第一视角 双目 视频 数据采集 供应商 招募 规模化">
-        <div class="card-top"><h4>Ego 数据采集供应商招募 — 同一需求本周发了 4 条</h4><span class="tags"><span class="tag tag-type">Ego 数据采集</span><span class="tag tag-dup">作者重复 ×4</span></span></div>
-        <dl class="fields">
-          <dt>作者</dt><dd><b>睡不醒的是我</b></dd>
-          <dt>发布时间</dt><dd>2026-11-11、11-13、11-14、11-17，共 4 条</dd>
-          <dt>需求方</dt><dd><b>未披露</b> — 原帖未写公司名</dd>
-          <dt>数据类型</dt><dd>第一视角 Ego 数据采集（供应商招募）</dd>
-          <dt>Spec</dt><dd><div class="spec">招募 Ego 数据采集供应商：要第一视角双目 Ego 视频；能规模化采集、持续稳定供货；有成熟团队、或做过类似项目者优先。4 条为同一需求的不同表述，内容口径一致。</div></dd>
-          <dt>采购量级</dt><dd><b>量比较大，未给具体数字</b></dd>
-          <dt>查重状态</dt><dd><b>作者重复 / 疑似同源</b> — 4 条合并为 1 类需求，不按 4 条独立需求计</dd>
-          <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af2ba12000000001802818e" target="_blank" rel="noopener noreferrer">2026-11-11 · 寻找Ego数据采集供应商，求合作！ ↗</a><a href="https://www.xiaohongshu.com/explore/6af5680e000000002501fb55" target="_blank" rel="noopener noreferrer">2026-11-13 · 积极寻找Ego数据采集供应商中 ↗</a><a href="https://www.xiaohongshu.com/explore/6af6c0c9000000002a02bc42" target="_blank" rel="noopener noreferrer">2026-11-14 · 招募Ego数据采集供应商｜第一视角双目 ↗</a><a href="https://www.xiaohongshu.com/explore/6afad440000000002b013756" target="_blank" rel="noopener noreferrer">2026-11-17 · 寻找靠谱的Ego数据采集供应商|设备商 ↗</a></div></dd>
-        </dl>
-      </article>
+    <!-- 需求组 1 -->
+    <div class="group blk">
+      <div class="group-head"><h3>需求组 1 · Ego / UMI 具身数据采集</h3><span class="meta">6 条笔记 · 2 位作者</span></div>
+      <p class="group-note">去重说明：睡不醒的是我 4 条为同一需求换标题重发；哆啦梦仔 2 条（11-16 与 11-13）为同一需求换标题重发。</p>
+      <div class="cards">
+        <article class="card" data-type="ego" data-text="睡不醒的是我 ego 第一视角 双目 视频 数据采集 供应商 招募 规模化">
+          <div class="card-top"><h4>Ego 数据采集供应商招募 — 同一需求本周发了 4 条</h4><span class="tags"><span class="tag tag-type">Ego 数据采集</span><span class="tag tag-dup">作者重复 ×4</span></span></div>
+          <dl class="fields">
+            <dt>作者</dt><dd><b>睡不醒的是我</b></dd>
+            <dt>发布时间</dt><dd>2026-11-11、11-13、11-14、11-17，共 4 条</dd>
+            <dt>需求方</dt><dd><b>未披露</b> — 原帖未写公司名</dd>
+            <dt>数据类型</dt><dd>第一视角 Ego 数据采集（供应商招募）</dd>
+            <dt>Spec</dt><dd><div class="spec">招募 Ego 数据采集供应商：要第一视角双目 Ego 视频；能规模化采集、持续稳定供货；有成熟团队、或做过类似项目者优先。4 条为同一需求的不同表述，内容口径一致。</div></dd>
+            <dt>采购量级</dt><dd><b>量比较大，未给具体数字</b></dd>
+            <dt>查重状态</dt><dd><b>作者重复 / 疑似同源</b> — 4 条合并为 1 类需求，不按 4 条独立需求计</dd>
+            <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af2ba12000000001802818e" target="_blank" rel="noopener noreferrer">2026-11-11 · 寻找Ego数据采集供应商，求合作！ ↗</a><a href="https://www.xiaohongshu.com/explore/6af5680e000000002501fb55" target="_blank" rel="noopener noreferrer">2026-11-13 · 积极寻找Ego数据采集供应商中 ↗</a><a href="https://www.xiaohongshu.com/explore/6af6c0c9000000002a02bc42" target="_blank" rel="noopener noreferrer">2026-11-14 · 招募Ego数据采集供应商｜第一视角双目 ↗</a><a href="https://www.xiaohongshu.com/explore/6afad440000000002b013756" target="_blank" rel="noopener noreferrer">2026-11-17 · 寻找靠谱的Ego数据采集供应商|设备商 ↗</a></div></dd>
+          </dl>
+        </article>
 
-      <article class="card" data-type="pcb" data-text="睡不醒的是我 pcb 工程数据 altium 立创eda kicad 原理图 gerber 100份">
-        <div class="card-top"><h4>PCB 工程数据采购 — 同一规格本周发了 2 条</h4><span class="tags"><span class="tag tag-type">PCB 工程数据</span><span class="tag tag-dup">作者重复 ×2</span></span></div>
-        <dl class="fields">
-          <dt>作者</dt><dd><b>睡不醒的是我</b></dd>
-          <dt>发布时间</dt><dd>2026-11-10、11-11，共 2 条</dd>
-          <dt>需求方</dt><dd><b>未披露</b> — 原帖未写公司名</dd>
-          <dt>数据类型</dt><dd>PCB 原始工程数据</dd>
-          <dt>Spec</dt><dd><div class="spec">100 份起收，上万份也能收，1 个完整项目算 1 份；原始工程文件必须能在原软件里打开编辑，Gerber、PDF、图片不算；库文件给全，设计规则和层叠保留，原理图和 PCB 对应；只收 Altium、立创 EDA、KiCad；重复的、开源的不要；来源合规、有权授权；验收后结算。另招高校代理人收毕业设计和科研项目。</div></dd>
-          <dt>采购量级</dt><dd><b>100 份起，上万份可收</b></dd>
-          <dt>查重状态</dt><dd><b>作者重复 / 疑似同源</b> — 2 条合并为 1 类需求</dd>
-          <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af17c7b000000003402a37e" target="_blank" rel="noopener noreferrer">2026-11-10 · 招高校代理人｜高价采购真实PCB工程数据 ↗</a><a href="https://www.xiaohongshu.com/explore/6af2b919000000002a02e5e9" target="_blank" rel="noopener noreferrer">2026-11-11 · 上万份也收：长期采购真实PCB工程数据 ↗</a></div></dd>
-        </dl>
-      </article>
+        <article class="card" data-type="ego" data-text="哆啦梦仔 ego umi 单目镜 双目镜 具身 头部 夹爪 传感器 成品存量">
+          <div class="card-top"><h4>项目一：Ego类单目镜和双目镜类视频</h4><span class="tags"><span class="tag tag-type">Ego / UMI 具身数据</span><span class="tag tag-dup">同一需求重发</span></span></div>
+          <dl class="fields">
+            <dt>作者</dt><dd><b>哆啦梦仔</b></dd>
+            <dt>发布时间</dt><dd>2026-11-16</dd>
+            <dt>需求方</dt><dd><b>未披露</b></dd>
+            <dt>数据类型</dt><dd>Ego 类单目镜/双目镜视频、UMI 类（头部、左夹爪、右夹爪及传感器）具身数据</dd>
+            <dt>Spec</dt><dd><div class="spec">项目一：Ego类单目镜和双目镜类视频 项目二：Umi类：有头部、左夹爪、右夹爪及传感器 欢迎各具身相关老板联系我 最好已经有成品存量私信dd我 #数据供应商 #具身智能 #数据集 #数字化发展 #具身数据 #ego #umi #具身 #供应链管理</div></dd>
+            <dt>采购量级</dt><dd><b>未给具体数字</b>，要求“最好已经有成品存量”</dd>
+            <dt>查重状态</dt><dd><b>作者重复 / 疑似同源</b> — 与 2026-11-13《寻找EGO和UMI数据库存的供应商》为同一需求换标题重发</dd>
+            <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6afa6324000000002903d376" target="_blank" rel="noopener noreferrer">项目一：Ego类单目镜和双目镜类视频 ↗</a></div></dd>
+          </dl>
+        </article>
 
-      <article class="card" data-type="other" data-text="睡不醒的是我 uwb 麦克风 设备 厂家">
-        <div class="card-top"><h4>急需 UWB 麦克风</h4><span class="tags"><span class="tag tag-filter">已筛掉 · 非数据需求</span></span></div>
-        <dl class="fields">
-          <dt>作者</dt><dd><b>睡不醒的是我</b></dd>
-          <dt>发布时间</dt><dd>2026-11-16</dd>
-          <dt>判定</dt><dd>找设备厂家，不是数据采购需求，本次不计入 8 条有效需求。</dd>
-          <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6afa8bc5000000002a025001" target="_blank" rel="noopener noreferrer">急需 UWB 麦克风 ↗</a></div></dd>
-        </dl>
-      </article>
-    </div>
-
-    <!-- 数据采集 / 数据服务 -->
-    <div class="account-head" data-account>
-      <h3>数据采集 <span>主页显示名「数据服务」 · 本周 2 条 · 均为真需求</span></h3>
-      <span class="head-actions"><a class="home-link" href="https://www.xiaohongshu.com/user/profile/5571c88bb7ba224fe7ca2ba8" target="_blank" rel="noopener noreferrer">查看主页 ↗</a><span class="badge badge-green">已扫描</span></span>
-    </div>
-    <div class="cards">
-      <article class="card" data-type="video" data-text="数据服务 数据采集 seedance 2.5 视频 数据 思维链 一手">
-        <div class="card-top"><h4>求购 seedance 2.5 数据</h4><span class="tags"><span class="tag tag-type">视频生成数据</span><span class="tag tag-new">本周新发布</span></span></div>
-        <dl class="fields">
-          <dt>作者</dt><dd><b>数据服务</b>（监控清单中记为「数据采集」）</dd>
-          <dt>发布时间</dt><dd>2026-11-16</dd>
-          <dt>需求方</dt><dd><b>未披露</b></dd>
-          <dt>Spec</dt><dd><div class="spec">求购一手 Seedance 2.5 视频数据，不限量。配图还写了要 Seedance 思维链的数据。</div></dd>
-          <dt>采购量级</dt><dd><b>不限量</b></dd>
-          <dt>查重状态</dt><dd><b>新笔记</b></dd>
-          <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6afa7e87000000002a01eedb" target="_blank" rel="noopener noreferrer">求购 seedance 2.5 数据 ↗</a></div></dd>
-        </dl>
-      </article>
-
-      <article class="card" data-type="video" data-text="数据服务 数据采集 长期求购 成品数据集 医疗 大模型轨迹 视频生成 题库">
-        <div class="card-top"><h4>长期求购各类成品数据集</h4><span class="tags"><span class="tag tag-type">成品数据集</span><span class="tag tag-new">本周新发布</span></span></div>
-        <dl class="fields">
-          <dt>作者</dt><dd><b>数据服务</b>（监控清单中记为「数据采集」）</dd>
-          <dt>发布时间</dt><dd>2026-11-13</dd>
-          <dt>需求方</dt><dd><b>未披露</b></dd>
-          <dt>Spec</dt><dd><div class="spec">长期求购各类成品数据集：医疗数据、大模型轨迹、视频生成数据、题库数据。具体要求私信聊，原帖未展开细则。</div></dd>
-          <dt>采购量级</dt><dd><b>长期求购，未给数字</b></dd>
-          <dt>查重状态</dt><dd><b>新笔记</b></dd>
-          <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af57a86000000002b038d5f" target="_blank" rel="noopener noreferrer">长期求购各类成品数据集 ↗</a></div></dd>
-        </dl>
-      </article>
+        <article class="card" data-type="ego" data-text="哆啦梦仔 ego umi 数据库存 供应商 具身 成品存量 采集">
+          <div class="card-top"><h4>寻找EGO和UMI数据库存的供应商</h4><span class="tags"><span class="tag tag-type">Ego / UMI 具身数据</span><span class="tag tag-dup">同一需求重发</span></span></div>
+          <dl class="fields">
+            <dt>作者</dt><dd><b>哆啦梦仔</b></dd>
+            <dt>发布时间</dt><dd>2026-11-13</dd>
+            <dt>需求方</dt><dd><b>未披露</b></dd>
+            <dt>数据类型</dt><dd>Ego 类单目镜/双目镜视频、UMI 类（头部、左夹爪、右夹爪及传感器）具身数据</dd>
+            <dt>Spec</dt><dd><div class="spec">项目一：Ego类单目镜和双目镜类视频，最好已经有成品存量并有经验承接后续采集事项 项目二：Umi采集类：有头部、左夹爪、右夹爪及传感器 欢迎各具身相关老板联系我 #数据供应商 #具身智能 #数据集 #数字化发展 #具身数据 #ego #umi #具身 #供应链管理</div></dd>
+            <dt>采购量级</dt><dd><b>未给具体数字</b>，要求“最好已经有成品存量并有经验承接后续采集事项”</dd>
+            <dt>查重状态</dt><dd><b>作者重复 / 疑似同源</b> — 与 2026-11-16《项目一：Ego类单目镜和双目镜类视频》为同一需求换标题重发</dd>
+            <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af66833000000001802fd06" target="_blank" rel="noopener noreferrer">寻找EGO和UMI数据库存的供应商 ↗</a></div></dd>
+          </dl>
+        </article>
+      </div>
     </div>
 
-    <!-- Echo -->
-    <div class="account-head" data-account>
-      <h3>Echo <span>本周 0 条</span></h3>
-      <span class="head-actions"><a class="home-link" href="https://www.xiaohongshu.com/user/profile/64926a27000000002a036fa5" target="_blank" rel="noopener noreferrer">查看主页 ↗</a><span class="badge badge-gray">已扫描 · 本周无新帖</span></span>
-    </div>
-    <div class="cards">
-      <article class="card zero" data-type="none" data-text="echo 本周无 cad pcb">
-        <div class="card-top"><h4>本周无新发布</h4><span class="tags"><span class="tag tag-filter">0 条</span></span></div>
-        <dl class="fields">
-          <dt>说明</dt><dd>该主页最新笔记为 <b>2026-10-28</b>，不在本周周期内。此前被关注的「有偿收 CAD 和 PCB 工程数据」为 <b>2026-10-02</b>，同样在周期外，本次不计入。</dd>
-        </dl>
-      </article>
-    </div>
-
-    <!-- Amber -->
-    <div class="account-head" data-account>
-      <h3>Amber咪的Mom <span>本周 0 条</span></h3>
-      <span class="head-actions"><a class="home-link" href="https://www.xiaohongshu.com/user/profile/62260f3f0000000021023f97" target="_blank" rel="noopener noreferrer">查看主页 ↗</a><span class="badge badge-gray">已扫描 · 本周无新帖</span></span>
-    </div>
-    <div class="cards">
-      <article class="card zero" data-type="none" data-text="amber kicad 本周无">
-        <div class="card-top"><h4>本周无新发布</h4><span class="tags"><span class="tag tag-filter">0 条</span></span></div>
-        <dl class="fields">
-          <dt>说明</dt><dd>最新笔记为 <b>2026-10-28</b> 的 KiCad 求助帖，内容是真实需求，但日期在周期外，本次不计入本周。</dd>
-        </dl>
-      </article>
+    <!-- 需求组 2 -->
+    <div class="group blk">
+      <div class="group-head"><h3>需求组 2 · PCB 工程数据</h3><span class="meta">2 条笔记 · 同一模板重发</span></div>
+      <div class="cards">
+        <article class="card" data-type="pcb" data-text="睡不醒的是我 pcb 工程数据 altium 立创eda kicad 原理图 gerber 100份">
+          <div class="card-top"><h4>PCB 工程数据采购 — 同一规格本周发了 2 条</h4><span class="tags"><span class="tag tag-type">PCB 工程数据</span><span class="tag tag-dup">作者重复 ×2</span></span></div>
+          <dl class="fields">
+            <dt>作者</dt><dd><b>睡不醒的是我</b></dd>
+            <dt>发布时间</dt><dd>2026-11-10、11-11，共 2 条</dd>
+            <dt>需求方</dt><dd><b>未披露</b> — 原帖未写公司名</dd>
+            <dt>数据类型</dt><dd>PCB 原始工程数据</dd>
+            <dt>Spec</dt><dd><div class="spec">100 份起收，上万份也能收，1 个完整项目算 1 份；原始工程文件必须能在原软件里打开编辑，Gerber、PDF、图片不算；库文件给全，设计规则和层叠保留，原理图和 PCB 对应；只收 Altium、立创 EDA、KiCad；重复的、开源的不要；来源合规、有权授权；验收后结算。另招高校代理人收毕业设计和科研项目。</div></dd>
+            <dt>采购量级</dt><dd><b>100 份起，上万份可收</b></dd>
+            <dt>查重状态</dt><dd><b>作者重复 / 疑似同源</b> — 2 条合并为 1 类需求</dd>
+            <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af17c7b000000003402a37e" target="_blank" rel="noopener noreferrer">2026-11-10 · 招高校代理人｜高价采购真实PCB工程数据 ↗</a><a href="https://www.xiaohongshu.com/explore/6af2b919000000002a02e5e9" target="_blank" rel="noopener noreferrer">2026-11-11 · 上万份也收：长期采购真实PCB工程数据 ↗</a></div></dd>
+          </dl>
+        </article>
+      </div>
     </div>
 
-    <!-- Kevin -->
-    <div class="account-head" data-account>
-      <h3>Kevin｜AI Lab <span>本周 0 条</span></h3>
-      <span class="head-actions"><a class="home-link" href="https://www.xiaohongshu.com/user/profile/62ad1a44000000001b029aa0" target="_blank" rel="noopener noreferrer">查看主页 ↗</a><span class="badge badge-gray">已扫描 · 本周无新帖</span></span>
+    <!-- 需求组 3 -->
+    <div class="group blk">
+      <div class="group-head"><h3>需求组 3 · Seedance 2.5 视频数据</h3><span class="meta">1 条笔记</span></div>
+      <div class="cards">
+        <article class="card" data-type="video" data-text="数据服务 数据采集 seedance 2.5 视频 数据 思维链 一手">
+          <div class="card-top"><h4>求购 seedance 2.5 数据</h4><span class="tags"><span class="tag tag-type">视频生成数据</span><span class="tag tag-new">本周新发布</span></span></div>
+          <dl class="fields">
+            <dt>作者</dt><dd><b>数据服务</b>（监控清单中记为「数据采集」）</dd>
+            <dt>发布时间</dt><dd>2026-11-16</dd>
+            <dt>需求方</dt><dd><b>未披露</b></dd>
+            <dt>Spec</dt><dd><div class="spec">求购一手 Seedance 2.5 视频数据，不限量。配图还写了要 Seedance 思维链的数据。</div></dd>
+            <dt>采购量级</dt><dd><b>不限量</b></dd>
+            <dt>查重状态</dt><dd><b>新笔记</b></dd>
+            <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6afa7e87000000002a01eedb" target="_blank" rel="noopener noreferrer">求购 seedance 2.5 数据 ↗</a></div></dd>
+          </dl>
+        </article>
+      </div>
     </div>
-    <div class="cards">
-      <article class="card zero" data-type="none" data-text="kevin ai lab 医疗 本周无">
-        <div class="card-top"><h4>本周无新发布</h4><span class="tags"><span class="tag tag-filter">0 条</span></span></div>
-        <dl class="fields">
-          <dt>说明</dt><dd>最新笔记为 <b>2026-11-03</b> 的医疗数据采购帖，在 2026-11-10 之前，不在本次周期内。</dd>
-        </dl>
-      </article>
+
+    <!-- 需求组 4 -->
+    <div class="group blk">
+      <div class="group-head"><h3>需求组 4 · 各类成品数据集</h3><span class="meta">1 条笔记</span></div>
+      <div class="cards">
+        <article class="card" data-type="dataset" data-text="数据服务 数据采集 长期求购 成品数据集 医疗 大模型轨迹 视频生成 题库">
+          <div class="card-top"><h4>长期求购各类成品数据集</h4><span class="tags"><span class="tag tag-type">成品数据集</span><span class="tag tag-new">本周新发布</span></span></div>
+          <dl class="fields">
+            <dt>作者</dt><dd><b>数据服务</b>（监控清单中记为「数据采集」）</dd>
+            <dt>发布时间</dt><dd>2026-11-13</dd>
+            <dt>需求方</dt><dd><b>未披露</b></dd>
+            <dt>Spec</dt><dd><div class="spec">长期求购各类成品数据集：医疗数据、大模型轨迹、视频生成数据、题库数据。具体要求私信聊，原帖未展开细则。</div></dd>
+            <dt>采购量级</dt><dd><b>长期求购，未给数字</b></dd>
+            <dt>查重状态</dt><dd><b>新笔记</b></dd>
+            <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af57a86000000002b038d5f" target="_blank" rel="noopener noreferrer">长期求购各类成品数据集 ↗</a></div></dd>
+          </dl>
+        </article>
+      </div>
+    </div>
+
+<!-- 需求组 5 -->
+<div class="group blk">
+<div class="group-head"><h3>需求组 5 · token 方向专家标注 / 垂类 RL 数据</h3><span class="meta">1 条笔记</span></div>
+<div class="cards">
+<article class="card" data-type="rl" data-text="佐维 token 专家标注 垂类 rl 数据 长期求购 agent 大模型 标注">
+<div class="card-top"><h4>数据 data market🏔️</h4><span class="tags"><span class="tag tag-type">专家标注 / RL 数据</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><b>佐维.</b></dd>
+<dt>发布时间</dt><dd>2026-11-17</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>token 方向专家标注、垂类 RL 数据</dd>
+<dt>Spec</dt><dd><div class="spec">正文“求购专家标注 垂类rl数据优先”；配图文字“ token方向 专家标注 垂类RL数据等 稳定供应的来”。标签 #agent数据 #大模型数据 #标注</div></dd>
+<dt>采购量级</dt><dd><b>未注明</b>，仅“长期求购”“稳定供应的来”</dd>
+<dt>查重状态</dt><dd><b>新笔记</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6afbe79f000000001c030852" target="_blank" rel="noopener noreferrer">数据 data market🏔️ ↗</a></div></dd>
+</dl>
+</article>
+</div>
+</div>
+
+<!-- 需求组 6 -->
+<div class="group blk">
+<div class="group-head"><h3>需求组 6 · 小语种 / 双工音频</h3><span class="meta">3 条笔记 · 内容高度相关</span></div>
+<div class="cards">
+<article class="card" data-type="audio" data-text="哆啦梦仔 小语种 成品 音频采集 英语 西班牙语 双工 供应商">
+<div class="card-top"><h4>建联供应商啦，有小语种成品和有音频采集经验的团队或公司可以联系我</h4><span class="tags"><span class="tag tag-type">小语种音频</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><b>哆啦梦仔</b></dd>
+<dt>发布时间</dt><dd>2026-11-17</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>小语种成品数据、音频采集（英语、西班牙语、双工）</dd>
+<dt>Spec</dt><dd><div class="spec">建联供应商啦，有小语种成品和有音频采集经验的团队或公司可以联系我 #小语种 #数据采集 #大模型 #数据供应商 #英语 #西班牙语 #双工</div></dd>
+<dt>采购量级</dt><dd><b>未说明</b></dd>
+<dt>查重状态</dt><dd><b>内容高度相关</b> — 与本组另 2 条音频需求内容高度相关</dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6afbfa71000000001601850b" target="_blank" rel="noopener noreferrer">建联供应商啦，有小语种成品和有音频采集经验的团队或公司可以联系我 ↗</a></div></dd>
+</dl>
+</article>
+
+<article class="card" data-type="audio" data-text="哆啦梦仔 多语言 小语种 英文 音频 网络聊天室 双人通话 客服电话录音 双音轨">
+<div class="card-top"><h4>欢迎多语言业务供应商老板建联</h4><span class="tags"><span class="tag tag-type">小语种音频</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><b>哆啦梦仔</b></dd>
+<dt>发布时间</dt><dd>2026-11-16</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>小语种（英文）音频成品 — 网络聊天室/双人通话、真实客服电话录音（双音轨）</dd>
+<dt>Spec</dt><dd><div class="spec">欢迎有海外小语种成品数据资源的供应商联系我 目前需要网络聊天室/双人通话，以及真实的客服电话录音。 语种：英文 #音频 #小语种 #双音轨 #AI #音频采集 #语言学习 #全球化 #外语学习 #人工翻译</div></dd>
+<dt>采购量级</dt><dd><b>未说明</b></dd>
+<dt>查重状态</dt><dd><b>内容高度相关</b> — 与本组另 2 条音频需求内容高度相关</dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6afa6566000000002a038557" target="_blank" rel="noopener noreferrer">欢迎多语言业务供应商老板建联 ↗</a></div></dd>
+</dl>
+</article>
+
+<article class="card" data-type="audio" data-text="哆啦梦仔 音频 双工 分轨 自然对话 网络聊天室 双人通话 客服电话录音 大量">
+<div class="card-top"><h4>有音频资源的供应商可以联系我</h4><span class="tags"><span class="tag tag-type">小语种音频</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><b>哆啦梦仔</b></dd>
+<dt>发布时间</dt><dd>2026-11-10</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>大量双工音频资源 — 分轨自然对话、网络聊天室/双人通话、真实客服电话录音</dd>
+<dt>Spec</dt><dd><div class="spec">有大量双工音频资源的供应商可以联系我，有定制项目和成品项目 类型：分轨自然对话、网络聊天室/双人通话；真实客服电话录音 #音频 #小语种 #双音轨 #AI #音频采集 #语言学习 #全球化 #外语学习 #人工翻译</div></dd>
+<dt>采购量级</dt><dd><b>仅写“大量”</b>，定制项目和成品项目均可</dd>
+<dt>查重状态</dt><dd><b>内容高度相关</b> — 与本组另 2 条音频需求内容高度相关</dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af17b010000000036014d4d" target="_blank" rel="noopener noreferrer">有音频资源的供应商可以联系我 ↗</a></div></dd>
+</dl>
+</article>
+</div>
+</div>
+
+<!-- 需求组 7 -->
+<div class="group blk">
+<div class="group-head"><h3>需求组 7 · 数学高难题</h3><span class="meta">1 条笔记</span></div>
+<div class="cards">
+<article class="card" data-type="math" data-text="哆啦梦仔 数学 高难题 frontiermath tier 4 专家 博士 推理题 奥赛 研究生">
+<div class="card-top"><h4>求有数学高难题资源的专家或博士</h4><span class="tags"><span class="tag tag-type">数学高难题</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><b>哆啦梦仔</b></dd>
+<dt>发布时间</dt><dd>2026-11-11</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>数学高难题 / 研究级数学推理题（FrontierMath Tier 4 优先，覆盖代数、几何、概率统计、微积分、拓扑等）</dd>
+<dt>Spec</dt><dd><div class="spec">求有数学高难题资源的专家或博士，如：FrontierMath，级别：Tier 4（最高难度的研究级数学题目），优先。 方式： 先交付 10-15 道题目作为样本，审核通过后按批次持续供应。 课题覆盖：代数、几何、概率统计、微积分、拓扑等。难度： 高中生竞赛奥赛的数学难题或研究生级别的数学问题。</div></dd>
+<dt>采购量级</dt><dd><b>先交付 10-15 道题目作为样本</b>，审核通过后按批次持续供应</dd>
+<dt>查重状态</dt><dd><b>新笔记</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af3e8ab000000002c00ee5b" target="_blank" rel="noopener noreferrer">求有数学高难题资源的专家或博士 ↗</a></div></dd>
+</dl>
+</article>
+</div>
+</div>
+
+<!-- 需求组 8 -->
+<div class="group blk">
+<div class="group-head"><h3>需求组 8 · 计算仿真调研</h3><span class="meta">1 条笔记</span></div>
+<div class="cards">
+<article class="card" data-type="sim" data-text="aaa数商李不总 流体仿真 机械仿真 计算仿真 硕博 训练 评测 调研">
+<div class="card-top"><h4>有没有做流体/机械仿真的同学🙋</h4><span class="tags"><span class="tag tag-type">计算仿真</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><b>AAA数商李不总</b></dd>
+<dt>发布时间</dt><dd>2026-11-16</dd>
+<dt>需求方</dt><dd><b>未披露</b>（自称“我们做大模型训练数据”）</dd>
+<dt>数据类型</dt><dd>计算仿真（流体仿真、机械仿真）训练与评测任务</dd>
+<dt>Spec</dt><dd><div class="spec">最近在看计算仿真方向，想认识一些做流体仿真、机械仿真的硕博同学，也欢迎已经有合作的小团队。我们做大模型训练数据，希望了解大家平时的仿真项目，哪些适合进一步做成模型训练和评测用的任务，逐步组建一个学生合作团队。做过课程项目、科研课题或实际工程案例都可以来聊，想了解：▪ 主要做什么方向，用什么软件 ▪ 有没有可以展示的仿真案例 ▪ 是否有时间参与后续项目合作 目前先交流方向和案例，具体合作内容、工作量和费用再一起对齐。有兴趣可以私信我「方向+简单经历」，也欢迎推荐身边的同学～ #流体仿真 #机械仿真 #计算仿真 #计算流体力学 #有限元分析 #硕博日常 #科研项目</div></dd>
+<dt>采购量级</dt><dd><b>未说明</b>，先交流方向和案例，合作内容/工作量/费用再对齐</dd>
+<dt>备注</dt><dd>作者在评论中回复“没有吧 我们只是在调研一下哈哈哈”，属前期调研性质</dd>
+<dt>查重状态</dt><dd><b>新笔记</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6afa6c94000000002a01efa8" target="_blank" rel="noopener noreferrer">有没有做流体/机械仿真的同学🙋 ↗</a></div></dd>
+</dl>
+</article>
+</div>
+</div>
+
+<!-- 需求组 9 -->
+<div class="group blk">
+<div class="group-head"><h3>需求组 9 · Unity / Blender 仿真与评测数据</h3><span class="meta">2 条笔记</span></div>
+<div class="cards">
+<article class="card" data-type="sim" data-text="aaa数商李不总 unity blender blenderbench 仿真 具身 强化学习 评测 demo">
+<div class="card-top"><h4>寻unity和blender数据供应商！</h4><span class="tags"><span class="tag tag-type">Unity / Blender 评测数据</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><b>AAA数商李不总</b></dd>
+<dt>发布时间</dt><dd>2026-11-13</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>Unity 仿真环境具身智能交互任务 / 强化学习闭环评测数据、Blender 三维 CG 生产任务评测数据（BlenderBench）</dd>
+<dt>Spec</dt><dd><div class="spec">寻数据供应商：◆ Unity（repo/bench/rl）👉 Unity仿真环境，具身智能交互任务，强化学习闭环评测，智能体在虚拟场景完成空间操作、物体交互任务 ◆ Blender（rl/bench）BlenderBench 👉 Blender三维CG生产任务，评测Agent自主建模、绑定、打光、渲染、动画等全流程操作能力 👍优先，不是从零定制开发！需要提供：✅ 数据量级 ✅ 任务描述 ✅ 1～2个可演示Demo样例，现场演示用⏱️ 时间很紧，这两天就要评审竞选！有资源、厂商、项目方欢迎直接私信沟通，可进一步对接细节👍 #AI大模型 #Agent #Benchmark #数据集 #具身智能 #Blender #Unity #工业大模型 #多模态大模型</div></dd>
+<dt>采购量级</dt><dd><b>未给具体数字</b>，要求提供数据量级、任务描述、1～2 个可演示 Demo 样例，“时间很紧，这两天就要评审竞选”；优先成品数据集，不是重新定制</dd>
+<dt>查重状态</dt><dd><b>新笔记</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af5b70f000000002b03bd1a" target="_blank" rel="noopener noreferrer">寻unity和blender数据供应商！ ↗</a></div></dd>
+</dl>
+</article>
+
+<article class="card" data-type="sim" data-text="aaa数商李不总 blender rl 强化学习 数据 大厂">
+<div class="card-top"><h4>大量收blender rl的数据</h4><span class="tags"><span class="tag tag-type">Blender RL 数据</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><b>AAA数商李不总</b></dd>
+<dt>发布时间</dt><dd>2026-11-11</dd>
+<dt>需求方</dt><dd><b>未披露</b>（正文只说“帮某大厂好友问一下”）</dd>
+<dt>数据类型</dt><dd>Blender RL（强化学习）数据</dd>
+<dt>Spec</dt><dd><div class="spec">帮某大厂好友问一下 有没有谁在做这方面数据呀 收blender rl的数据</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b></dd>
+<dt>查重状态</dt><dd><b>新笔记</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af315fe000000002501129b" target="_blank" rel="noopener noreferrer">大量收blender rl的数据 ↗</a></div></dd>
+</dl>
+</article>
+</div>
+</div>
+
+<!-- 需求组 10 -->
+<div class="group blk">
+<div class="group-head"><h3>需求组 10 · KiCad / EDA / PCB 工程数据</h3><span class="meta">4 条笔记 · 作者均为 数据-Mr Li</span></div>
+<div class="cards">
+<article class="card" data-type="eda" data-text="数据-mr li kicad 原理图 pcb 元件库 多层板 工程 研发 合规授权 脱敏">
+<div class="card-top"><h4>寻kicad一手供应商</h4><span class="tags"><span class="tag tag-type">KiCad 工程数据</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><b>数据-Mr Li</b></dd>
+<dt>发布时间</dt><dd>2026-11-17</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>KiCad 工程参考素材（电路原理图、PCB 板工程、元件库、多层板设计工程），用于电子电路方向研发项目</dd>
+<dt>Spec</dt><dd><div class="spec">电子电路方向研发项目，寻KiCad工程参考素材源头供方。包含电路原理图、PCB板工程、元件库、多层板设计工程等素材，电路类型丰富。资源需要具备合规授权，支持脱敏，可批量稳定输出。有稳定一手KiCad工程资源的伙伴，私信沟通品类、体量，小样先行评估。</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b>（可批量稳定输出，私信沟通体量）</dd>
+<dt>查重状态</dt><dd><b>新笔记</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6afbb72e000000002b01dc75" target="_blank" rel="noopener noreferrer">寻kicad一手供应商 ↗</a></div></dd>
+</dl>
+</article>
+
+<article class="card" data-type="eda" data-text="数据-mr li pcb 工程文件 电路板 研发 硬件仿真 电路方案验证 工艺参数">
+<div class="card-top"><h4>我需要采购，急！！</h4><span class="tags"><span class="tag tag-type">PCB 工程数据</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><b>数据-Mr Li</b></dd>
+<dt>发布时间</dt><dd>2026-11-14</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>PCB 相关工程文件，用于电路板研发、硬件仿真、电路方案验证</dd>
+<dt>Spec</dt><dd><div class="spec">电路板研发、硬件仿真、电路方案验证的项目，离不开规范完整的PCB工程素材。我们寻找合规来源的PCB相关工程文件，希望资料齐全、工艺参数真实，覆盖不同行业场景。可以先发小样核验文件完整性，也能够按需做脱敏处理。只对接直接持有资源的伙伴，中间服务商暂不沟通。有合适资源的朋友，欢迎私信说明文件类型、场景范围。</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b></dd>
+<dt>查重状态</dt><dd><b>新笔记</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af7c6d7000000002203afcc" target="_blank" rel="noopener noreferrer">我需要采购，急！！ ↗</a></div></dd>
+</dl>
+</article>
+
+<article class="card" data-type="eda" data-text="数据-mr li eda 工程资料 芯片 集成电路 研发调试 文件链路 脱敏">
+<div class="card-top"><h4>急需采购！！！</h4><span class="tags"><span class="tag tag-type">EDA 工程数据</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><b>数据-Mr Li</b></dd>
+<dt>发布时间</dt><dd>2026-11-14</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>EDA 相关工程资料，用于芯片、集成电路相关研发调试</dd>
+<dt>Spec</dt><dd><div class="spec">芯片、集成电路相关研发调试过程中，规范完整的EDA工程文件是很重要的参考素材。我们长期寻找来源合规的EDA相关工程资料，希望文件链路完整、参数信息齐全，覆盖不同设计场景。可以先提供小样核验文件质量与格式适配度，也支持按需脱敏处理，适配项目参考、方案验证使用。只对接直接持有资源的伙伴，中间服务商暂时不沟通。手里有对应资源的朋友，可以私信说明素材的场景与文件类型。</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b></dd>
+<dt>查重状态</dt><dd><b>新笔记</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af7c7930000000018025b2c" target="_blank" rel="noopener noreferrer">急需采购！！！ ↗</a></div></dd>
+</dl>
+</article>
+
+<article class="card" data-type="eda" data-text="数据-mr li kicad 工程源文件 电路 硬件 研发调试 器件参数 一手">
+<div class="card-top"><h4>找一手供应商</h4><span class="tags"><span class="tag tag-type">KiCad 工程数据</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><b>数据-Mr Li</b></dd>
+<dt>发布时间</dt><dd>2026-11-14</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>KiCad 工程源文件/资料，用于电路硬件研发调试参考</dd>
+<dt>Spec</dt><dd><div class="spec">电路硬件研发调试的时候，常会用到KiCad工程源文件作为参考素材。我们长期寻找合规的KiCad工程资料，要求工程结构完整、器件参数齐全，覆盖不同硬件场景。可以先提供小样用来测试适配性，支持按需脱敏，用于研发参考、方案验证。只对接一手资源方，暂时不对接中间商。手里有对应资源的伙伴，可以私信聊聊场景和文件情况。</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b></dd>
+<dt>查重状态</dt><dd><b>新笔记</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af7c612000000002303cdb6" target="_blank" rel="noopener noreferrer">找一手供应商 ↗</a></div></dd>
+</dl>
+</article>
+</div>
+</div>
+
+<!-- 需求组 11 -->
+<div class="group blk">
+<div class="group-head"><h3>需求组 11 · 电子文本 / 读物素材</h3><span class="meta">6 条笔记 · 作者均为 数据-Mr Li</span></div>
+<div class="cards">
+<article class="card" data-type="text" data-text="数据-mr li 读物文本 科普 人文 社科 通识 文本理解 知识类大模型 一手">
+<div class="card-top"><h4>我需要源头供应商！</h4><span class="tags"><span class="tag tag-type">电子文本 / 读物</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><b>数据-Mr Li</b></dd>
+<dt>发布时间</dt><dd>2026-11-17</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>读物文本（科普、人文、社科、通识类），用于文本理解、知识类大模型研发</dd>
+<dt>Spec</dt><dd><div class="spec">面向文本理解、知识类大模型研发，寻找读物文本一手资源伙伴。涵盖科普、人文、社科、通识类读物文本，内容体系完整，格式规范。需要资源具备合规授权，支持脱敏，可批量稳定供给。有一手资源的供应商，欢迎私信沟通品类、体量，小样先行评估。</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b>（可批量稳定供给，私信沟通体量）</dd>
+<dt>查重状态</dt><dd><b>新笔记</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6afbb57c000000001603feac" target="_blank" rel="noopener noreferrer">我需要源头供应商！ ↗</a></div></dd>
+</dl>
+</article>
+
+<article class="card" data-type="text" data-text="数据-mr li 叙事故事 文本素材 言情 悬疑 玄幻 都市 短篇 nlp 大模型">
+<div class="card-top"><h4>有合规资源的源头来</h4><span class="tags"><span class="tag tag-type">电子文本 / 读物</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><b>数据-Mr Li</b></dd>
+<dt>发布时间</dt><dd>2026-11-17</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>叙事故事类文本素材（言情、悬疑、玄幻、都市、短篇故事），用于 NLP 大模型研发</dd>
+<dt>Spec</dt><dd><div class="spec">我们长期收叙事故事类文本素材资源，用于NLP大模型研发参考。题材包含言情、悬疑、玄幻、都市、短篇故事等多种叙事文体，需要文本格式规整、段落完整。要求资源具备合规授权，可脱敏处理，能够稳定持续供给。有稳定源头资源的供方，欢迎私信说明品类、体量，可先发小样评估。</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b>（稳定持续供给，私信说明体量）</dd>
+<dt>查重状态</dt><dd><b>新笔记</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6afbb4a9000000002903c191" target="_blank" rel="noopener noreferrer">有合规资源的源头来 ↗</a></div></dd>
+</dl>
+</article>
+
+<article class="card" data-type="text" data-text="数据-mr li 长文本素材 多领域 模型学习 内容理解 批量交付 语料">
+<div class="card-top"><h4>急需供应方！！！</h4><span class="tags"><span class="tag tag-type">电子文本 / 读物</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><b>数据-Mr Li</b></dd>
+<dt>发布时间</dt><dd>2026-11-16</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>长文本素材（多领域文字内容），用于模型学习、内容理解方向研发</dd>
+<dt>Spec</dt><dd><div class="spec">很多做AI研发的小伙伴，都在找品类丰富、来源规范的长文本素材，今天简单聊聊这类素材的用途，同时寻找靠谱供方。这类文本素材涵盖多领域文字内容，适合用来做模型学习、内容理解方向的研发参考。我们长期稳定收，需要品类覆盖面广、交付稳定的合作源头。要求素材来源合规，可提供稳定批量交付，能够长期配合对接。。如果您是做文本素材整理、有稳定供给渠道的朋友，欢迎私信沟通合作细节，期待长期稳定的双向合作。#文本素材 #AI研发素材 #语料资源 #</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b>（稳定批量交付）</dd>
+<dt>查重状态</dt><dd><b>新笔记</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6afa642f000000002b02af15" target="_blank" rel="noopener noreferrer">急需供应方！！！ ↗</a></div></dd>
+</dl>
+</article>
+
+<article class="card" data-type="text" data-text="数据-mr li 电子书 中英文 电子读物 学术 理工 通识 科研学习 知识库">
+<div class="card-top"><h4>急需电子书数据采购！！！</h4><span class="tags"><span class="tag tag-type">电子文本 / 读物</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><b>数据-Mr Li</b></dd>
+<dt>发布时间</dt><dd>2026-11-14</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>中英文电子读物（学术、理工、通识等方向），用于科研学习、知识库搭建</dd>
+<dt>Spec</dt><dd><div class="spec">科研学习、知识库搭建的相关项目里，优质合规的电子读物是很常用的参考素材。我们长期寻找来源合规的中英文电子读物，类目丰富，覆盖学术、理工、通识等方向。支持先提供小样核验内容与格式，可按需脱敏，适配学习参考、内容梳理等场景。只对接直接持有资源的伙伴，中间商暂不沟通。有合适资源的朋友，可以私信说明读物类目、语种。</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b></dd>
+<dt>查重状态</dt><dd><b>新笔记</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af7c84f000000002903d742" target="_blank" rel="noopener noreferrer">急需电子书数据采购！！！ ↗</a></div></dd>
+</dl>
+</article>
+
+<article class="card" data-type="text" data-text="数据-mr li 电子书 文本数据集 原文 后训练 知识库构建 脱敏 定向筛选">
+<div class="card-top"><h4>长期求购电子书文本数据集｜寻稳定供应商</h4><span class="tags"><span class="tag tag-type">电子文本 / 读物</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><b>数据-Mr Li</b></dd>
+<dt>发布时间</dt><dd>2026-11-12</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>电子书文本数据集/原文数据，用于大模型后训练、知识库构建</dd>
+<dt>Spec</dt><dd><div class="spec">项目采购电子书文本素材，用于大模型后训练、知识库构建。需要品类丰富的电子书原文数据，文本排版干净、内容完整，格式规范。要求素材可做脱敏处理，具备合规授权，支持按题材、语种定向筛选整理，可按需求定制加工。优先对接一手源头供方，中介勿扰，有稳定存量、可以先出样测试的供应商欢迎私信，可长期稳定合作。</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b>（有稳定存量、可先出样测试）</dd>
+<dt>查重状态</dt><dd><b>新笔记</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af529bb0000000024030577" target="_blank" rel="noopener noreferrer">长期求购电子书文本数据集｜寻稳定供应商 ↗</a></div></dd>
+</dl>
+</article>
+
+<article class="card" data-type="text" data-text="数据-mr li 电子文本素材 中英文 一手源头 量大优先 稳定存量 长期合作">
+<div class="card-top"><h4>长期找电子文本素材一手源头｜中英文都收✨</h4><span class="tags"><span class="tag tag-type">电子文本 / 读物</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><b>数据-Mr Li</b></dd>
+<dt>发布时间</dt><dd>2026-11-11</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>电子文本素材资源（中英文）</dd>
+<dt>Spec</dt><dd><div class="spec">长期稳定收电子文本素材资源，中英文版本都需要，量大优先。只对接一手源头供方，不找中间商、中介，中间环节太多沟通成本太高啦。要求资源来源合规，可长期稳定供货，有稳定存量的朋友欢迎来聊。适合有自有资源、可以持续输出的源头伙伴，长期合作，需求稳定。有货的可以直接带品类、大致存量私信我，非诚勿扰～</div></dd>
+<dt>采购量级</dt><dd><b>未明确具体数量</b>（量大优先，有稳定存量）</dd>
+<dt>查重状态</dt><dd><b>新笔记</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af3cf36000000002b028c87" target="_blank" rel="noopener noreferrer">长期找电子文本素材一手源头｜中英文都收✨ ↗</a></div></dd>
+</dl>
+</article>
+</div>
+</div>
+
+<!-- 需求组 12 -->
+<div class="group blk">
+<div class="group-head"><h3>需求组 12 · CNC 加工与 CAD 设计变更数据</h3><span class="meta">2 条笔记 · 作者均为 数据-Mr Li</span></div>
+<div class="cards">
+<article class="card" data-type="cnc" data-text="数据-mr li cnc 加工数据 图纸 3d模型 工艺方案 机床参数 质检 工时 nda 铝合金 不锈钢">
+<div class="card-top"><h4>寻找 CNC 加工数据源头供应商</h4><span class="tags"><span class="tag tag-type">CNC 加工数据</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><b>数据-Mr Li</b></dd>
+<dt>发布时间</dt><dd>2026-11-13</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>真实 CNC 加工历史项目数据，用于 AI 模型训练（每套含加工图纸、3D 模型、工艺方案；机床参数、工装、切削参数、材料信息；加工缺陷记录、质检结果、工时成本记录；优先铝合金、不锈钢、结构件、壳体、精密小件，有不良/返工案例优先）</dd>
+<dt>Spec</dt><dd><div class="spec">付费征集真实 CNC 加工历史项目数据，用于 AI 模型训练，只用存量已有订单，不用新开加工单。每套数据包含：▪️加工图纸、3D 模型、工艺方案 ▪️机床参数、工装、切削参数、材料信息 ▪️加工缺陷记录、质检结果、工时成本记录 ✨优先征集：铝合金、不锈钢、结构件、壳体、精密小件，有不良 / 返工案例优先。⚠️不接收 ❌网上随便下载的模型、虚拟案例 ❌涉密、军工、管制类项目 ❌无工艺、无质检信息的空白图纸 &gt; &gt; 客户资料需要提前拿到对外共享授权 合作流程：先签 NDA 保密协议，可先发几个案例评估，审核通过后结算付费。有存量资源的源头加工厂、工艺团队欢迎私信对接。</div></dd>
+<dt>采购量级</dt><dd><b>未明确具体套数</b>（可先发几个案例评估，审核通过后结算付费）</dd>
+<dt>查重状态</dt><dd><b>新笔记</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af677620000000024032233" target="_blank" rel="noopener noreferrer">寻找 CNC 加工数据源头供应商 ↗</a></div></dd>
+</dl>
+</article>
+
+<article class="card" data-type="cnc" data-text="数据-mr li cad 设计变更 数据集 失效指标 仿真文件 变更说明 受力零件 保密协议">
+<div class="card-top"><h4>求CAD真实设计变更数据｜找源头工程团队</h4><span class="tags"><span class="tag tag-type">CAD 设计变更数据</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><b>数据-Mr Li</b></dd>
+<dt>发布时间</dt><dd>2026-11-13</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>真实项目 CAD 设计变更数据集，用于 AI 训练（一套变更交付内容：失效指标、修复多版本设计、全套仿真文件、变更说明文档；优先多仿真类型校核的受力产品零件）</dd>
+<dt>Spec</dt><dd><div class="spec">急招源头工程团队，收集真实项目CAD设计变更数据集，用于AI训练，付费合作，复用过往历史项目。📎一套变更交付内容：失效指标、修复多版本设计、全套仿真文件、变更说明文档 优先多仿真类型校核的受力产品零件。支持主流CAD及仿真软件；拒收下载零件、微小倒角围角改动、军工管制项目，客户资料需授权。会签署保密协议，先提交候选案例评估，审核通过付费。有资源欢迎私信。</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b>（先提交候选案例评估，审核通过付费）</dd>
+<dt>查重状态</dt><dd><b>新笔记</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af672d6000000002a024885" target="_blank" rel="noopener noreferrer">求CAD真实设计变更数据｜找源头工程团队 ↗</a></div></dd>
+</dl>
+</article>
+</div>
+</div>
+
+<!-- 需求组 13 -->
+<div class="group blk">
+<div class="group-head"><h3>需求组 13 · 图文视频成对多模态数据集</h3><span class="meta">1 条笔记</span></div>
+<div class="cards">
+<article class="card" data-type="multi" data-text="数据-mr li 图文 视频 成对 多模态 数据集 caption 标注 后训练 评测 harbor workspace">
+<div class="card-top"><h4>求购图文视频成对多模态数据集｜寻长期稳定</h4><span class="tags"><span class="tag tag-type">多模态数据集</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><b>数据-Mr Li</b></dd>
+<dt>发布时间</dt><dd>2026-11-12</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>图文、视频标注成对素材（多场景实拍图文对、短视频+caption 标注素材），用于多模态大模型后训练、评测任务</dd>
+<dt>Spec</dt><dd><div class="spec">项目长期收高质量图文、视频标注成对素材，用于多模态大模型后训练、评测任务。需求覆盖多场景实拍图文对、短视频+caption标注素材，要求标注规范、画面丰富。素材需要支持脱敏、具备合规授权；可以按指定方向定制采集整理，支持Harbor、workspace格式封装。只对接一手源头供方，中介勿扰，有稳定存量、可稳定出样的供应商欢迎私信，可长期合作。</div></dd>
+<dt>采购量级</dt><dd><b>未明确</b>（有稳定存量、可稳定出样）</dd>
+<dt>查重状态</dt><dd><b>新笔记</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af528d4000000002b012c7a" target="_blank" rel="noopener noreferrer">求购图文视频成对多模态数据集｜寻长期稳定 ↗</a></div></dd>
+</dl>
+</article>
+</div>
+</div>
+
+<!-- 需求组 14 -->
+<div class="group blk">
+<div class="group-head"><h3>需求组 14 · 高校 STEM 习题教材</h3><span class="meta">1 条笔记</span></div>
+<div class="cards">
+<article class="card" data-type="stem" data-text="数据-mr li 高校 stem 习题 教材 理工科 课后练习 复习题目 中英文 一手">
+<div class="card-top"><h4>蹲高校STEM习题、教材一手资源供应商✨</h4><span class="tags"><span class="tag tag-type">STEM 习题教材</span><span class="tag tag-new">本周新发布</span></span></div>
+<dl class="fields">
+<dt>作者</dt><dd><b>数据-Mr Li</b></dd>
+<dt>发布时间</dt><dd>2026-11-11</dd>
+<dt>需求方</dt><dd><b>未披露</b></dd>
+<dt>数据类型</dt><dd>高校 STEM/大学理工科教材素材、配套习题、课后练习、复习题目（中英文都接受）</dd>
+<dt>Spec</dt><dd><div class="spec">一直在找高校STEM方向的学习素材源头，长期批量收，只找一手！主要收大学理工科相关教材素材、配套习题、课后练习、复习题目。中英文素材都接受，偏好品类丰富、存量大、可以持续更新的。之前对接过不少中间环节，沟通效率很低，所以优先源头直连。手上有这类资源的大佬、工作室，可以私信聊聊。</div></dd>
+<dt>采购量级</dt><dd><b>未明确具体数量</b>（长期批量收，偏好品类丰富、存量大、可持续更新）</dd>
+<dt>查重状态</dt><dd><b>新笔记</b></dd>
+<dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af3d78e000000002303ca6a" target="_blank" rel="noopener noreferrer">蹲高校STEM习题、教材一手资源供应商✨ ↗</a></div></dd>
+</dl>
+</article>
+</div>
+</div>
+
+    <!-- 本周无新发布 -->
+    <div class="group blk">
+      <div class="group-head"><h3>本周无新发布</h3><span class="meta">本周 0 条的主页共 22 个</span></div>
+      <p class="group-note">下面保留 Echo、Amber咪的Mom、Kevin｜AI Lab 三个主页的 0 条卡片；另有其他 19 个已扫主页本周也是 0 条，见下方账号清单，不再逐一制卡。</p>
+
+      <div class="subgroup blk">
+        <div class="account-head">
+          <h3>Echo <span>本周 0 条</span></h3>
+          <span class="head-actions"><a class="home-link" href="https://xhslink.cn/o/zC7hVlzicB" target="_blank" rel="noopener noreferrer">查看主页 ↗</a><span class="badge badge-gray">已扫描 · 本周无新帖</span></span>
+        </div>
+        <div class="cards">
+          <article class="card zero" data-type="none" data-text="echo 本周无 cad pcb">
+            <div class="card-top"><h4>本周无新发布</h4><span class="tags"><span class="tag tag-filter">0 条</span></span></div>
+            <dl class="fields">
+              <dt>说明</dt><dd>该主页最新笔记为 <b>2026-10-28</b>，不在本周周期内。此前被关注的「有偿收 CAD 和 PCB 工程数据」为 <b>2026-10-02</b>，同样在周期外，本次不计入。</dd>
+            </dl>
+          </article>
+        </div>
+      </div>
+
+      <div class="subgroup blk">
+        <div class="account-head">
+          <h3>Amber咪的Mom <span>本周 0 条</span></h3>
+          <span class="head-actions"><a class="home-link" href="https://xhslink.cn/o/4cqm1nJhk3n" target="_blank" rel="noopener noreferrer">查看主页 ↗</a><span class="badge badge-gray">已扫描 · 本周无新帖</span></span>
+        </div>
+        <div class="cards">
+          <article class="card zero" data-type="none" data-text="amber kicad 本周无">
+            <div class="card-top"><h4>本周无新发布</h4><span class="tags"><span class="tag tag-filter">0 条</span></span></div>
+            <dl class="fields">
+              <dt>说明</dt><dd>最新笔记为 <b>2026-10-28</b> 的 KiCad 求助帖，内容是真实需求，但日期在周期外，本次不计入本周。</dd>
+            </dl>
+          </article>
+        </div>
+      </div>
+
+      <div class="subgroup blk">
+        <div class="account-head">
+          <h3>Kevin｜AI Lab <span>本周 0 条</span></h3>
+          <span class="head-actions"><a class="home-link" href="https://xhslink.cn/o/1bVRqiZzW1c" target="_blank" rel="noopener noreferrer">查看主页 ↗</a><span class="badge badge-gray">已扫描 · 本周无新帖</span></span>
+        </div>
+        <div class="cards">
+          <article class="card zero" data-type="none" data-text="kevin ai lab 医疗 本周无">
+            <div class="card-top"><h4>本周无新发布</h4><span class="tags"><span class="tag tag-filter">0 条</span></span></div>
+            <dl class="fields">
+              <dt>说明</dt><dd>最新笔记为 <b>2026-11-03</b> 的医疗数据采购帖，在 2026-11-10 之前，不在本次周期内。</dd>
+            </dl>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <!-- 本周筛掉的 -->
+    <div class="group blk">
+      <div class="group-head"><h3>本周筛掉的</h3><span class="meta">18 条 · 不计入需求</span></div>
+      <p class="group-note">设备采购 1 条、行业分享 15 条、招聘类 1 条、供应商广告 1 条，均不列入上面的 14 个需求组。</p>
+      <div class="cards">
+        <article class="card" data-type="filtered" data-text="睡不醒的是我 uwb 麦克风 设备 厂家 筛掉">
+          <div class="card-top"><h4>急需 UWB 麦克风</h4><span class="tags"><span class="tag tag-filter">已筛掉 · 非数据需求</span></span></div>
+          <dl class="fields">
+            <dt>作者</dt><dd><b>睡不醒的是我</b></dd>
+            <dt>发布时间</dt><dd>2026-11-16</dd>
+            <dt>判定</dt><dd>找设备厂家，不是数据采购需求，不计入本周有效需求。</dd>
+            <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6afa8bc5000000002a025001" target="_blank" rel="noopener noreferrer">急需 UWB 麦克风 ↗</a></div></dd>
+          </dl>
+        </article>
+      </div>
+      <div class="filtered-box">
+        <h4>其余 17 条筛掉明细（仅汇总，不制卡）</h4>
+        <ul>
+          <li><b>设备采购 1 条：</b>就是上面这张卡片 — 睡不醒的是我 2026-11-16《急需 UWB 麦克风》。</li>
+          <li><b>行业分享 15 条 — ScenesAi 3 条：</b>《单卡5090，实时把人物变成超级英雄》《不是预录视频！AI实时生成可交互的世界》《达瓦亮相百度世界大会，实时世界模型登场！》</li>
+          <li><b>行业分享 15 条 — 楼肉肉. 4 条：</b>《公开的是10万小时，拿去训练的是40万小时》《菜鸟开放海外仓：场景正在从资源变成平台》《把数采中心的收入拿掉，有些机器人公司的估值要对半砍》《买方早就用一条规则回答了「小时会不会饱和」》</li>
+          <li><b>行业分享 15 条 — lili 8 条：</b>《不做 RL，就是技术落后吗？》《RL环境，决定模型后续的能力上限》《大厂悄悄收破产企业数据，到底想训练什么？》《有了Fable5.2，具身世界模型要拿大结果了？》《黄仁勋离任，会给后训练赛道带来什么影响？》《后训练数据、SFT、Benchmark的“三角恋”关系》《海外后训练数据溢价高，为何大厂依旧愿意买》《AMA有感｜后训练数据赛道真的很卷！》</li>
+          <li><b>招聘类 1 条：</b>月界数据-小鱼 2026-11-12《英语好的看过来》（招募英语陪练）。<div class="orig-links" style="margin-top:6px"><a href="https://www.xiaohongshu.com/explore/6af47872000000002a02f8df" target="_blank" rel="noopener noreferrer">英语好的看过来 ↗</a></div></li>
+          <li><b>供应商广告 1 条：</b>AAA数商李不总 2026-11-12《原始CAD&amp;PCB文件供应｜出题、大模型训练用》— 出售 CAD&amp;PCB 原生文件资源，非采购需求；原文“有CAD&amp;PCB原生文件资源，图纸源文件，支持出题，训练大模型用”；无原笔记链接记录。</li>
+        </ul>
+      </div>
     </div>
 
     <div class="empty" id="empty">没有符合当前筛选的内容，换个关键词试试。</div>
@@ -302,16 +796,16 @@
     <div class="sec-head"><h2>怎么看这批结果</h2></div>
     <div class="summary-box">
       <ul>
-        <li><b>量集中在一个号：</b>本周 9 条笔记里 7 条来自「睡不醒的是我」，另外 2 条来自「数据服务」。其余 3 个已扫主页本周都没发帖。</li>
-        <li><b>别按 8 条独立需求理解：</b>8 条有效笔记去重后是 <b>4 类需求</b> — Ego 采集（4 条同源）、PCB 工程数据（2 条同源）、Seedance 2.5 数据（1 条）、成品数据集长期求购（1 条）。</li>
-        <li><b>需求方全部未披露：</b>本周 8 条没有一条写明采购公司名，跟进时只能先按作者联系，不能臆测背后公司。</li>
-        <li><b>这不是全量结论：</b>还有 <b>27 个账号本次未扫描</b>，它们本周有没有发采购帖，这页不做判断。</li>
+        <li><b>数据-Mr Li 是本周最大新发现：</b>一周连发 14 条、全是采购需求，一个人覆盖电子文本、KiCad/PCB/EDA、CNC、CAD 变更、多模态，32 条需求里占了 14 条。</li>
+        <li><b>Ego/UMI 仍是最热方向：</b>睡不醒的是我 4 条 + 哆啦梦仔 2 条，32 条需求里 6 条与 Ego/UMI 相关；注意 Ego 和 PCB 都有同源重发，别按条数当独立需求理解。</li>
+        <li><b>仿真与 3D 评测方向成型：</b>Unity/Blender、Blender RL、CNC 加工数据、CAD 设计变更，都是之前几轮没见过的新方向。</li>
+        <li><b>32 个主页全部扫完，无遗漏：</b>本周 50 条笔记、32 条真实需求、18 条筛掉，账目完整；需求方仍全部未披露，跟进时只能先按作者联系，不能臆测背后公司。</li>
       </ul>
     </div>
   </section>
 
   <section id="watchlist">
-    <div class="sec-head"><h2>32 个监控账号清单 — 本次只扫了 5 个</h2><p>清单完整保留。下面用「本次状态」标清：<b>已扫描 5 个</b>，其余 <b>27 个本次未扫描</b>。未扫描不等于本周没发帖，只是这次没看。点任意昵称即可打开该账号的小红书主页。</p></div>
+    <div class="sec-head"><h2>32 个监控账号清单 — 本次 32 个全部已扫描</h2><p>清单完整保留。下面用「本次状态」标清：<b>32 个主页已全部扫描</b>，本周状态按 2026-11-10 至 2026-11-17 的扫描结果标注。点任意昵称即可打开该账号的小红书主页。</p></div>
     <div class="wl-tools">
       <input type="search" id="wlq" placeholder="按昵称或需求方向搜索，如 PCB、Agent、Echo…" aria-label="搜索监控账号">
       <span class="wl-count" id="wlcount">显示 32 / 32</span>
@@ -323,41 +817,42 @@
       <div class="wrow scanned" data-wl="睡不醒的是我 pcb ego 已扫描"><div class="no">3</div><div class="nick"><a href="https://xhslink.cn/o/9swvnfCImTe" target="_blank" rel="noopener noreferrer">睡不醒的是我 ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">PCB 原始工程设计数据 / Ego 数据采集 — 本周 7 条，6 条真需求</div></div>
       <div class="wrow scanned" data-wl="kevin ai lab 已扫描"><div class="no">4</div><div class="nick"><a href="https://xhslink.cn/o/1bVRqiZzW1c" target="_blank" rel="noopener noreferrer">Kevin｜AI ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">TBS 科研任务、OSWorld / GUI Agent 轨迹、AutoResearch、3D 工程 — 本周 0 条（清单名 Kevin｜AI，主页显示 Kevin｜AI Lab）</div></div>
       <div class="wrow scanned" data-wl="数据采集 数据服务 医疗 已扫描"><div class="no">5</div><div class="nick"><a href="https://xhslink.cn/o/9XC9nTOyzbO" target="_blank" rel="noopener noreferrer">数据采集 ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">医疗多模态、科研建模与评测、临床工作流 — 主页显示名「数据服务」，本周 2 条真需求</div></div>
-      <div class="wrow" data-wl="买定离手计划 金融 agent 未扫描"><div class="no">6</div><div class="nick"><a href="https://xhslink.cn/o/AWrqItU0YNw" target="_blank" rel="noopener noreferrer">买定离手计划 ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">金融场景 AI Agent 轨迹 / Tool-Calling / 多轮对话</div></div>
-      <div class="wrow" data-wl="不寻 金融 法律 未扫描"><div class="no">7</div><div class="nick"><a href="https://xhslink.cn/o/49BJkzq6Qhm" target="_blank" rel="noopener noreferrer">不寻 ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">企业级金融、法律高质量原始数据集</div></div>
-      <div class="wrow" data-wl="毛毛狗 金融 未扫描"><div class="no">8</div><div class="nick"><a href="https://xhslink.cn/o/AliIBP5swJl" target="_blank" rel="noopener noreferrer">毛毛狗 ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">金融财经资讯、研报摘要、公众号及雪球金融资讯</div></div>
-      <div class="wrow" data-wl="佐维 多轮对话 sft 未扫描"><div class="no">9</div><div class="nick"><a href="https://xhslink.cn/o/8q9uKb4fNTU" target="_blank" rel="noopener noreferrer">佐维. ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">多轮对话 SFT、RL/RLHF、Agent 训练轨迹、金融工作流</div></div>
-      <div class="wrow" data-wl="小木偶 视频 未扫描"><div class="no">10</div><div class="nick"><a href="https://xhslink.cn/o/5bz6VSMOuFh" target="_blank" rel="noopener noreferrer">小木偶 ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">真实场景视频（人物对话/动作、日常生活）</div></div>
-      <div class="wrow" data-wl="scenesai 世界模型 视频 未扫描"><div class="no">11</div><div class="nick"><a href="https://xhslink.cn/o/9EOOZFZDfw7" target="_blank" rel="noopener noreferrer">ScenesAi ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">世界模型 / 视频编辑 / CG、VFX 特效视频</div></div>
-      <div class="wrow" data-wl="孤云枕月 题库 语料 未扫描"><div class="no">12</div><div class="nick"><a href="https://xhslink.cn/o/2LmCR9M1txw" target="_blank" rel="noopener noreferrer">孤云枕月 ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">题库、图书期刊语料、训练语料、Agent 轨迹、多模态</div></div>
-      <div class="wrow" data-wl="云川 视频 pair 未扫描"><div class="no">13</div><div class="nick"><a href="https://xhslink.cn/o/2vI7kCrC9PP" target="_blank" rel="noopener noreferrer">云川 ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">AI 视频生成与编辑（Video Pair、参考生成、视频编辑）</div></div>
-      <div class="wrow" data-wl="小红薯69a79bf0 sd2.5 视频 未扫描"><div class="no">14</div><div class="nick"><a href="https://xhslink.cn/o/7CH8ZFrr4AV" target="_blank" rel="noopener noreferrer">小红薯69A79BF0 ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">SD2.5 视频生成与编辑（图生视频、视频复刻、Pair）</div></div>
-      <div class="wrow" data-wl="norman 专业软件 3d 未扫描"><div class="no">15</div><div class="nick"><a href="https://xhslink.cn/o/1Vcyorh6jQ3" target="_blank" rel="noopener noreferrer">Norman ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">专业软件真实商业任务（3D/工程、平面/UI、视频、办公、开发）</div></div>
-      <div class="wrow" data-wl="boliboli rlhf agent 未扫描"><div class="no">16</div><div class="nick"><a href="https://xhslink.cn/o/6P5fgLPuS0n" target="_blank" rel="noopener noreferrer">boliboli ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">RLHF 偏好 / Agent 轨迹 / CoT 推理 / 具身与离线 RL</div></div>
-      <div class="wrow" data-wl="yd 具身 ego umi 未扫描"><div class="no">17</div><div class="nick"><a href="https://xhslink.cn/o/859FxphHMne" target="_blank" rel="noopener noreferrer">💭yd ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">具身机器人（Ego、UMI、Teleop 遥操作）</div></div>
-      <div class="wrow" data-wl="simreal agent 未扫描"><div class="no">18</div><div class="nick"><a href="https://xhslink.cn/o/6XHhq6O2nLL" target="_blank" rel="noopener noreferrer">SimReal ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">编程与 Agent、专家知识、行业工作流、多模态与具身、RL 环境</div></div>
-      <div class="wrow" data-wl="楼肉肉 具身 ego 未扫描"><div class="no">19</div><div class="nick"><a href="https://xhslink.cn/o/37wFoLsaCbw" target="_blank" rel="noopener noreferrer">楼肉肉. ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">具身训练（Egocentric、UMI 机器人操作）</div></div>
-      <div class="wrow" data-wl="米粥 3d rl 未扫描"><div class="no">20</div><div class="nick"><a href="https://xhslink.cn/o/7tYXvyg3jkI" target="_blank" rel="noopener noreferrer">米粥 ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">3D 智能体轨迹 / RL 训练</div></div>
-      <div class="wrow" data-wl="哆啦梦仔 ue5 blender figma 未扫描"><div class="no">21</div><div class="nick"><a href="https://xhslink.cn/o/9wG143ZuPbd" target="_blank" rel="noopener noreferrer">哆啦梦仔 ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">UE5 游戏工程、Blender 3D、Photoshop 源文件、Figma UI/UX</div></div>
-      <div class="wrow" data-wl="月界数据 小鱼 源码 3d 未扫描"><div class="no">22</div><div class="nick"><a href="https://xhslink.cn/o/8Agn3Xrst8s" target="_blank" rel="noopener noreferrer">月界数据-小鱼 ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">软件项目源码、3D/动画/特效代码、3D 模型及游戏原画</div></div>
-      <div class="wrow" data-wl="lili agent benchmark 未扫描"><div class="no">23</div><div class="nick"><a href="https://xhslink.cn/o/53WTZrKcyWA" target="_blank" rel="noopener noreferrer">lili ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">Agent 合成后训练 / 长轨迹 / Benchmark 配套</div></div>
-      <div class="wrow" data-wl="y 后训练 rubric 未扫描"><div class="no">24</div><div class="nick"><a href="https://xhslink.cn/o/53MmonmXl0N" target="_blank" rel="noopener noreferrer">Y. ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">后训练（Rubric、SFT/RL/Reward、Agent 长任务）</div></div>
-      <div class="wrow" data-wl="01 sft dpo agent 未扫描"><div class="no">25</div><div class="nick"><a href="https://xhslink.cn/o/7NdvjrbUYTI" target="_blank" rel="noopener noreferrer">01 ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">中文 SFT / DPO、Tool-Calling / ReAct 轨迹、Coding Agent</div></div>
-      <div class="wrow" data-wl="andrew 郑瀚 agent 未扫描"><div class="no">26</div><div class="nick"><a href="https://xhslink.cn/o/4ntKIyaau2L" target="_blank" rel="noopener noreferrer">Andrew~郑瀚 ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">Agent 任务与轨迹、AI 训练评测、学术及专业知识语料</div></div>
-      <div class="wrow" data-wl="myriad cua agent 未扫描"><div class="no">27</div><div class="nick"><a href="https://xhslink.cn/o/1H0poKrKmbe" target="_blank" rel="noopener noreferrer">Myriad ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">CUA / Agent 浏览器操作轨迹（Web Agent Trajectory）</div></div>
-      <div class="wrow" data-wl="eva 后训练 rubric 未扫描"><div class="no">28</div><div class="nick"><a href="https://xhslink.cn/o/A3tzCnYlIxt" target="_blank" rel="noopener noreferrer">Eva ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">后训练（Rubric、SFT/RL/Reward、Agent 长任务及工具调用）</div></div>
-      <div class="wrow" data-wl="aaa数商李不总 cyber coding 未扫描"><div class="no">29</div><div class="nick"><a href="https://xhslink.cn/o/eUpjjxyypL" target="_blank" rel="noopener noreferrer">AAA数商李不总 ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">Cyber Agent、Coding Agent、AI Cowork、CLI Agent、WorkspaceBench、GDPval V2</div></div>
-      <div class="wrow" data-wl="miammcz 文本 ocr coding 未扫描"><div class="no">30</div><div class="nick"><a href="https://xhslink.cn/o/4LEDN3WD0Pg" target="_blank" rel="noopener noreferrer">MIAMMCZ ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">文本、OCR 图像、语音、Coding、专家垂直、多模态、合成数据</div></div>
-      <div class="wrow" data-wl="数据-mr 电子文本 未扫描"><div class="no">31</div><div class="nick"><a href="https://xhslink.cn/o/6lpL1K4pv22" target="_blank" rel="noopener noreferrer">数据-Mr ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">电子文本素材 / 中英文电子书文本资源</div></div>
-      <div class="wrow" data-wl="小花鱼 raw workspace 未扫描"><div class="no">32</div><div class="nick"><a href="https://xhslink.cn/o/dGRR8FpIis" target="_blank" rel="noopener noreferrer">小花鱼 ↗</a></div><div class="st st-no">○ 未扫描</div><div class="dir">Raw Workspace 原始项目工作空间（科研、代码、软件工程、数据分析、建模仿真、STEM）</div></div>
+      <div class="wrow scanned" data-wl="买定离手计划 金融 agent 已扫描"><div class="no">6</div><div class="nick"><a href="https://xhslink.cn/o/AWrqItU0YNw" target="_blank" rel="noopener noreferrer">买定离手计划 ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">金融场景 AI Agent 轨迹 / Tool-Calling / 多轮对话 — 本周 0 条</div></div>
+      <div class="wrow scanned" data-wl="不寻 金融 法律 已扫描"><div class="no">7</div><div class="nick"><a href="https://xhslink.cn/o/49BJkzq6Qhm" target="_blank" rel="noopener noreferrer">不寻 ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">企业级金融、法律高质量原始数据集 — 本周 0 条</div></div>
+      <div class="wrow scanned" data-wl="毛毛狗 金融 已扫描"><div class="no">8</div><div class="nick"><a href="https://xhslink.cn/o/AliIBP5swJl" target="_blank" rel="noopener noreferrer">毛毛狗 ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">金融财经资讯、研报摘要、公众号及雪球金融资讯 — 本周 0 条</div></div>
+      <div class="wrow scanned" data-wl="佐维 多轮对话 sft rl 已扫描"><div class="no">9</div><div class="nick"><a href="https://xhslink.cn/o/8q9uKb4fNTU" target="_blank" rel="noopener noreferrer">佐维. ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">多轮对话 SFT、RL/RLHF、Agent 训练轨迹、金融工作流 — 本周 1 条需求</div></div>
+      <div class="wrow scanned" data-wl="小木偶 视频 已扫描"><div class="no">10</div><div class="nick"><a href="https://xhslink.cn/o/5bz6VSMOuFh" target="_blank" rel="noopener noreferrer">小木偶 ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">真实场景视频（人物对话/动作、日常生活） — 本周 0 条</div></div>
+      <div class="wrow scanned" data-wl="scenesai 世界模型 视频 分享 已扫描"><div class="no">11</div><div class="nick"><a href="https://xhslink.cn/o/9EOOZFZDfw7" target="_blank" rel="noopener noreferrer">ScenesAi ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">世界模型 / 视频编辑 / CG、VFX 特效视频 — 本周 3 条，均为分享</div></div>
+      <div class="wrow scanned" data-wl="孤云枕月 题库 语料 已扫描"><div class="no">12</div><div class="nick"><a href="https://xhslink.cn/o/2LmCR9M1txw" target="_blank" rel="noopener noreferrer">孤云枕月 ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">题库、图书期刊语料、训练语料、Agent 轨迹、多模态 — 本周 0 条</div></div>
+      <div class="wrow scanned" data-wl="云川 视频 pair 已扫描"><div class="no">13</div><div class="nick"><a href="https://xhslink.cn/o/2vI7kCrC9PP" target="_blank" rel="noopener noreferrer">云川 ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">AI 视频生成与编辑（Video Pair、参考生成、视频编辑） — 本周 0 条</div></div>
+      <div class="wrow scanned" data-wl="小红薯69a79bf0 sd2.5 视频 已扫描"><div class="no">14</div><div class="nick"><a href="https://xhslink.cn/o/7CH8ZFrr4AV" target="_blank" rel="noopener noreferrer">小红薯69A79BF0 ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">SD2.5 视频生成与编辑（图生视频、视频复刻、Pair） — 本周 0 条</div></div>
+      <div class="wrow scanned" data-wl="norman 专业软件 3d 已扫描"><div class="no">15</div><div class="nick"><a href="https://xhslink.cn/o/1Vcyorh6jQ3" target="_blank" rel="noopener noreferrer">Norman ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">专业软件真实商业任务（3D/工程、平面/UI、视频、办公、开发） — 本周 0 条</div></div>
+      <div class="wrow scanned" data-wl="boliboli rlhf agent 已扫描"><div class="no">16</div><div class="nick"><a href="https://xhslink.cn/o/6P5fgLPuS0n" target="_blank" rel="noopener noreferrer">boliboli ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">RLHF 偏好 / Agent 轨迹 / CoT 推理 / 具身与离线 RL — 本周 0 条</div></div>
+      <div class="wrow scanned" data-wl="yd 具身 ego umi 已扫描"><div class="no">17</div><div class="nick"><a href="https://xhslink.cn/o/859FxphHMne" target="_blank" rel="noopener noreferrer">💭yd ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">具身机器人（Ego、UMI、Teleop 遥操作） — 本周 0 条</div></div>
+      <div class="wrow scanned" data-wl="simreal agent 已扫描"><div class="no">18</div><div class="nick"><a href="https://xhslink.cn/o/6XHhq6O2nLL" target="_blank" rel="noopener noreferrer">SimReal ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">编程与 Agent、专家知识、行业工作流、多模态与具身、RL 环境 — 本周 0 条</div></div>
+      <div class="wrow scanned" data-wl="楼肉肉 具身 ego 分享 已扫描"><div class="no">19</div><div class="nick"><a href="https://xhslink.cn/o/37wFoLsaCbw" target="_blank" rel="noopener noreferrer">楼肉肉. ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">具身训练（Egocentric、UMI 机器人操作） — 本周 4 条，均为分享</div></div>
+      <div class="wrow scanned" data-wl="米粥 3d rl 已扫描"><div class="no">20</div><div class="nick"><a href="https://xhslink.cn/o/7tYXvyg3jkI" target="_blank" rel="noopener noreferrer">米粥 ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">3D 智能体轨迹 / RL 训练 — 本周 0 条</div></div>
+      <div class="wrow scanned" data-wl="哆啦梦仔 ue5 blender figma 音频 数学 ego 已扫描"><div class="no">21</div><div class="nick"><a href="https://xhslink.cn/o/9wG143ZuPbd" target="_blank" rel="noopener noreferrer">哆啦梦仔 ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">UE5 游戏工程、Blender 3D、Photoshop 源文件、Figma UI/UX — 本周 6 条需求</div></div>
+      <div class="wrow scanned" data-wl="月界数据 小鱼 源码 3d 招聘 已扫描"><div class="no">22</div><div class="nick"><a href="https://xhslink.cn/o/8Agn3Xrst8s" target="_blank" rel="noopener noreferrer">月界数据-小鱼 ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">软件项目源码、3D/动画/特效代码、3D 模型及游戏原画 — 本周 1 条，招聘已排除</div></div>
+      <div class="wrow scanned" data-wl="lili agent benchmark 分享 已扫描"><div class="no">23</div><div class="nick"><a href="https://xhslink.cn/o/53WTZrKcyWA" target="_blank" rel="noopener noreferrer">lili ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">Agent 合成后训练 / 长轨迹 / Benchmark 配套 — 本周 8 条，均为分享</div></div>
+      <div class="wrow scanned" data-wl="y 后训练 rubric 已扫描"><div class="no">24</div><div class="nick"><a href="https://xhslink.cn/o/53MmonmXl0N" target="_blank" rel="noopener noreferrer">Y. ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">后训练（Rubric、SFT/RL/Reward、Agent 长任务） — 本周 0 条</div></div>
+      <div class="wrow scanned" data-wl="01 sft dpo agent 已扫描"><div class="no">25</div><div class="nick"><a href="https://xhslink.cn/o/7NdvjrbUYTI" target="_blank" rel="noopener noreferrer">01 ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">中文 SFT / DPO、Tool-Calling / ReAct 轨迹、Coding Agent — 本周 0 条</div></div>
+      <div class="wrow scanned" data-wl="andrew 郑瀚 agent 已扫描"><div class="no">26</div><div class="nick"><a href="https://xhslink.cn/o/4ntKIyaau2L" target="_blank" rel="noopener noreferrer">Andrew~郑瀚 ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">Agent 任务与轨迹、AI 训练评测、学术及专业知识语料 — 本周 0 条</div></div>
+      <div class="wrow scanned" data-wl="myriad cua agent 已扫描"><div class="no">27</div><div class="nick"><a href="https://xhslink.cn/o/1H0poKrKmbe" target="_blank" rel="noopener noreferrer">Myriad ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">CUA / Agent 浏览器操作轨迹（Web Agent Trajectory） — 本周 0 条</div></div>
+      <div class="wrow scanned" data-wl="eva 后训练 rubric 已扫描"><div class="no">28</div><div class="nick"><a href="https://xhslink.cn/o/A3tzCnYlIxt" target="_blank" rel="noopener noreferrer">Eva ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">后训练（Rubric、SFT/RL/Reward、Agent 长任务及工具调用） — 本周 0 条</div></div>
+      <div class="wrow scanned" data-wl="aaa数商李不总 cyber coding 仿真 unity blender 已扫描"><div class="no">29</div><div class="nick"><a href="https://xhslink.cn/o/eUpjjxyypL" target="_blank" rel="noopener noreferrer">AAA数商李不总 ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">Cyber Agent、Coding Agent、AI Cowork、CLI Agent、WorkspaceBench、GDPval V2 — 本周 4 条笔记、3 条需求（另有 1 条供应商广告已排除）</div></div>
+      <div class="wrow scanned" data-wl="miammcz 文本 ocr coding 已扫描"><div class="no">30</div><div class="nick"><a href="https://xhslink.cn/o/4LEDN3WD0Pg" target="_blank" rel="noopener noreferrer">MIAMMCZ ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">文本、OCR 图像、语音、Coding、专家垂直、多模态、合成数据 — 本周 0 条</div></div>
+      <div class="wrow scanned" data-wl="数据-mr li 电子文本 kicad eda pcb cnc cad 多模态 stem 已扫描"><div class="no">31</div><div class="nick"><a href="https://xhslink.cn/o/6lpL1K4pv22" target="_blank" rel="noopener noreferrer">数据-Mr Li ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">电子文本素材 / 中英文电子书文本资源、KiCad/EDA/PCB 工程、CNC/CAD、多模态、STEM — 本周 14 条需求</div></div>
+      <div class="wrow scanned" data-wl="小花鱼 raw workspace 已扫描"><div class="no">32</div><div class="nick"><a href="https://xhslink.cn/o/dGRR8FpIis" target="_blank" rel="noopener noreferrer">小花鱼 ↗</a></div><div class="st st-yes">● 已扫描</div><div class="dir">Raw Workspace 原始项目工作空间（科研、代码、软件工程、数据分析、建模仿真、STEM） — 本周 0 条</div></div>
     </div>
     <div class="wl-empty" id="wlempty">没有匹配的账号，换个关键词试试。</div>
-    <p class="note">本次未扫描的 27 个账号，本页不对其本周动态做任何判断。</p>
+    <p class="note">本次 32 个账号已全部扫描完成，本页数据为周期 2026-11-10 至 2026-11-17 的完整结果。</p>
   </section>
 
   <footer>
-    <p><b>小红书采购需求扫描 — 5 个主页实测结果</b></p>
-    <p>核实日期 2026-11-17 · 统计周期 2026-11-10 至 2026-11-17 · 方式：浏览器只读扫描 · 范围：32 个监控账号中的 5 个，其余 27 个本次未扫描 · 本页不是本周周报，页面为发布时快照，不会自行更新。</p>
+    <p><b>小红书采购需求扫描 — 32 个主页实测结果（周期 2026-11-10 至 2026-11-17）</b></p>
+    <p>核实日期 2026-11-17 · 统计周期 2026-11-10 至 2026-11-17 · 方式：浏览器只读扫描 · 范围：32 个监控账号全部已扫描 · 本页不是本周周报，页面为发布时快照，不会自行更新。</p>
+    <p>笔记链接打不开（404）时，可通过作者主页按日期找到该笔记，因为小红书的链接有时效 token。</p>
   </footer>
 </div>
 
@@ -373,20 +868,17 @@
     var shown = 0;
     cards.forEach(function(c){
       var t = c.getAttribute('data-type');
-      var okF = filter === 'all' || t === filter || (filter==='video' && t==='video');
+      var okF = filter === 'all' || t === filter;
       var hay = (c.textContent + ' ' + (c.getAttribute('data-text')||'')).toLowerCase();
       var okQ = !kw || hay.indexOf(kw) !== -1;
       var show = okF && okQ;
       c.style.display = show ? '' : 'none';
       if(show) shown++;
     });
-    // hide account heads with no visible cards in following sibling .cards
-    document.querySelectorAll('[data-account]').forEach(function(h){
-      var cont = h.nextElementSibling;
-      if(!cont) return;
-      var any = Array.prototype.some.call(cont.querySelectorAll('.card'), function(c){ return c.style.display !== 'none'; });
-      h.style.display = any ? '' : 'none';
-      cont.style.display = any ? '' : 'none';
+    // hide any group/subgroup block whose cards are all hidden
+    document.querySelectorAll('#results .blk').forEach(function(b){
+      var any = Array.prototype.some.call(b.querySelectorAll('.card'), function(c){ return c.style.display !== 'none'; });
+      b.style.display = any ? '' : 'none';
     });
     empty.style.display = shown ? 'none' : 'block';
   }
