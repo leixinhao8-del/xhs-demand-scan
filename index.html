@@ -104,6 +104,7 @@
   .fields dd{margin:0;color:var(--ink2)}
   .fields dd b{color:var(--ink)}
   .spec{background:var(--surface2);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:13.5px;line-height:1.7}
+  .fields dd,.spec,.card h4{min-width:0;overflow-wrap:anywhere}
   .card.zero .spec{background:var(--surface)}
   @media(max-width:560px){.fields{grid-template-columns:1fr}.fields dt{margin-top:6px}}
   .toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 8px}
@@ -164,7 +165,7 @@
     <span class="kicker"><i></i> 周期 2026-11-10 至 2026-11-17</span>
     <h1>小红书采购需求扫描</h1>
     <p class="lead">统计周期 <strong>2026-11-10 至 2026-11-17</strong>，只看这一周内新发布的笔记。</p>
-    <p class="datastrip"><span>32/32</span> 个主页已扫描 · 本周 <span>50 条</span>笔记 · <span>54 条</span>真实采购需求（19 个需求组）· <span>18 条</span>已筛掉</p>
+    <p class="datastrip"><span>32/32</span> 个主页已扫描 · 监控账号本周 <span>50 条</span>笔记 · 其他账号新需求 <span>22 条</span> · <span>54 条</span>真实采购需求（19 个需求组）· 监控账号 <span>18 条</span>已筛掉</p>
 
     <div class="truths" aria-label="本次范围说明">
       <h2>先说清本次范围</h2>
@@ -176,17 +177,17 @@
 
     <div class="stats" aria-label="本次总览">
       <div class="ds"><div class="n">32 / 32</div><div class="l">本次已扫描主页 · 全部扫完</div></div>
-      <div class="ds"><div class="n">50 条</div><div class="l">本周共看到的笔记</div></div>
+      <div class="ds"><div class="n">50 条</div><div class="l">监控账号本周的笔记（加上其他账号 22 条，本周共 72 条笔记）</div></div>
       <div class="ds"><div class="n">54 条</div><div class="l">真实采购需求笔记</div></div>
       <div class="ds"><div class="n">19 个</div><div class="l">去重后的需求组</div></div>
       <div class="ds"><div class="n">10 个</div><div class="l">本周有新笔记的主页</div></div>
       <div class="ds"><div class="n">22 个</div><div class="l">本周 0 条的主页</div></div>
       <div class="ds"><div class="n">18 条</div><div class="l">被筛掉（1 条设备、15 条行业分享、1 条招聘、1 条供应商广告）</div></div>
-      <div class="ds"><div class="n">0 条</div><div class="l">写明需求方公司名的笔记 — 本周 32 条均未披露</div></div>
+      <div class="ds"><div class="n">3 条</div><div class="l">写明需求方公司名的笔记 — 监控账号的 32 条均未披露，具名的 3 条都在其他账号一节：聚身之家 / AIMAN.World、BDEX、蚂蚁科技</div></div>
     </div>
 
     <nav class="jump" aria-label="快速跳转">
-      <a href="#highlights">本周值得关注</a><a href="#results">需求清单（14 组）</a><a href="#conclusion">怎么看这批结果</a><a href="#watchlist">32 个账号清单</a>
+      <a href="#highlights">本周值得关注</a><a href="#results">需求清单（19 组）</a><a href="#others">其他账号需求</a><a href="#conclusion">怎么看这批结果</a><a href="#watchlist">32 个账号清单</a>
     </nav>
   </header>
 
@@ -219,8 +220,8 @@
 
   <section id="results">
     <div class="sec-head">
-      <h2>需求清单 · 14 个需求组（2026-11-10 至 2026-11-17）</h2>
-      <p>按需求组分组呈现：本周 32 条真实采购需求笔记，去重后是 14 个需求组。同一作者、同一需求换说法重复发布的，已合并在同一组里并标出重复关系，不按多条独立需求计数。每张卡片下方有原文链接。</p>
+      <h2>需求清单 · 19 个需求组（2026-11-10 至 2026-11-17）</h2>
+      <p>按需求组分组呈现：本周共 54 条真实采购需求笔记——监控账号 32 条（组 1–14）加其他账号 22 条（组 15–19），去重后共 19 个需求组。同一作者、同一需求换说法重复发布的，已合并在同一组里并标出重复关系，不按多条独立需求计数。每张卡片下方有原文链接。</p>
       <p class="link-note">提示：小红书笔记链接偶尔会因临时令牌失效显示 404，遇到时点该作者的主页链接进去，再按日期找那条笔记即可。</p>
     </div>
 
@@ -1102,7 +1103,7 @@
     <!-- 本周筛掉的 -->
     <div class="group blk">
       <div class="group-head"><h3>本周筛掉的</h3><span class="meta">18 条 · 不计入需求</span></div>
-      <p class="group-note">设备采购 1 条、行业分享 15 条、招聘类 1 条、供应商广告 1 条，均不列入上面的 14 个需求组。</p>
+      <p class="group-note">设备采购 1 条、行业分享 15 条、招聘类 1 条、供应商广告 1 条，均不列入上面的 19 个需求组。</p>
       <div class="cards">
         <article class="card" data-type="filtered" data-text="睡不醒的是我 uwb 麦克风 设备 厂家 筛掉">
           <div class="card-top"><h4>急需 UWB 麦克风</h4><span class="tags"><span class="tag tag-filter">已筛掉 · 非数据需求</span></span></div>
@@ -1137,7 +1138,7 @@
         <li><b>数据-Mr Li 是本周最大新发现：</b>一周连发 14 条、全是采购需求，一个人覆盖电子文本、KiCad/PCB/EDA、CNC、CAD 变更、多模态，32 条需求里占了 14 条。</li>
         <li><b>Ego/UMI 仍是最热方向：</b>睡不醒的是我 4 条 + 哆啦梦仔 2 条，32 条需求里 6 条与 Ego/UMI 相关；注意 Ego 和 PCB 都有同源重发，别按条数当独立需求理解。</li>
         <li><b>仿真与 3D 评测方向成型：</b>Unity/Blender、Blender RL、CNC 加工数据、CAD 设计变更，都是之前几轮没见过的新方向。</li>
-        <li><b>32 个主页全部扫完，无遗漏：</b>本周 50 条笔记、32 条真实需求、18 条筛掉，账目完整；需求方仍全部未披露，跟进时只能先按作者联系，不能臆测背后公司。</li>
+        <li><b>32 个主页全部扫完，无遗漏：</b>监控账号本周 50 条笔记、32 条真实需求、18 条筛掉，账目完整；这 32 条的需求方仍全部未披露，跟进时只能先按作者联系，不能臆测背后公司。写明需求方的是其他账号一节的 3 条：聚身之家 / AIMAN.World、BDEX、蚂蚁科技。</li>
       </ul>
     </div>
   </section>
