@@ -67,6 +67,10 @@
   .hl .num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--red);color:#fff;font-size:14px;font-weight:900;margin-bottom:10px}
   .hl h3{margin:0 0 6px;font-size:16.5px;line-height:1.4}
   .hl p{margin:0;font-size:14px;color:var(--ink2)}
+  .hl{display:flex;flex-direction:column}
+  .hl-btn{display:inline-flex;align-items:center;gap:6px;margin-top:14px;align-self:flex-start;font-size:13.5px;font-weight:700;color:var(--red-ink);background:var(--red-soft);border:1px solid color-mix(in srgb, var(--red) 25%, transparent);padding:7px 12px;border-radius:999px;text-decoration:none;min-height:36px}
+  .hl-btn:hover{text-decoration:underline}
+  .group.blk{scroll-margin-top:24px}
   /* Groups */
   .group-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px;margin:30px 0 6px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
   .group-head:first-of-type{margin-top:8px}
@@ -156,7 +160,7 @@
   <header class="hero">
     <span class="kicker"><i></i> 周期 2026-11-10 至 2026-11-17</span>
     <h1>小红书采购需求扫描</h1>
-    <p class="lead">这是今天用浏览器<strong>只读方式逐个打开主页核实</strong>的结果。统计周期 <strong>2026-11-10 至 2026-11-17</strong>，只看这一周内新发布的笔记。</p>
+    <p class="lead">统计周期 <strong>2026-11-10 至 2026-11-17</strong>，只看这一周内新发布的笔记。</p>
     <p class="datastrip"><span>32/32</span> 个主页已扫描 · 本周 <span>50 条</span>笔记 · <span>32 条</span>真实采购需求（14 个需求组）· <span>18 条</span>已筛掉</p>
 
     <div class="truths" aria-label="本次范围说明">
@@ -164,8 +168,6 @@
       <p>本次 32 个监控账号<b>全部扫完</b>；29 号主页（AAA数商李不总）已补查完整。</p>
       <ul>
         <li><b>统计周期：</b>2026-11-10 至 2026-11-17（含首尾两天），周期外的旧笔记不计入本周</li>
-        <li><b>说明：</b>32 个主页全部扫完；29 号主页已补查完整（此前列表不一致是加载问题，本次 10 条笔记完整核对无缺失）</li>
-        <li><b>核实方式：</b>2026-11-17 浏览器只读打开主页核实，不点赞、不评论、不私信；需求方未在原帖写明公司名的，一律记「未披露」，不把作者当需求方</li>
       </ul>
     </div>
 
@@ -195,16 +197,19 @@
         <span class="num">1</span>
         <h3>数据-Mr Li 一周连发 14 条，全是采购需求</h3>
         <p>本周最大新发现，一个人覆盖电子文本、KiCad、PCB、EDA、CNC、CAD 变更、多模态，32 条需求里他一家就占了 14 条。</p>
+        <a class="hl-btn" href="#group-10">看他这 14 条需求 →</a>
       </div>
       <div class="hl">
         <span class="num">2</span>
         <h3>Ego / 具身数据最热</h3>
         <p>睡不醒的是我连发 4 条找 Ego 供应商，哆啦梦仔又补 2 条 Ego/UMI，本周 32 条需求里 6 条与 Ego/UMI 相关。</p>
+        <a class="hl-btn" href="#group-1">看这 6 条 Ego/UMI 需求 →</a>
       </div>
       <div class="hl">
         <span class="num">3</span>
         <h3>仿真和 3D 评测数据成型</h3>
         <p>Unity/Blender、Blender RL、CNC 加工数据、CAD 设计变更，都是之前几轮没见过的新方向。</p>
+        <a class="hl-btn" href="#group-9">看仿真和 3D 评测需求 →</a>
       </div>
     </div>
   </section>
@@ -235,7 +240,7 @@
     </div>
 
     <!-- 需求组 1 -->
-    <div class="group blk">
+    <div class="group blk" id="group-1">
       <div class="group-head"><h3>需求组 1 · Ego / UMI 具身数据采集</h3><span class="meta">6 条笔记 · 2 位作者</span></div>
       <p class="group-note">去重说明：睡不醒的是我 4 条为同一需求换标题重发；哆啦梦仔 2 条（11-16 与 11-13）为同一需求换标题重发。</p>
       <div class="cards">
@@ -284,7 +289,7 @@
     </div>
 
     <!-- 需求组 2 -->
-    <div class="group blk">
+    <div class="group blk" id="group-2">
       <div class="group-head"><h3>需求组 2 · PCB 工程数据</h3><span class="meta">2 条笔记 · 同一模板重发</span></div>
       <div class="cards">
         <article class="card" data-type="pcb" data-text="睡不醒的是我 pcb 工程数据 altium 立创eda kicad 原理图 gerber 100份">
@@ -304,7 +309,7 @@
     </div>
 
     <!-- 需求组 3 -->
-    <div class="group blk">
+    <div class="group blk" id="group-3">
       <div class="group-head"><h3>需求组 3 · Seedance 2.5 视频数据</h3><span class="meta">1 条笔记</span></div>
       <div class="cards">
         <article class="card" data-type="video" data-text="数据服务 数据采集 seedance 2.5 视频 数据 思维链 一手">
@@ -323,7 +328,7 @@
     </div>
 
     <!-- 需求组 4 -->
-    <div class="group blk">
+    <div class="group blk" id="group-4">
       <div class="group-head"><h3>需求组 4 · 各类成品数据集</h3><span class="meta">1 条笔记</span></div>
       <div class="cards">
         <article class="card" data-type="dataset" data-text="数据服务 数据采集 长期求购 成品数据集 医疗 大模型轨迹 视频生成 题库">
@@ -342,7 +347,7 @@
     </div>
 
 <!-- 需求组 5 -->
-<div class="group blk">
+<div class="group blk" id="group-5">
 <div class="group-head"><h3>需求组 5 · token 方向专家标注 / 垂类 RL 数据</h3><span class="meta">1 条笔记</span></div>
 <div class="cards">
 <article class="card" data-type="rl" data-text="佐维 token 专家标注 垂类 rl 数据 长期求购 agent 大模型 标注">
@@ -362,7 +367,7 @@
 </div>
 
 <!-- 需求组 6 -->
-<div class="group blk">
+<div class="group blk" id="group-6">
 <div class="group-head"><h3>需求组 6 · 小语种 / 双工音频</h3><span class="meta">3 条笔记 · 内容高度相关</span></div>
 <div class="cards">
 <article class="card" data-type="audio" data-text="哆啦梦仔 小语种 成品 音频采集 英语 西班牙语 双工 供应商">
@@ -410,7 +415,7 @@
 </div>
 
 <!-- 需求组 7 -->
-<div class="group blk">
+<div class="group blk" id="group-7">
 <div class="group-head"><h3>需求组 7 · 数学高难题</h3><span class="meta">1 条笔记</span></div>
 <div class="cards">
 <article class="card" data-type="math" data-text="哆啦梦仔 数学 高难题 frontiermath tier 4 专家 博士 推理题 奥赛 研究生">
@@ -430,7 +435,7 @@
 </div>
 
 <!-- 需求组 8 -->
-<div class="group blk">
+<div class="group blk" id="group-8">
 <div class="group-head"><h3>需求组 8 · 计算仿真调研</h3><span class="meta">1 条笔记</span></div>
 <div class="cards">
 <article class="card" data-type="sim" data-text="aaa数商李不总 流体仿真 机械仿真 计算仿真 硕博 训练 评测 调研">
@@ -451,7 +456,7 @@
 </div>
 
 <!-- 需求组 9 -->
-<div class="group blk">
+<div class="group blk" id="group-9">
 <div class="group-head"><h3>需求组 9 · Unity / Blender 仿真与评测数据</h3><span class="meta">2 条笔记</span></div>
 <div class="cards">
 <article class="card" data-type="sim" data-text="aaa数商李不总 unity blender blenderbench 仿真 具身 强化学习 评测 demo">
@@ -485,7 +490,7 @@
 </div>
 
 <!-- 需求组 10 -->
-<div class="group blk">
+<div class="group blk" id="group-10">
 <div class="group-head"><h3>需求组 10 · KiCad / EDA / PCB 工程数据</h3><span class="meta">4 条笔记 · 作者均为 数据-Mr Li</span></div>
 <div class="cards">
 <article class="card" data-type="eda" data-text="数据-mr li kicad 原理图 pcb 元件库 多层板 工程 研发 合规授权 脱敏">
@@ -547,7 +552,7 @@
 </div>
 
 <!-- 需求组 11 -->
-<div class="group blk">
+<div class="group blk" id="group-11">
 <div class="group-head"><h3>需求组 11 · 电子文本 / 读物素材</h3><span class="meta">6 条笔记 · 作者均为 数据-Mr Li</span></div>
 <div class="cards">
 <article class="card" data-type="text" data-text="数据-mr li 读物文本 科普 人文 社科 通识 文本理解 知识类大模型 一手">
@@ -637,7 +642,7 @@
 </div>
 
 <!-- 需求组 12 -->
-<div class="group blk">
+<div class="group blk" id="group-12">
 <div class="group-head"><h3>需求组 12 · CNC 加工与 CAD 设计变更数据</h3><span class="meta">2 条笔记 · 作者均为 数据-Mr Li</span></div>
 <div class="cards">
 <article class="card" data-type="cnc" data-text="数据-mr li cnc 加工数据 图纸 3d模型 工艺方案 机床参数 质检 工时 nda 铝合金 不锈钢">
@@ -671,7 +676,7 @@
 </div>
 
 <!-- 需求组 13 -->
-<div class="group blk">
+<div class="group blk" id="group-13">
 <div class="group-head"><h3>需求组 13 · 图文视频成对多模态数据集</h3><span class="meta">1 条笔记</span></div>
 <div class="cards">
 <article class="card" data-type="multi" data-text="数据-mr li 图文 视频 成对 多模态 数据集 caption 标注 后训练 评测 harbor workspace">
@@ -691,7 +696,7 @@
 </div>
 
 <!-- 需求组 14 -->
-<div class="group blk">
+<div class="group blk" id="group-14">
 <div class="group-head"><h3>需求组 14 · 高校 STEM 习题教材</h3><span class="meta">1 条笔记</span></div>
 <div class="cards">
 <article class="card" data-type="stem" data-text="数据-mr li 高校 stem 习题 教材 理工科 课后练习 复习题目 中英文 一手">
@@ -851,7 +856,7 @@
 
   <footer>
     <p><b>小红书采购需求扫描 — 32 个主页实测结果（周期 2026-11-10 至 2026-11-17）</b></p>
-    <p>核实日期 2026-11-17 · 统计周期 2026-11-10 至 2026-11-17 · 方式：浏览器只读扫描 · 范围：32 个监控账号全部已扫描 · 页面为发布时快照，不会自行更新。</p>
+    <p>统计周期 2026-11-10 至 2026-11-17 · 范围：32 个监控账号全部已扫描 · 页面为发布时快照，不会自行更新。</p>
     <p>笔记链接打不开（404）时，可通过作者主页按日期找到该笔记，因为小红书的链接有时效 token。</p>
   </footer>
 </div>
