@@ -72,6 +72,8 @@
   .hl-btn{display:inline-flex;align-items:center;gap:6px;margin-top:14px;align-self:flex-start;font-size:13.5px;font-weight:700;color:var(--red-ink);background:var(--red-soft);border:1px solid color-mix(in srgb, var(--red) 25%, transparent);padding:7px 12px;border-radius:999px;text-decoration:none;min-height:36px}
   .hl-btn:hover{text-decoration:underline}
   .group.blk{scroll-margin-top:24px}
+  .flat-list{margin-top:8px}
+  .card[id]{scroll-margin-top:24px}
   /* Groups */
   .group-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px;margin:30px 0 6px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
   .group-head:first-of-type{margin-top:8px}
@@ -168,7 +170,7 @@
     <h1>小红书采购需求扫描</h1>
     <p class="lead">统计周期 <strong>2026-11-10 至 2026-11-17</strong>，只看这一周内新发布的笔记。</p>
     <p class="update-line">每周三、周日 10:30 更新本周内容</p>
-    <p class="datastrip"><span>32/32</span> 个主页已扫描 · 监控账号本周 <span>50 条</span>笔记 · 其他账号新需求 <span>22 条</span> · <span>54 条</span>真实采购需求（14 个需求组）· 监控账号 <span>18 条</span>已筛掉</p>
+    <p class="datastrip"><span>32/32</span> 个主页已扫描 · 监控账号本周 <span>50 条</span>笔记 · 其他账号新需求 <span>22 条</span> · <span>54 条</span>真实采购需求· 监控账号 <span>18 条</span>已筛掉</p>
 
     <div class="truths" aria-label="本次范围说明">
       <h2>先说清本次范围</h2>
@@ -182,7 +184,7 @@
       <div class="ds"><div class="n">32 / 32</div><div class="l">本次已扫描主页 · 全部扫完</div></div>
       <div class="ds"><div class="n">50 条</div><div class="l">监控账号本周的笔记（加上其他账号 22 条，本周共 72 条笔记）</div></div>
       <div class="ds"><div class="n">54 条</div><div class="l">真实采购需求笔记</div></div>
-      <div class="ds"><div class="n">14 个</div><div class="l">去重后的需求组</div></div>
+      <div class="ds"><div class="n">50 张</div><div class="l">需求卡片（54 条笔记去重合并后）</div></div>
       <div class="ds"><div class="n">10 个</div><div class="l">本周有新笔记的主页</div></div>
       <div class="ds"><div class="n">22 个</div><div class="l">本周 0 条的主页</div></div>
       <div class="ds"><div class="n">18 条</div><div class="l">被筛掉（1 条设备、15 条行业分享、1 条招聘、1 条供应商广告）</div></div>
@@ -190,7 +192,7 @@
     </div>
 
     <nav class="jump" aria-label="快速跳转">
-      <a href="#highlights">本周值得关注</a><a href="#results">需求清单（14 组）</a><a href="#conclusion">怎么看这批结果</a><a href="#watchlist">32 个账号清单</a>
+      <a href="#highlights">本周值得关注</a><a href="#results">需求清单</a><a href="#conclusion">怎么看这批结果</a><a href="#watchlist">32 个账号清单</a>
     </nav>
   </header>
 
@@ -204,27 +206,27 @@
         <span class="num">1</span>
         <h3>数据-Mr Li 一周连发 14 条，全是采购需求</h3>
         <p>本周最大新发现，一个人覆盖电子文本、KiCad、PCB、EDA、CNC、CAD 变更、多模态，32 条需求里他一家就占了 14 条。</p>
-        <a class="hl-btn" href="#group-10">看他这 14 条需求 →</a>
+        <a class="hl-btn" href="#card-mrli">看他这 14 条需求 →</a>
       </div>
       <div class="hl">
         <span class="num">2</span>
         <h3>Ego / 具身数据最热</h3>
         <p>睡不醒的是我连发 4 条找 Ego 供应商，哆啦梦仔又补 2 条 Ego/UMI，本周 32 条需求里 6 条与 Ego/UMI 相关。</p>
-        <a class="hl-btn" href="#group-1">看这 6 条 Ego/UMI 需求 →</a>
+        <a class="hl-btn" href="#card-ego">看这 6 条 Ego/UMI 需求 →</a>
       </div>
       <div class="hl">
         <span class="num">3</span>
         <h3>仿真和 3D 评测数据成型</h3>
         <p>Unity/Blender、Blender RL、CNC 加工数据、CAD 设计变更，都是之前几轮没见过的新方向。</p>
-        <a class="hl-btn" href="#group-9">看仿真和 3D 评测需求 →</a>
+        <a class="hl-btn" href="#card-sim">看仿真和 3D 评测需求 →</a>
       </div>
     </div>
   </section>
 
   <section id="results">
     <div class="sec-head">
-      <h2>需求清单 · 14 个需求组（2026-11-10 至 2026-11-17）</h2>
-      <p>按需求组分组呈现：本周共 54 条真实采购需求笔记——监控账号 32 条加其他账号 22 条；其他账号的需求已按数据类型并入相应需求组，卡片上标有「其他账号」，去重后共 14 个需求组。同一作者、同一需求换说法重复发布的，已合并在同一组里并标出重复关系，不按多条独立需求计数。每张卡片下方有原文链接。</p>
+      <h2>需求清单（2026-11-10 至 2026-11-17）</h2>
+      <p>本周共 54 条真实采购需求笔记——监控账号 32 条加其他账号 22 条，需求卡片直接平铺排列；其他账号的需求卡片上标有「其他账号」。同一作者、同一需求换说法重复发布的，已合并为一张卡片并标出重复关系，不按多条独立需求计数；一张笔记涉及多个需求的，保留多个分类标签，点任一对应分类筛选都会显示这张卡片。每张卡片下方有原文链接。</p>
       <p class="link-note">提示：小红书笔记链接偶尔会因临时令牌失效显示 404，遇到时点该作者的主页链接进去，再按日期找那条笔记即可。</p>
     </div>
 
@@ -252,12 +254,8 @@
       <button class="fbtn" data-f="stem">STEM 习题教材</button>
     </div>
 
-    <!-- 需求组 1 -->
-    <div class="group blk" id="group-1">
-      <div class="group-head"><h3>需求组 1 · Ego / UMI 具身数据采集</h3><span class="meta">9 条笔记 · 5 位作者</span></div>
-      <p class="group-note">去重说明：睡不醒的是我 4 条为同一需求换标题重发；哆啦梦仔 2 条（11-16 与 11-13）为同一需求换标题重发。</p>
-      <div class="cards">
-        <article class="card" data-type="ego embodied" data-text="睡不醒的是我 ego 第一视角 双目 视频 数据采集 供应商 招募 规模化">
+    <div class="cards flat-list" id="demand-list">
+<article class="card" id="card-ego" data-type="ego embodied" data-text="睡不醒的是我 ego 第一视角 双目 视频 数据采集 供应商 招募 规模化">
           <div class="card-top"><h4>Ego 数据采集供应商招募 — 同一需求本周发了 4 条</h4><span class="tags"><span class="tag tag-type">Ego 数据采集</span><span class="tag tag-dup">作者重复 ×4</span></span></div>
           <dl class="fields">
             <dt>作者</dt><dd><a class="author-link" href="https://xhslink.cn/o/9swvnfCImTe" target="_blank" rel="noopener noreferrer"><b>睡不醒的是我</b></a></dd>
@@ -270,8 +268,7 @@
             <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af2ba12000000001802818e" target="_blank" rel="noopener noreferrer">2026-11-11 · 寻找Ego数据采集供应商，求合作！ ↗</a><a href="https://www.xiaohongshu.com/explore/6af5680e000000002501fb55" target="_blank" rel="noopener noreferrer">2026-11-13 · 积极寻找Ego数据采集供应商中 ↗</a><a href="https://www.xiaohongshu.com/explore/6af6c0c9000000002a02bc42" target="_blank" rel="noopener noreferrer">2026-11-14 · 招募Ego数据采集供应商｜第一视角双目 ↗</a><a href="https://www.xiaohongshu.com/explore/6afad440000000002b013756" target="_blank" rel="noopener noreferrer">2026-11-17 · 寻找靠谱的Ego数据采集供应商|设备商 ↗</a></div></dd>
           </dl>
         </article>
-
-        <article class="card" data-type="ego embodied" data-text="哆啦梦仔 ego umi 单目镜 双目镜 具身 头部 夹爪 传感器 成品存量">
+<article class="card" data-type="ego embodied" data-text="哆啦梦仔 ego umi 单目镜 双目镜 具身 头部 夹爪 传感器 成品存量">
           <div class="card-top"><h4>项目一：Ego类单目镜和双目镜类视频</h4><span class="tags"><span class="tag tag-type">Ego / UMI 具身数据</span><span class="tag tag-dup">同一需求重发</span></span></div>
           <dl class="fields">
             <dt>作者</dt><dd><a class="author-link" href="https://xhslink.cn/o/9wG143ZuPbd" target="_blank" rel="noopener noreferrer"><b>哆啦梦仔</b></a></dd>
@@ -284,8 +281,7 @@
             <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6afa6324000000002903d376" target="_blank" rel="noopener noreferrer">项目一：Ego类单目镜和双目镜类视频 ↗</a></div></dd>
           </dl>
         </article>
-
-        <article class="card" data-type="ego embodied" data-text="哆啦梦仔 ego umi 数据库存 供应商 具身 成品存量 采集">
+<article class="card" data-type="ego embodied" data-text="哆啦梦仔 ego umi 数据库存 供应商 具身 成品存量 采集">
           <div class="card-top"><h4>寻找EGO和UMI数据库存的供应商</h4><span class="tags"><span class="tag tag-type">Ego / UMI 具身数据</span><span class="tag tag-dup">同一需求重发</span></span></div>
           <dl class="fields">
             <dt>作者</dt><dd><a class="author-link" href="https://xhslink.cn/o/9wG143ZuPbd" target="_blank" rel="noopener noreferrer"><b>哆啦梦仔</b></a></dd>
@@ -334,14 +330,7 @@
 <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af6c308000000002b025bbb" target="_blank" rel="noopener noreferrer">具身智能数据采集团队来聊聊 ↗</a></div></dd>
 </dl>
 </article>
-      </div>
-    </div>
-
-    <!-- 需求组 2 -->
-    <div class="group blk" id="group-2">
-      <div class="group-head"><h3>需求组 2 · PCB 工程数据</h3><span class="meta">2 条笔记 · 同一模板重发</span></div>
-      <div class="cards">
-        <article class="card" data-type="pcb" data-text="睡不醒的是我 pcb 工程数据 altium 立创eda kicad 原理图 gerber 100份">
+<article class="card" data-type="pcb" data-text="睡不醒的是我 pcb 工程数据 altium 立创eda kicad 原理图 gerber 100份">
           <div class="card-top"><h4>PCB 工程数据采购 — 同一规格本周发了 2 条</h4><span class="tags"><span class="tag tag-type">PCB 工程数据</span><span class="tag tag-dup">作者重复 ×2</span></span></div>
           <dl class="fields">
             <dt>作者</dt><dd><a class="author-link" href="https://xhslink.cn/o/9swvnfCImTe" target="_blank" rel="noopener noreferrer"><b>睡不醒的是我</b></a></dd>
@@ -354,14 +343,7 @@
             <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af17c7b000000003402a37e" target="_blank" rel="noopener noreferrer">2026-11-10 · 招高校代理人｜高价采购真实PCB工程数据 ↗</a><a href="https://www.xiaohongshu.com/explore/6af2b919000000002a02e5e9" target="_blank" rel="noopener noreferrer">2026-11-11 · 上万份也收：长期采购真实PCB工程数据 ↗</a></div></dd>
           </dl>
         </article>
-      </div>
-    </div>
-
-    <!-- 需求组 3 -->
-    <div class="group blk" id="group-3">
-      <div class="group-head"><h3>需求组 3 · Seedance 2.5 视频数据</h3><span class="meta">1 条笔记</span></div>
-      <div class="cards">
-        <article class="card" data-type="video" data-text="数据服务 数据采集 seedance 2.5 视频 数据 思维链 一手">
+<article class="card" data-type="video" data-text="数据服务 数据采集 seedance 2.5 视频 数据 思维链 一手">
           <div class="card-top"><h4>求购 seedance 2.5 数据</h4><span class="tags"><span class="tag tag-type">视频生成数据</span><span class="tag tag-new">本周新发布</span></span></div>
           <dl class="fields">
             <dt>作者</dt><dd><a class="author-link" href="https://xhslink.cn/o/9XC9nTOyzbO" target="_blank" rel="noopener noreferrer"><b>数据服务</b></a>（监控清单中记为「数据采集」）</dd>
@@ -373,14 +355,7 @@
             <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6afa7e87000000002a01eedb" target="_blank" rel="noopener noreferrer">求购 seedance 2.5 数据 ↗</a></div></dd>
           </dl>
         </article>
-      </div>
-    </div>
-
-    <!-- 需求组 4 -->
-    <div class="group blk" id="group-4">
-      <div class="group-head"><h3>需求组 4 · 各类成品数据集</h3><span class="meta">5 条笔记</span></div>
-      <div class="cards">
-        <article class="card" data-type="dataset" data-text="数据服务 数据采集 长期求购 成品数据集 医疗 大模型轨迹 视频生成 题库">
+<article class="card" data-type="dataset" data-text="数据服务 数据采集 长期求购 成品数据集 医疗 大模型轨迹 视频生成 题库">
           <div class="card-top"><h4>长期求购各类成品数据集</h4><span class="tags"><span class="tag tag-type">成品数据集</span><span class="tag tag-new">本周新发布</span></span></div>
           <dl class="fields">
             <dt>作者</dt><dd><a class="author-link" href="https://xhslink.cn/o/9XC9nTOyzbO" target="_blank" rel="noopener noreferrer"><b>数据服务</b></a>（监控清单中记为「数据采集」）</dd>
@@ -440,13 +415,6 @@
 <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af27342000000001603c45b" target="_blank" rel="noopener noreferrer">数据采集供应商私信我 ↗</a></div></dd>
 </dl>
 </article>
-      </div>
-    </div>
-
-<!-- 需求组 5 -->
-<div class="group blk" id="group-5">
-<div class="group-head"><h3>需求组 5 · token 方向专家标注 / 垂类 RL 数据</h3><span class="meta">6 条笔记</span></div>
-<div class="cards">
 <article class="card" data-type="expert rl" data-text="佐维 token 专家标注 垂类 rl 数据 长期求购 agent 大模型 标注">
 <div class="card-top"><h4>数据 data market🏔️</h4><span class="tags"><span class="tag tag-type">专家标注 / RL 数据</span><span class="tag tag-new">本周新发布</span></span></div>
 <dl class="fields">
@@ -520,13 +488,6 @@
 <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af8d2f5000000000d009b1b" target="_blank" rel="noopener noreferrer">RL env 公司（头部模厂采购合作）寻数商长期 ↗</a></div></dd>
 </dl>
 </article>
-</div>
-</div>
-
-<!-- 需求组 6 -->
-<div class="group blk" id="group-6">
-<div class="group-head"><h3>需求组 6 · 小语种 / 双工音频</h3><span class="meta">3 条笔记 · 内容高度相关</span></div>
-<div class="cards">
 <article class="card" data-type="audio" data-text="哆啦梦仔 小语种 成品 音频采集 英语 西班牙语 双工 供应商">
 <div class="card-top"><h4>建联供应商啦，有小语种成品和有音频采集经验的团队或公司可以联系我</h4><span class="tags"><span class="tag tag-type">小语种音频</span><span class="tag tag-new">本周新发布</span></span></div>
 <dl class="fields">
@@ -536,11 +497,10 @@
 <dt>数据类型</dt><dd>小语种成品数据、音频采集（英语、西班牙语、双工）</dd>
 <dt>Spec</dt><dd><div class="spec">寻有小语种成品数据、有音频采集经验的团队或公司；涉及英语、西班牙语、双工音频。</div></dd>
 <dt>采购量级</dt><dd><b>未说明</b></dd>
-<dt>查重状态</dt><dd><b>内容高度相关</b> — 与本组另 2 条音频需求内容高度相关</dd>
+<dt>查重状态</dt><dd><b>内容高度相关</b> — 与另 2 条音频需求内容高度相关</dd>
 <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6afbfa71000000001601850b" target="_blank" rel="noopener noreferrer">建联供应商啦，有小语种成品和有音频采集经验的团队或公司可以联系我 ↗</a></div></dd>
 </dl>
 </article>
-
 <article class="card" data-type="audio" data-text="哆啦梦仔 多语言 小语种 英文 音频 网络聊天室 双人通话 客服电话录音 双音轨">
 <div class="card-top"><h4>欢迎多语言业务供应商老板建联</h4><span class="tags"><span class="tag tag-type">小语种音频</span><span class="tag tag-new">本周新发布</span></span></div>
 <dl class="fields">
@@ -550,11 +510,10 @@
 <dt>数据类型</dt><dd>小语种（英文）音频成品 — 网络聊天室/双人通话、真实客服电话录音（双音轨）</dd>
 <dt>Spec</dt><dd><div class="spec">寻海外小语种成品数据：网络聊天室/双人通话、真实客服电话录音（双音轨）；语种：英文。</div></dd>
 <dt>采购量级</dt><dd><b>未说明</b></dd>
-<dt>查重状态</dt><dd><b>内容高度相关</b> — 与本组另 2 条音频需求内容高度相关</dd>
+<dt>查重状态</dt><dd><b>内容高度相关</b> — 与另 2 条音频需求内容高度相关</dd>
 <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6afa6566000000002a038557" target="_blank" rel="noopener noreferrer">欢迎多语言业务供应商老板建联 ↗</a></div></dd>
 </dl>
 </article>
-
 <article class="card" data-type="audio" data-text="哆啦梦仔 音频 双工 分轨 自然对话 网络聊天室 双人通话 客服电话录音 大量">
 <div class="card-top"><h4>有音频资源的供应商可以联系我</h4><span class="tags"><span class="tag tag-type">小语种音频</span><span class="tag tag-new">本周新发布</span></span></div>
 <dl class="fields">
@@ -564,17 +523,10 @@
 <dt>数据类型</dt><dd>大量双工音频资源 — 分轨自然对话、网络聊天室/双人通话、真实客服电话录音</dd>
 <dt>Spec</dt><dd><div class="spec">寻大量双工音频资源，定制项目和成品项目均可；类型：分轨自然对话、网络聊天室/双人通话、真实客服电话录音。</div></dd>
 <dt>采购量级</dt><dd><b>仅写“大量”</b>，定制项目和成品项目均可</dd>
-<dt>查重状态</dt><dd><b>内容高度相关</b> — 与本组另 2 条音频需求内容高度相关</dd>
+<dt>查重状态</dt><dd><b>内容高度相关</b> — 与另 2 条音频需求内容高度相关</dd>
 <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af17b010000000036014d4d" target="_blank" rel="noopener noreferrer">有音频资源的供应商可以联系我 ↗</a></div></dd>
 </dl>
 </article>
-</div>
-</div>
-
-<!-- 需求组 7 -->
-<div class="group blk" id="group-7">
-<div class="group-head"><h3>需求组 7 · 数学高难题</h3><span class="meta">1 条笔记</span></div>
-<div class="cards">
 <article class="card" data-type="math" data-text="哆啦梦仔 数学 高难题 frontiermath tier 4 专家 博士 推理题 奥赛 研究生">
 <div class="card-top"><h4>求有数学高难题资源的专家或博士</h4><span class="tags"><span class="tag tag-type">数学高难题</span><span class="tag tag-new">本周新发布</span></span></div>
 <dl class="fields">
@@ -588,13 +540,6 @@
 <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af3e8ab000000002c00ee5b" target="_blank" rel="noopener noreferrer">求有数学高难题资源的专家或博士 ↗</a></div></dd>
 </dl>
 </article>
-</div>
-</div>
-
-<!-- 需求组 8 -->
-<div class="group blk" id="group-8">
-<div class="group-head"><h3>需求组 8 · 计算仿真调研</h3><span class="meta">1 条笔记</span></div>
-<div class="cards">
 <article class="card" data-type="sim" data-text="aaa数商李不总 流体仿真 机械仿真 计算仿真 硕博 训练 评测 调研">
 <div class="card-top"><h4>有没有做流体/机械仿真的同学🙋</h4><span class="tags"><span class="tag tag-type">计算仿真</span></span></div>
 <dl class="fields">
@@ -609,14 +554,7 @@
 <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6afa6c94000000002a01efa8" target="_blank" rel="noopener noreferrer">有没有做流体/机械仿真的同学🙋 ↗</a></div></dd>
 </dl>
 </article>
-</div>
-</div>
-
-<!-- 需求组 9 -->
-<div class="group blk" id="group-9">
-<div class="group-head"><h3>需求组 9 · Unity / Blender 仿真与评测数据</h3><span class="meta">4 条笔记</span></div>
-<div class="cards">
-<article class="card" data-type="sim eval" data-text="aaa数商李不总 unity blender blenderbench 仿真 具身 强化学习 评测 demo">
+<article class="card" id="card-sim" data-type="sim eval" data-text="aaa数商李不总 unity blender blenderbench 仿真 具身 强化学习 评测 demo">
 <div class="card-top"><h4>寻unity和blender数据供应商！</h4><span class="tags"><span class="tag tag-type">Unity / Blender 评测数据</span></span></div>
 <dl class="fields">
 <dt>作者</dt><dd><a class="author-link" href="https://xhslink.cn/o/eUpjjxyypL" target="_blank" rel="noopener noreferrer"><b>AAA数商李不总</b></a></dd>
@@ -629,7 +567,6 @@
 <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af5b70f000000002b03bd1a" target="_blank" rel="noopener noreferrer">寻unity和blender数据供应商！ ↗</a></div></dd>
 </dl>
 </article>
-
 <article class="card" data-type="sim eval" data-text="aaa数商李不总 blender rl 强化学习 数据 大厂">
 <div class="card-top"><h4>大量收blender rl的数据</h4><span class="tags"><span class="tag tag-type">Blender RL 数据</span><span class="tag tag-new">本周新发布</span></span></div>
 <dl class="fields">
@@ -667,14 +604,7 @@
 <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af2ca1e000000002b01bdb0" target="_blank" rel="noopener noreferrer">500一条招募供应商 ↗</a></div></dd>
 </dl>
 </article>
-</div>
-</div>
-
-<!-- 需求组 10 -->
-<div class="group blk" id="group-10">
-<div class="group-head"><h3>需求组 10 · KiCad / EDA / PCB 工程数据</h3><span class="meta">4 条笔记 · 作者均为 数据-Mr Li</span></div>
-<div class="cards">
-<article class="card" data-type="kicad" data-text="数据-mr li kicad 原理图 pcb 元件库 多层板 工程 研发 合规授权 脱敏">
+<article class="card" id="card-mrli" data-type="kicad" data-text="数据-mr li kicad 原理图 pcb 元件库 多层板 工程 研发 合规授权 脱敏">
 <div class="card-top"><h4>寻kicad一手供应商</h4><span class="tags"><span class="tag tag-type">KiCad 工程数据</span><span class="tag tag-new">本周新发布</span></span></div>
 <dl class="fields">
 <dt>作者</dt><dd><a class="author-link" href="https://xhslink.cn/o/6lpL1K4pv22" target="_blank" rel="noopener noreferrer"><b>数据-Mr Li</b></a></dd>
@@ -687,7 +617,6 @@
 <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6afbb72e000000002b01dc75" target="_blank" rel="noopener noreferrer">寻kicad一手供应商 ↗</a></div></dd>
 </dl>
 </article>
-
 <article class="card" data-type="pcb" data-text="数据-mr li pcb 工程文件 电路板 研发 硬件仿真 电路方案验证 工艺参数">
 <div class="card-top"><h4>我需要采购，急！！</h4><span class="tags"><span class="tag tag-type">PCB 工程数据</span><span class="tag tag-new">本周新发布</span></span></div>
 <dl class="fields">
@@ -701,7 +630,6 @@
 <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af7c6d7000000002203afcc" target="_blank" rel="noopener noreferrer">我需要采购，急！！ ↗</a></div></dd>
 </dl>
 </article>
-
 <article class="card" data-type="eda" data-text="数据-mr li eda 工程资料 芯片 集成电路 研发调试 文件链路 脱敏">
 <div class="card-top"><h4>急需采购！！！</h4><span class="tags"><span class="tag tag-type">EDA 工程数据</span><span class="tag tag-new">本周新发布</span></span></div>
 <dl class="fields">
@@ -715,7 +643,6 @@
 <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af7c7930000000018025b2c" target="_blank" rel="noopener noreferrer">急需采购！！！ ↗</a></div></dd>
 </dl>
 </article>
-
 <article class="card" data-type="kicad" data-text="数据-mr li kicad 工程源文件 电路 硬件 研发调试 器件参数 一手">
 <div class="card-top"><h4>找一手供应商</h4><span class="tags"><span class="tag tag-type">KiCad 工程数据</span><span class="tag tag-new">本周新发布</span></span></div>
 <dl class="fields">
@@ -729,13 +656,6 @@
 <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af7c612000000002303cdb6" target="_blank" rel="noopener noreferrer">找一手供应商 ↗</a></div></dd>
 </dl>
 </article>
-</div>
-</div>
-
-<!-- 需求组 11 -->
-<div class="group blk" id="group-11">
-<div class="group-head"><h3>需求组 11 · 电子文本 / 读物素材</h3><span class="meta">6 条笔记 · 作者均为 数据-Mr Li</span></div>
-<div class="cards">
 <article class="card" data-type="text reading" data-text="数据-mr li 读物文本 科普 人文 社科 通识 文本理解 知识类大模型 一手">
 <div class="card-top"><h4>我需要源头供应商！</h4><span class="tags"><span class="tag tag-type">电子文本 / 读物</span><span class="tag tag-new">本周新发布</span></span></div>
 <dl class="fields">
@@ -749,7 +669,6 @@
 <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6afbb57c000000001603feac" target="_blank" rel="noopener noreferrer">我需要源头供应商！ ↗</a></div></dd>
 </dl>
 </article>
-
 <article class="card" data-type="text" data-text="数据-mr li 叙事故事 文本素材 言情 悬疑 玄幻 都市 短篇 nlp 大模型">
 <div class="card-top"><h4>有合规资源的源头来</h4><span class="tags"><span class="tag tag-type">电子文本 / 读物</span><span class="tag tag-new">本周新发布</span></span></div>
 <dl class="fields">
@@ -763,7 +682,6 @@
 <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6afbb4a9000000002903c191" target="_blank" rel="noopener noreferrer">有合规资源的源头来 ↗</a></div></dd>
 </dl>
 </article>
-
 <article class="card" data-type="text" data-text="数据-mr li 长文本素材 多领域 模型学习 内容理解 批量交付 语料">
 <div class="card-top"><h4>急需供应方！！！</h4><span class="tags"><span class="tag tag-type">电子文本 / 读物</span><span class="tag tag-new">本周新发布</span></span></div>
 <dl class="fields">
@@ -777,7 +695,6 @@
 <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6afa642f000000002b02af15" target="_blank" rel="noopener noreferrer">急需供应方！！！ ↗</a></div></dd>
 </dl>
 </article>
-
 <article class="card" data-type="text reading" data-text="数据-mr li 电子书 中英文 电子读物 学术 理工 通识 科研学习 知识库">
 <div class="card-top"><h4>急需电子书数据采购！！！</h4><span class="tags"><span class="tag tag-type">电子文本 / 读物</span><span class="tag tag-new">本周新发布</span></span></div>
 <dl class="fields">
@@ -791,7 +708,6 @@
 <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af7c84f000000002903d742" target="_blank" rel="noopener noreferrer">急需电子书数据采购！！！ ↗</a></div></dd>
 </dl>
 </article>
-
 <article class="card" data-type="text reading" data-text="数据-mr li 电子书 文本数据集 原文 后训练 知识库构建 脱敏 定向筛选">
 <div class="card-top"><h4>长期求购电子书文本数据集｜寻稳定供应商</h4><span class="tags"><span class="tag tag-type">电子文本 / 读物</span><span class="tag tag-new">本周新发布</span></span></div>
 <dl class="fields">
@@ -805,7 +721,6 @@
 <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af529bb0000000024030577" target="_blank" rel="noopener noreferrer">长期求购电子书文本数据集｜寻稳定供应商 ↗</a></div></dd>
 </dl>
 </article>
-
 <article class="card" data-type="text" data-text="数据-mr li 电子文本素材 中英文 一手源头 量大优先 稳定存量 长期合作">
 <div class="card-top"><h4>长期找电子文本素材一手源头｜中英文都收✨</h4><span class="tags"><span class="tag tag-type">电子文本 / 读物</span><span class="tag tag-new">本周新发布</span></span></div>
 <dl class="fields">
@@ -819,13 +734,6 @@
 <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af3cf36000000002b028c87" target="_blank" rel="noopener noreferrer">长期找电子文本素材一手源头｜中英文都收✨ ↗</a></div></dd>
 </dl>
 </article>
-</div>
-</div>
-
-<!-- 需求组 12 -->
-<div class="group blk" id="group-12">
-<div class="group-head"><h3>需求组 12 · CNC 加工与 CAD 设计变更数据</h3><span class="meta">4 条笔记 · 3 位作者</span></div>
-<div class="cards">
 <article class="card" data-type="cnc" data-text="数据-mr li cnc 加工数据 图纸 3d模型 工艺方案 机床参数 质检 工时 nda 铝合金 不锈钢">
 <div class="card-top"><h4>寻找 CNC 加工数据源头供应商</h4><span class="tags"><span class="tag tag-type">CNC 加工数据</span><span class="tag tag-new">本周新发布</span></span></div>
 <dl class="fields">
@@ -839,7 +747,6 @@
 <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af677620000000024032233" target="_blank" rel="noopener noreferrer">寻找 CNC 加工数据源头供应商 ↗</a></div></dd>
 </dl>
 </article>
-
 <article class="card" data-type="cad" data-text="数据-mr li cad 设计变更 数据集 失效指标 仿真文件 变更说明 受力零件 保密协议">
 <div class="card-top"><h4>求CAD真实设计变更数据｜找源头工程团队</h4><span class="tags"><span class="tag tag-type">CAD 设计变更数据</span><span class="tag tag-new">本周新发布</span></span></div>
 <dl class="fields">
@@ -877,13 +784,6 @@
 <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af7b8d2000000002a02d3ab" target="_blank" rel="noopener noreferrer">CAD厂商 数采供应商 零部件加工 ↗</a></div></dd>
 </dl>
 </article>
-</div>
-</div>
-
-<!-- 需求组 13 -->
-<div class="group blk" id="group-13">
-<div class="group-head"><h3>需求组 13 · 图文视频成对多模态数据集</h3><span class="meta">7 条笔记</span></div>
-<div class="cards">
 <article class="card" data-type="multi" data-text="数据-mr li 图文 视频 成对 多模态 数据集 caption 标注 后训练 评测 harbor workspace">
 <div class="card-top"><h4>求购图文视频成对多模态数据集｜寻长期稳定</h4><span class="tags"><span class="tag tag-type">多模态数据集</span><span class="tag tag-new">本周新发布</span></span></div>
 <dl class="fields">
@@ -969,13 +869,6 @@
 <dt>原文链接</dt><dd><div class="orig-links"><a href="https://www.xiaohongshu.com/explore/6af51689000000002a024265" target="_blank" rel="noopener noreferrer">数据需求，有数据资源的的砸过来 ↗</a></div></dd>
 </dl>
 </article>
-</div>
-</div>
-
-<!-- 需求组 14 -->
-<div class="group blk" id="group-14">
-<div class="group-head"><h3>需求组 14 · 高校 STEM 习题教材</h3><span class="meta">1 条笔记</span></div>
-<div class="cards">
 <article class="card" data-type="stem" data-text="数据-mr li 高校 stem 习题 教材 理工科 课后练习 复习题目 中英文 一手">
 <div class="card-top"><h4>蹲高校STEM习题、教材一手资源供应商✨</h4><span class="tags"><span class="tag tag-type">STEM 习题教材</span><span class="tag tag-new">本周新发布</span></span></div>
 <dl class="fields">
@@ -990,12 +883,11 @@
 </dl>
 </article>
 </div>
-</div>
 
     <!-- 本周筛掉的 -->
     <div class="group blk">
       <div class="group-head"><h3>本周筛掉的</h3><span class="meta">18 条 · 不计入需求</span></div>
-      <p class="group-note">设备采购 1 条、行业分享 15 条、招聘类 1 条、供应商广告 1 条，均不列入上面的 14 个需求组。</p>
+      <p class="group-note">设备采购 1 条、行业分享 15 条、招聘类 1 条、供应商广告 1 条，均不列入上面的需求清单。</p>
       <div class="cards">
         <article class="card" data-type="filtered" data-text="睡不醒的是我 uwb 麦克风 设备 厂家 筛掉">
           <div class="card-top"><h4>急需 UWB 麦克风</h4><span class="tags"><span class="tag tag-filter">已筛掉 · 非数据需求</span></span></div>
