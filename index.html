@@ -60,6 +60,27 @@
   section{margin-top:40px}
   .sec-head{margin-bottom:16px}
   .sec-head h2{font-family:"Songti SC","STSong","Noto Serif CJK SC","Source Han Serif SC",serif;font-size:24px;margin:0 0 6px}
+  .head-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px}
+  .head-row h2{margin:0}
+  .view-toggle{font-family:inherit;font-size:13.5px;font-weight:700;color:var(--red-ink);background:var(--red-soft);border:1px solid color-mix(in srgb, var(--red) 25%, transparent);padding:8px 16px;border-radius:999px;cursor:pointer;min-height:36px;white-space:nowrap}
+  .view-toggle:hover{text-decoration:underline}
+  .view-toggle[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  /* Demand table view */
+  .dtable-wrap{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface);margin-top:8px}
+  table.dtable{width:100%;border-collapse:collapse;table-layout:fixed}
+  .dtable th,.dtable td{padding:10px 12px;font-size:13.5px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);overflow-wrap:anywhere;word-break:break-word;line-break:anywhere}
+  .dtable thead th{background:var(--surface2);font-size:13px;color:var(--muted);font-weight:800;border-bottom:2px solid var(--line)}
+  .dtable tbody tr:last-child td{border-bottom:0}
+  .dtable td.dtitle{font-weight:700;color:var(--ink)}
+  .dtable td.dtitle.merged-cat{vertical-align:middle;text-align:center;font-size:15px;background:var(--surface2)}
+  .dtable td.dspec{color:var(--ink2);line-height:1.65}
+  .dtable td.dbuyer{font-weight:700;color:var(--ink)}
+  .dtable td.dno{color:var(--muted);font-weight:700}
+  .dtable .row-other{margin-left:6px;vertical-align:1px}
+  .dtable .orig-links a{font-size:13px}
+  .dtable td.dhome a{font-size:13px;font-weight:600;text-decoration:none}
+  .dtable td.dhome a:hover{text-decoration:underline}
+  @media(max-width:700px){.dtable th,.dtable td{padding:8px;font-size:12.5px}.dtable .orig-links a{font-size:12px}.dtable td.dhome a{font-size:12px}}
   .sec-head p{margin:0;color:var(--ink2);font-size:15px;max-width:800px}
   /* Highlights */
   .hl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
@@ -225,7 +246,10 @@
 
   <section id="results">
     <div class="sec-head">
-      <h2>需求清单（2026-11-10 至 2026-11-17）</h2>
+      <div class="head-row">
+        <h2>需求清单（2026-11-10 至 2026-11-17）</h2>
+        <button type="button" class="view-toggle" id="viewToggle" aria-pressed="false">查看表格视图</button>
+      </div>
       <p>本周共 54 条真实采购需求笔记——监控账号 32 条加其他账号 22 条，需求卡片直接平铺排列；其他账号的需求卡片上标有「其他账号」。同一作者、同一需求换说法重复发布的，已合并为一张卡片并标出重复关系，不按多条独立需求计数；一张笔记涉及多个需求的，保留多个分类标签，点任一对应分类筛选都会显示这张卡片。每张卡片下方有原文链接。</p>
       <p class="link-note">提示：小红书笔记链接偶尔会因临时令牌失效显示 404，遇到时点该作者的主页链接进去，再按日期找那条笔记即可。</p>
     </div>
@@ -884,6 +908,14 @@
 </article>
 </div>
 
+    <div class="dtable-wrap" id="dtable-wrap" style="display:none">
+      <table class="dtable" aria-label="需求清单表格视图">
+        <colgroup><col style="width:18%"><col style="width:31%"><col style="width:11%"><col style="width:5%"><col style="width:17%"><col style="width:18%"></colgroup>
+        <thead><tr><th scope="col">需求</th><th scope="col">Spec</th><th scope="col">需求方</th><th scope="col">序号</th><th scope="col">发布链接</th><th scope="col">主页链接</th></tr></thead>
+        <tbody id="dtbody"></tbody>
+      </table>
+    </div>
+
     <!-- 本周筛掉的 -->
     <div class="group blk">
       <div class="group-head"><h3>本周筛掉的</h3><span class="meta">18 条 · 不计入需求</span></div>
@@ -986,6 +1018,7 @@
   var q = document.getElementById('q');
   var btns = Array.prototype.slice.call(document.querySelectorAll('.fbtn'));
   var filter = 'all';
+  var updateDemandMerge = null;
   function apply(){
     var kw = (q.value || '').trim().toLowerCase();
     var shown = 0;
@@ -996,6 +1029,7 @@
       var okQ = !kw || hay.indexOf(kw) !== -1;
       var show = okF && okQ;
       c.style.display = show ? '' : 'none';
+      if(c._trow) c._trow.style.display = show ? '' : 'none';
       if(show) shown++;
     });
     // hide any group/subgroup block whose cards are all hidden
@@ -1004,6 +1038,7 @@
       b.style.display = any ? '' : 'none';
     });
     empty.style.display = shown ? 'none' : 'block';
+    if(updateDemandMerge) updateDemandMerge(filter === 'all' && !kw);
   }
   btns.forEach(function(b){
     b.addEventListener('click', function(){
@@ -1014,6 +1049,140 @@
     });
   });
   q.addEventListener('input', apply);
+
+  // Table view: one row per demand card, built from the cards themselves
+  var demandCards = Array.prototype.slice.call(document.querySelectorAll('#demand-list > .card'));
+  var tbody = document.getElementById('dtbody');
+  var catLabels = {};
+  btns.forEach(function(b){
+    var f = b.getAttribute('data-f');
+    if(f && f !== 'all') catLabels[f] = b.textContent.trim();
+  });
+  demandCards.forEach(function(c, i){
+    var tr = document.createElement('tr');
+    var tdTitle = document.createElement('td');
+    tdTitle.className = 'dtitle';
+    var h4 = c.querySelector('h4');
+    var titleText = h4 ? h4.textContent : '';
+    var hasOther = !!c.querySelector('.tag-other');
+    tdTitle.appendChild(document.createTextNode(titleText));
+    if(hasOther){
+      var mark = document.createElement('span');
+      mark.className = 'tag tag-other row-other';
+      mark.textContent = '其他账号';
+      tdTitle.appendChild(mark);
+    }
+    var catKey = ((c.getAttribute('data-type') || '').trim().split(/\s+/)[0] || '');
+    tr._catKey = catKey;
+    tr._catLabel = catLabels[catKey] || catKey;
+    tr._titleTd = tdTitle;
+    tdTitle._origTitle = titleText;
+    tdTitle._hasOther = hasOther;
+    var tdSpec = document.createElement('td');
+    tdSpec.className = 'dspec';
+    var spec = c.querySelector('.spec');
+    tdSpec.textContent = spec ? spec.textContent.trim() : '';
+    var tdBuyer = document.createElement('td');
+    tdBuyer.className = 'dbuyer';
+    var buyer = '未披露';
+    var dts = c.querySelectorAll('.fields dt');
+    for(var k = 0; k < dts.length; k++){
+      if(dts[k].textContent.trim() === '需求方'){
+        var dd = dts[k].nextElementSibling;
+        var b = dd ? dd.querySelector('b') : null;
+        buyer = b ? b.textContent.trim() : (dd ? dd.textContent.trim() : '未披露');
+        break;
+      }
+    }
+    tdBuyer.textContent = buyer;
+    var tdNo = document.createElement('td');
+    tdNo.className = 'dno';
+    tdNo.textContent = String(i + 1);
+    var tdLinks = document.createElement('td');
+    var linkBox = document.createElement('div');
+    linkBox.className = 'orig-links';
+    Array.prototype.forEach.call(c.querySelectorAll('.orig-links a'), function(a){
+      linkBox.appendChild(a.cloneNode(true));
+    });
+    tdLinks.appendChild(linkBox);
+    var tdHome = document.createElement('td');
+    tdHome.className = 'dhome';
+    var authorLink = c.querySelector('.author-link');
+    if(authorLink){
+      var homeLink = authorLink.cloneNode(true);
+      homeLink.appendChild(document.createTextNode(' ↗'));
+      tdHome.appendChild(homeLink);
+    } else {
+      tdHome.textContent = '—';
+    }
+    tr.appendChild(tdTitle);
+    tr.appendChild(tdSpec);
+    tr.appendChild(tdBuyer);
+    tr.appendChild(tdNo);
+    tr.appendChild(tdLinks);
+    tr.appendChild(tdHome);
+    tbody.appendChild(tr);
+    c._trow = tr;
+  });
+
+  function restoreTitleCell(td){
+    td.removeAttribute('rowspan');
+    td.classList.remove('merged-cat');
+    td.removeAttribute('data-merged');
+    td.textContent = '';
+    td.appendChild(document.createTextNode(td._origTitle || ''));
+    if(td._hasOther){
+      var mark = document.createElement('span');
+      mark.className = 'tag tag-other row-other';
+      mark.textContent = '其他账号';
+      td.appendChild(mark);
+    }
+  }
+  updateDemandMerge = function(mergeMode){
+    var rows = demandCards.map(function(c){ return c._trow; }).filter(Boolean);
+    // First restore every row's own title cell so state is clean in both modes
+    rows.forEach(function(tr){
+      var td = tr._titleTd;
+      if(!td) return;
+      if(td.parentNode !== tr) tr.insertBefore(td, tr.firstChild);
+      restoreTitleCell(td);
+    });
+    if(!mergeMode) return;
+    // Merge mode (全部 + no search): group consecutive rows by primary category
+    var i = 0;
+    while(i < rows.length){
+      var key = rows[i]._catKey;
+      var j = i + 1;
+      while(j < rows.length && rows[j]._catKey === key) j++;
+      var count = j - i;
+      var firstTd = rows[i]._titleTd;
+      if(firstTd){
+        firstTd.textContent = rows[i]._catLabel || key;
+        firstTd.classList.add('merged-cat');
+        firstTd.setAttribute('data-merged', 'true');
+        if(count > 1) firstTd.setAttribute('rowspan', String(count));
+      }
+      for(var k = i + 1; k < j; k++){
+        var td2 = rows[k]._titleTd;
+        if(td2 && td2.parentNode) td2.parentNode.removeChild(td2);
+      }
+      i = j;
+    }
+  };
+  updateDemandMerge(true);
+
+  var listEl = document.getElementById('demand-list');
+  var tableWrap = document.getElementById('dtable-wrap');
+  var toggleBtn = document.getElementById('viewToggle');
+  var tableMode = false;
+  toggleBtn.addEventListener('click', function(){
+    tableMode = !tableMode;
+    listEl.style.display = tableMode ? 'none' : '';
+    tableWrap.style.display = tableMode ? '' : 'none';
+    toggleBtn.textContent = tableMode ? '切回卡片视图' : '查看表格视图';
+    toggleBtn.setAttribute('aria-pressed', tableMode ? 'true' : 'false');
+    apply();
+  });
 
   var wlq = document.getElementById('wlq');
   var rows = Array.prototype.slice.call(document.querySelectorAll('.wrow[data-wl]'));
