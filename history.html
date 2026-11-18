@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="data:," />
+<title>小红书采购需求扫描 — 历史记录</title>
+<style>
+  :root{
+    --bg:#ffffff; --bg2:#f6f6f4; --surface:#ffffff; --surface2:#fafaf8;
+    --ink:#191817; --ink2:#4a4743; --muted:#7a756e; --line:#e7e3de;
+    --red:#e60023; --red-soft:#fff0f2; --red-ink:#b8001c;
+    --green:#14743c; --green-soft:#eaf6ee;
+    --amber:#8a5a00; --amber-soft:#fff6dd;
+    --chip:#f1efec;
+    --shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px rgba(0,0,0,.05);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#131211; --bg2:#1a1918; --surface:#1c1b1a; --surface2:#222120;
+      --ink:#f2efec; --ink2:#c9c3bc; --muted:#9a948c; --line:#33302d;
+      --red:#ff4d6a; --red-soft:#3a151c; --red-ink:#ff8aa0;
+      --green:#5ec98a; --green-soft:#173324;
+      --amber:#f0b84a; --amber-soft:#3a2e10;
+      --chip:#2a2826;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.3);
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Source Han Sans SC","Noto Sans CJK SC",sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:var(--red-ink)}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 20px 64px}
+  .hero{padding:32px 0 8px}
+  .kicker{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--red-ink);background:var(--red-soft);padding:6px 12px;border-radius:999px}
+  .kicker i{width:7px;height:7px;border-radius:50%;background:var(--red);display:inline-block}
+  h1{font-family:"Songti SC","STSong","Noto Serif CJK SC","Source Han Serif SC",serif;font-size:clamp(28px,6vw,42px);line-height:1.15;margin:16px 0 12px;font-weight:900;letter-spacing:-.01em}
+  .lead{font-size:16.5px;color:var(--ink2);max-width:780px;margin:0}
+  .update-line{margin:14px 0 0;font-size:16px;font-weight:900;color:var(--red-ink);background:var(--red-soft);border:1px solid color-mix(in srgb, var(--red) 30%, transparent);border-radius:10px;padding:12px 16px;max-width:780px}
+  .periods{margin-top:28px;display:grid;gap:16px}
+  .period{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px 22px;box-shadow:var(--shadow)}
+  .period .top{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+  .period h2{margin:0;font-size:20px}
+  .badge{display:inline-block;font-size:12.5px;font-weight:800;color:var(--green);background:var(--green-soft);padding:4px 10px;border-radius:999px}
+  .badge.archive{color:var(--amber);background:var(--amber-soft)}
+  .stats{margin:10px 0 0;font-size:15px;font-weight:800;color:var(--ink)}
+  .stats span{color:var(--red-ink)}
+  .hl{margin:8px 0 0;font-size:14.5px;color:var(--ink2)}
+  .go{display:inline-block;margin-top:12px;font-size:14.5px;font-weight:800}
+  footer{margin-top:48px;border-top:1px solid var(--line);padding-top:16px;font-size:13.5px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <span class="kicker"><i></i>历史记录</span>
+    <h1>往期扫描结果</h1>
+    <p class="lead">每周三、周日更新；这里是每期扫描结果的归档，点进去看那期的完整清单。</p>
+    <p class="update-line">每周三、周日 10:30 更新本周内容</p>
+  </div>
+
+  <div class="periods">
+    <article class="period">
+      <div class="top"><h2>2026-11-17 至 2026-11-18</h2><span class="badge">当前最新</span></div>
+      <p class="stats"><span>8 条新需求</span>（监控 4 + 其他账号 4）· 筛掉 7 条 · 需求方均未披露</p>
+      <p class="hl">值得关注：数据-Mr Li 一天 4 条；Elaine | AI Lab 新出现，一天 2 条；济宁 UMI 招募写明结算 T+2。</p>
+      <a class="go" href="https://leixinhao8-del.github.io/xhs-demand-scan/">查看本期 →</a>
+    </article>
+
+    <article class="period">
+      <div class="top"><h2>2026-11-10 至 2026-11-17</h2><span class="badge archive">已归档</span></div>
+      <p class="stats"><span>54 条需求</span>（监控 32 + 其他账号 22）· 32 个主页全扫 · 监控主页筛掉 18 条</p>
+      <p class="hl">值得关注：数据-Mr Li 一周 14 条；Ego/UMI 最热（6 条）；仿真与 3D 评测方向成型。</p>
+      <a class="go" href="https://leixinhao8-del.github.io/xhs-demand-scan/history/2026-11-10.html">查看本期 →</a>
+    </article>
+  </div>
+
+  <footer>
+    <p>每周三、周日 10:30 自动更新 · <a href="https://leixinhao8-del.github.io/xhs-demand-scan/">返回最新结果</a></p>
+  </footer>
+</div>
+</body>
+</html>
